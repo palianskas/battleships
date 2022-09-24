@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace battleships_api.Controllers;
 
+using LinqToDB;
+using LinqToDB.Data;
+
 [ApiController]
 [Route("[controller]")]
 public class TestController : ControllerBase
@@ -14,8 +17,21 @@ public class TestController : ControllerBase
   }
 
   [HttpGet]
-  public string Get()
+  public ActionResult<List<Match>> Get()
   {
-    return "Hello world!";
+    using var database = new BattleshipsDatabase();
+
+    var result = database.Matches.ToList();
+
+    return result;
   }
+}
+
+public class BattleshipsDatabase : DataConnection
+{
+  public BattleshipsDatabase() : base(LinqToDB.ProviderName.MySql, "server=localhost;database=battleships;user=root")
+  { }
+
+  public ITable<Match> Matches => this.GetTable<Match>();
+
 }

@@ -6,4 +6,4 @@
     1. Install MariaDB v10.9.3 (version that comes with Xampp *might* work)
 	  2. Import `database/import.sql` to a database named `battleships`
 4. Run `dotnet run` in this dir
-5. Check if `https://localhost:<port>/test` returns the list of all `matches` database table entries
+5. Check if `https://localhost:<port>/matches` returns a newly created `match` entity

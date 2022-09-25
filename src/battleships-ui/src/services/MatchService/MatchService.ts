@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Match } from '../../models/Match';
 
 const api = axios.create({
-  baseURL: 'https://localhost:7072/',
+  baseURL: 'https://localhost:7072/api/',
 });
 
 export class MatchService {

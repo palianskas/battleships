@@ -20,6 +20,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 { }
 
+app.UsePathBase(new PathString("/api"));
+
+app.UseRouting();
+
 app.UseCors(corsPolicyName);
 
 app.UseHttpsRedirection();

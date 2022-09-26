@@ -1,3 +1,4 @@
+using battleships_api.Models;
 using LinqToDB;
 using LinqToDB.Data;
 

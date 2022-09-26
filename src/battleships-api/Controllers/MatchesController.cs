@@ -1,3 +1,4 @@
+using battleships_api.Models;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ public class MatchesController: ControllerBase{
     {
         using var database = new BattleshipsDatabase();
 
-        var match = database.Matches.FirstOrDefault(match => match.Id.Equals(id));
+        var match = database.Matches.LoadWith(m => m.Players).FirstOrDefault(match => match.Id.Equals(id));
 
         if(match == null){
             return NotFound();

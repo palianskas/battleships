@@ -1,13 +1,36 @@
-import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
+import { useEffect } from 'react';
+import {
+  generatePath,
+  LoaderFunctionArgs,
+  Outlet,
+  useLoaderData,
+  useNavigate,
+} from 'react-router-dom';
 import { Match } from '../../models/Match';
 import { MatchService } from '../../services/MatchService/MatchService';
 
 export default function MatchDisplay() {
+  const navigate = useNavigate();
+
   const match = useLoaderData() as Match;
+
+  useEffect(() => {
+    if (match.players?.length < 2) {
+      const path = generatePath('pregame');
+
+      navigate(path);
+    }
+  }, []);
 
   return (
     <div className="container d-flex justify-content-center">
-      {match.id} - {match.name}
+      <span>
+        {match.id} - {match.name}
+      </span>
+      <br />
+      {match.players.map((player) => (
+        <span>{player.name}</span>
+      ))}
     </div>
   );
 }

@@ -10,6 +10,7 @@ import MatchDisplay, {
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import NewMatch from './components/NewMatch/NewMatch';
 import Root from './routes/Root/Root';
+import Pregame from './components/MatchDisplay/Pregame/Pregame';
 
 const router = createBrowserRouter([
   {
@@ -21,11 +22,16 @@ const router = createBrowserRouter([
         element: <NewMatch />,
       },
       {
-        path: 'matches',
+        path: 'matches/:id',
         children: [
           {
-            path: ':id',
+            path: '',
             element: <MatchDisplay />,
+            loader: matchLoader,
+          },
+          {
+            path: 'pregame',
+            element: <Pregame />,
             loader: matchLoader,
           },
         ],

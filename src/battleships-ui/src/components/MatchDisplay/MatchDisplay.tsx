@@ -15,7 +15,7 @@ export default function MatchDisplay() {
   const match = useLoaderData() as Match;
 
   useEffect(() => {
-    if (match.players?.length < 2) {
+    if (match.isPregame) {
       const path = generatePath('pregame');
 
       navigate(path);

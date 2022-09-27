@@ -13,8 +13,17 @@ public class Match
     [Column, NotNull]
     public string Name { get; set; }
 
+    [Column, NotNull]
+    public bool IsPregame { get; set; }
+
     [AssociationAttribute(QueryExpressionMethod = nameof(GetMatchPlayers))]
     public List<Player> Players { get; set; }
+
+    [Column]
+    public int? MatchSettingsId { get; set; }
+
+    // [AssociationAttribute(ThisKey = "matchSettingsId", OtherKey = "id")]
+    // public MatchSettings Settings { get; set; }
 
     private static Expression<Func<Match, IDataContext, IQueryable<Player>>> GetMatchPlayers()
     {

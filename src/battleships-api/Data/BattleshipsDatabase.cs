@@ -8,4 +8,6 @@ public class BattleshipsDatabase : DataConnection
     { }
 
     public ITable<Match> Matches => this.GetTable<Match>();
+    public ITable<Player> Players => this.GetTable<Player>();
+    public ITable<MatchSettings> MatchSettings => this.GetTable<MatchSettings>();
 }

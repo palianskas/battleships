@@ -21,9 +21,15 @@ public class MatchesController: ControllerBase{
 
         var match = new Match {
             Name = "New match",
+            IsPregame = true,
         };
 
         match.Id = await database.InsertWithInt32IdentityAsync(match);
+
+        // match.Settings = new MatchSettings(match.Id);
+
+        // match.Settings.Id = await database.InsertWithInt32IdentityAsync(match.Settings);
+        // match.MatchSettingsId = match.Settings.Id;
 
         return match;
     }
@@ -33,7 +39,9 @@ public class MatchesController: ControllerBase{
     {
         using var database = new BattleshipsDatabase();
 
-        var match = database.Matches.LoadWith(m => m.Players).FirstOrDefault(match => match.Id.Equals(id));
+        var match = database.Matches.LoadWith(m => m.Players)
+        // .LoadWith(m => m.Settings)
+        .FirstOrDefault(match => match.Id.Equals(id));
 
         if(match == null){
             return NotFound();

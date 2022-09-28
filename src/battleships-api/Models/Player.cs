@@ -1,18 +1,16 @@
-using LinqToDB.Mapping;
+namespace Models;
 
-namespace battleships_api.Models;
+public enum PlayerTeam {
+    Blue,
+    Red,
+}
 
-[Table("players")]
 public class Player {
-    [Identity]
-    public int Id { get; set; }
-
-    [Column]
     public string Name { get; set; }
+    public PlayerTeam Team { get; set; }
 
-    [Column]
-    public int MatchId { get; set; }
-
-    [AssociationAttribute(ThisKey = "matchId", OtherKey = "id")]
-    public Match Match { get; set; }
+    public Player(string name, PlayerTeam team = PlayerTeam.Blue){
+        this.Name = name;
+        this.Team = team;
+    }
 }

@@ -1,8 +1,7 @@
-using battleships_api.Models;
-using LinqToDB;
+using Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace battleships_api.Controllers;
+namespace Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -14,31 +13,23 @@ public class PlayersController: ControllerBase{
         _logger = logger;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<Player>> Get([FromQuery] string name)
+    [HttpPost]
+    public ActionResult Add([FromQuery] string name, [FromQuery] string? teamString)
     {
-        using var database = new BattleshipsDatabase();
-
-        var player = new Player {
-            Name = name,
-        };
-
-        player.Id = await database.InsertWithInt32IdentityAsync(player);
-
-        return player;
-    }
-
-    [HttpGet("{id}")]
-    public ActionResult<Match> Get(int id)
-    {
-        using var database = new BattleshipsDatabase();
-
-        var player = database.Matches.LoadWith(m => m.Players).FirstOrDefault(player => player.Id.Equals(id));
-
-        if(player == null){
-            return NotFound();
+        if(!Enum.TryParse<PlayerTeam>(teamString, out var team)) {
+            team = PlayerTeam.Blue;
         }
 
-        return player;
+        var match = MatchProvider.Instance.Match;
+
+        if(match.Players.Count >= 2){
+            return BadRequest();
+        }
+
+        var player = new Player(name, team);
+
+        match.Players.Add(player);
+
+        return Ok();
     }
 }

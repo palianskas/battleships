@@ -9,7 +9,7 @@ export default function NewMatch() {
   const handleClick = async () => {
     const match = await MatchService.createNew();
 
-    const path = generatePath('matches/:id', { id: match.id.toString() });
+    const path = generatePath('match');
 
     navigate(path);
   };

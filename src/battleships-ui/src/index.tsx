@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         element: <NewMatch />,
       },
       {
-        path: 'matches/:id',
+        path: 'match',
         children: [
           {
             path: '',

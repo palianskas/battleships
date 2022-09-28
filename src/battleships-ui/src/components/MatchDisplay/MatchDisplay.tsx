@@ -40,7 +40,7 @@ export async function matchLoader({
 }: LoaderFunctionArgs): Promise<Match> {
   const id = Number.parseInt(params.id ?? '');
 
-  const match = await MatchService.get(id);
+  const match = await MatchService.get();
 
   return match;
 }

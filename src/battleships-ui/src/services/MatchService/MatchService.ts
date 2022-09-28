@@ -9,14 +9,14 @@ export class MatchService {
   private static ENDPOINT_URL = 'matches/';
   private static LOCAL_STORAGE_MATCH_KEY = 'MATCH';
 
-  static async get(id: number): Promise<Match> {
-    const response = await api.get(this.ENDPOINT_URL + `${id}`);
+  static async get(): Promise<Match> {
+    const response = await api.get(this.ENDPOINT_URL);
 
     return response.data;
   }
 
-  static async createNew(): Promise<Match> {
-    const response = await api.get(this.ENDPOINT_URL);
+  static async createNew(name = 'New match'): Promise<Match> {
+    const response = await api.post(this.ENDPOINT_URL, { name: name });
 
     return response.data;
   }

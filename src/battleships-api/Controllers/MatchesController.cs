@@ -16,10 +16,14 @@ public class MatchesController: ControllerBase{
     [HttpPost]
     public ActionResult Create()
     {
-        var match = new Match();
+        lock (MatchProvider.Instance) {
+            if(MatchProvider.Instance.Match == null){
+                var match = new Match();
 
-        MatchProvider.Instance.Match = match;
-
+                MatchProvider.Instance.Match = match;
+            }
+        }
+        
         return Ok();
     }
 

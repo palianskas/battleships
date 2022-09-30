@@ -14,9 +14,9 @@ public class PlayersController: ControllerBase{
     }
 
     [HttpPost]
-    public ActionResult Add([FromQuery] string name, [FromQuery] string? teamString)
+    public ActionResult Add([FromBody] PlayerAddRequest request)
     {
-        if(!Enum.TryParse<PlayerTeam>(teamString, out var team)) {
+        if(!Enum.TryParse<PlayerTeam>(request.Team, out var team)) {
             team = PlayerTeam.Blue;
         }
 
@@ -26,7 +26,11 @@ public class PlayersController: ControllerBase{
             return BadRequest();
         }
 
-        var player = new Player(name, team);
+        if(match.Players.Any(player => player.Team == team)){
+            team = team == PlayerTeam.Blue ? PlayerTeam.Red : PlayerTeam.Blue;
+        }
+
+        var player = new Player(request.Name, team);
 
         match.Players.Add(player);
 

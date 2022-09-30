@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Player } from '../../models/Player';
 
 const api = axios.create({
-  baseURL: 'https://localhost:7072/api/',
+  baseURL: process.env.REACT_APP_BASE_URL,
 });
 
 export class PlayerService {
@@ -16,8 +16,8 @@ export class PlayerService {
   }
 
   static async createNew(name: string): Promise<Player> {
-    const response = await api.get(this.ENDPOINT_URL, {
-      params: { name: name },
+    const response = await api.post(this.ENDPOINT_URL, {
+      name: name,
     });
 
     return response.data;

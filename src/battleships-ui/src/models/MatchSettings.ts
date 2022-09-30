@@ -8,8 +8,8 @@ export default class MatchSettings {
   gameMode!: GameMode;
   useDice!: boolean;
 
-  constructor() {
-    this.gameMode = GameMode.Classic;
-    this.useDice = false;
+  constructor(object?: Partial<MatchSettings>) {
+    this.gameMode = object?.gameMode ?? GameMode.Classic;
+    this.useDice = !!object?.useDice;
   }
 }

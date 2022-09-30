@@ -2,12 +2,14 @@ import Button from 'react-bootstrap/esm/Button';
 import { LinkContainer } from 'react-router-bootstrap';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { MatchService } from '../../services/MatchService/MatchService';
+import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
 
 export default function NewMatch() {
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    const match = await MatchService.createNew();
+    await MatchService.createNew();
+    await PlayerService.createNew('New player');
 
     const path = generatePath('match');
 
@@ -18,7 +20,7 @@ export default function NewMatch() {
     <div className="container d-flex justify-content-center">
       <LinkContainer to={'matches'}>
         <Button className="primary" onClick={handleClick}>
-          Create a new match!
+          Join a match!
         </Button>
       </LinkContainer>
     </div>

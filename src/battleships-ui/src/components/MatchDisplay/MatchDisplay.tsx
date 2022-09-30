@@ -24,9 +24,7 @@ export default function MatchDisplay() {
 
   return (
     <div className="container d-flex justify-content-center">
-      <span>
-        {match.id} - {match.name}
-      </span>
+      <span>Name: {match.name}</span>
       <br />
       {match.players.map((player) => (
         <span>{player.name}</span>

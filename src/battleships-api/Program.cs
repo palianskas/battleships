@@ -8,6 +8,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy.AllowAnyOrigin();
+            policy.AllowAnyHeader();
         });
     });
 

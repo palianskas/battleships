@@ -1,3 +1,5 @@
+using Services.Hubs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,11 +11,15 @@ builder.Services.AddCors(options =>
         {
             policy.AllowAnyOrigin();
             policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+            policy.SetIsOriginAllowed(_ => true);
         });
     });
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSignalR();
+
 
 var app = builder.Build();
 
@@ -29,7 +35,8 @@ app.UseCors(corsPolicyName);
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>endpoints.MapHub<MatchEventHub>("/match-event-hub"));
 
 app.MapControllers();
 

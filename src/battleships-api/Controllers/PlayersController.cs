@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Controllers;
 
+[Obsolete("Not necessary with event based architecture")]
 [ApiController]
 [Route("[controller]")]
 public class PlayersController: ControllerBase{

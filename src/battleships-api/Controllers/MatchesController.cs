@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Controllers;
 
+[Obsolete("Needs rework to work with event based arch")]
 [ApiController]
 [Route("[controller]")]
 public class MatchesController: ControllerBase{

@@ -4,8 +4,15 @@ namespace Services.Hubs;
 
 public class MatchEventHub : Hub
 {
-    public async Task PropagateEvent(string eventName, string data)
+    public void PropagateEvent(MatchEventNames eventName, string data)
     {
-        await Clients.All.SendAsync("ReceiveEvent", "server:" + eventName, "server:" + data);
+        Clients.All.SendAsync("ReceiveEvent", eventName, data);
     }
+}
+
+public enum MatchEventNames {
+  MatchCreated,
+  PlayerJoined,
+  PlayerStartedMatch,
+  PlayerUpdatedMatchSettings,
 }

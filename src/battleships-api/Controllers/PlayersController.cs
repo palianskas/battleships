@@ -23,7 +23,8 @@ public class PlayersController: ControllerBase{
         var match = MatchProvider.Instance.Match;
 
         if(match.Players.Count >= 2){
-            return BadRequest();
+            // return BadRequest();
+            return Ok();
         }
 
         if(match.Players.Any(player => player.Team == team)){

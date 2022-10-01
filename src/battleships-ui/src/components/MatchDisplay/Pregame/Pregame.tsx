@@ -5,8 +5,6 @@ import MatchSettingsConfig from '../MatchSettings/MatchSettings';
 export default function Pregame() {
   const match = useLoaderData() as Match;
 
-  console.log(match);
-
   return (
     <div className="container">
       <div className="container pb-5">

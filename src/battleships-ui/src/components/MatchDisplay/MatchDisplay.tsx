@@ -38,7 +38,9 @@ export default function MatchDisplay() {
   return (
     <div className="container d-flex justify-content-center">
       <div className="col-3">
-        <div>{bluePlayer?.name}</div>
+        <div>
+          {bluePlayer?.name} {bluePlayer?.id} {bluePlayer?.team}
+        </div>
         <div>
           {bluePlayer?.ships.map((ship, index) => (
             <div key={index}>
@@ -50,7 +52,9 @@ export default function MatchDisplay() {
       </div>
       <div className="col-6">{match.name}</div>
       <div className="col-3">
-        <div>{redPlayer?.name}</div>
+        <div>
+          {redPlayer?.name} {redPlayer?.id} {redPlayer?.team}
+        </div>
         <div>
           {redPlayer?.ships.map((ship, index) => (
             <div key={index}>
@@ -64,38 +68,40 @@ export default function MatchDisplay() {
   );
 
   function handlePlayerJoinedEvent(data: any): void {
-    try {
-      const player = new Player(data.player);
+    const player = new Player(data.player);
 
-      const currentPlayer = PlayerService.getFromSessionStorage();
+    const currentPlayer = PlayerService.getFromSessionStorage();
 
-      if (
-        (player.id !== currentPlayer?.id &&
-          MatchProvider.Instance.match.players.length < 2) ||
-        MatchProvider.Instance.match.players.length == 0
-      ) {
-        player.invertTeam();
-
-        MatchProvider.Instance.match.players.push(player);
-
-        MatchProvider.Instance.match = new Match(MatchProvider.Instance.match);
-
-        if (currentPlayer != null) {
-          MatchEventsService.Instance.sendEvent(
-            MatchEventNames.SecondPlayerConfirmation,
-            { player: currentPlayer }
-          );
-        }
-
-        if (MatchProvider.Instance.match.players.length == 2) {
-          MatchService.initMatchPlayerVehicles();
-        }
-      }
-
-      setRerenderToggle(!rerenderToggle);
-    } catch (e) {
-      console.log(e);
+    if (player.id !== currentPlayer?.id && match.players.length < 2) {
+      handleAddEnemyPlayer(player, currentPlayer);
     }
+
+    if (player.id === currentPlayer?.id && match.players.length == 0) {
+      handleAddCurrentPlayer(player);
+    }
+
+    if (match.players.length == 2) {
+      MatchService.initMatchPlayerVehicles();
+    }
+
+    setRerenderToggle(!rerenderToggle);
+  }
+
+  function handleAddEnemyPlayer(enemyPlayer: Player, currentPlayer?: Player) {
+    enemyPlayer.invertTeam();
+
+    match.players.push(enemyPlayer);
+
+    if (currentPlayer != null) {
+      MatchEventsService.Instance.sendEvent(
+        MatchEventNames.SecondPlayerConfirmation,
+        { player: currentPlayer }
+      );
+    }
+  }
+
+  function handleAddCurrentPlayer(player: Player) {
+    match.players.push(player);
   }
 }
 

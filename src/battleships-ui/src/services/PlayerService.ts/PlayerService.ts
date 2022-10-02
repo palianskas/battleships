@@ -30,11 +30,11 @@ export class PlayerService {
     );
   }
 
-  static getFromSessionStorage(): Player | null {
+  static getFromSessionStorage(): Player | undefined {
     const value = sessionStorage.getItem(this.LOCAL_STORAGE_PLAYER_KEY);
 
     if (value == null) {
-      return null;
+      return undefined;
     }
 
     return JSON.parse(value);

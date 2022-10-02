@@ -1,20 +1,22 @@
 import Button from 'react-bootstrap/esm/Button';
 import { LinkContainer } from 'react-router-bootstrap';
 import { generatePath, useNavigate } from 'react-router-dom';
-import MatchEventService, {
+import MatchEventsService, {
   MatchEventNames,
 } from '../../services/MatchEventService/MatchEventService';
-import { MatchService } from '../../services/MatchService/MatchService';
 import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
 
 export default function NewMatch() {
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    await MatchService.createNew();
-    await PlayerService.createNew('New player');
+    PlayerService.createNew('New player');
 
-    await MatchEventService.Instance.sendEvent(MatchEventNames.MatchCreated);
+    MatchEventsService.Instance.sendEvent(MatchEventNames.PlayerJoined, {
+      player: PlayerService.getFromLocalStorage(),
+    });
+
+    await MatchEventsService.Instance.sendEvent(MatchEventNames.NewMatch);
 
     const path = generatePath('match');
 

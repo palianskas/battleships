@@ -4,15 +4,9 @@ namespace Services.Hubs;
 
 public class MatchEventHub : Hub
 {
-    public void PropagateEvent(MatchEventNames eventName, string data)
+    // eventIds defined in FE
+    public void PropagateEvent(int eventId, string data)
     {
-        Clients.All.SendAsync("ReceiveEvent", eventName, data);
+        Clients.All.SendAsync("ReceiveEvent", eventId, data);
     }
-}
-
-public enum MatchEventNames {
-  MatchCreated,
-  PlayerJoined,
-  PlayerStartedMatch,
-  PlayerUpdatedMatchSettings,
 }

@@ -12,8 +12,9 @@ import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
 export default function MatchDisplay() {
   const navigate = useNavigate();
 
-  const [match, setMatch] = useState(MatchProvider.Instance.match);
+  const [rerenderToggle, setRerenderToggle] = useState(false);
 
+  const match = MatchProvider.Instance.match;
   const bluePlayer = match.players[0];
   const redPlayer = match.players[1];
 
@@ -39,8 +40,8 @@ export default function MatchDisplay() {
       <div className="col-3">
         <div>{bluePlayer?.name}</div>
         <div>
-          {bluePlayer?.ships.map((ship) => (
-            <div>
+          {bluePlayer?.ships.map((ship, index) => (
+            <div key={index}>
               <span>{ship.constructor.name}</span>
               <br />
             </div>
@@ -51,8 +52,8 @@ export default function MatchDisplay() {
       <div className="col-3">
         <div>{redPlayer?.name}</div>
         <div>
-          {redPlayer?.ships.map((ship) => (
-            <div>
+          {redPlayer?.ships.map((ship, index) => (
+            <div key={index}>
               <span>{ship.constructor.name}</span>
               <br />
             </div>
@@ -91,7 +92,7 @@ export default function MatchDisplay() {
         }
       }
 
-      setMatch(MatchProvider.Instance.match);
+      setRerenderToggle(!rerenderToggle);
     } catch (e) {
       console.log(e);
     }

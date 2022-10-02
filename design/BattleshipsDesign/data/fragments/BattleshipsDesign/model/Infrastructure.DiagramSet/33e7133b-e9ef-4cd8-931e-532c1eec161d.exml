@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="BattleshipsDesign" version="4">
+  <OBJECT>
+    <ID name="BattleshipsDesign" mc="Infrastructure.DiagramSet" uid="33e7133b-e9ef-4cd8-931e-532c1eec161d"/>
+    <PID name="BattleshipsDesign" mc="Standard.Project" uid="1fcef428-bcf1-4590-8f17-4c82969f28cf"/>
+    <ATTRIBUTES>
+      <ATT name="Name"><![CDATA[BattleshipsDesign]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES></DEPENDENCIES>
+  </OBJECT>
+</EXT>

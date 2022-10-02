@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Ships" version="4">
+  <OBJECT>
+    <ID name="Ships" mc="Standard.Package" uid="b3f76462-d1eb-4741-8ae2-32b09e45c0e5"/>
+    <PID name="Models" mc="Standard.Package" uid="6f5b74a3-10b1-428d-9f48-66e1b5651b65"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Ships]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Ship" mc="Standard.Class" uid="b23e54c7-c9cf-4941-ab0a-9b1054f86bd7"/>
+        <OBJECT>
+          <ID name="ShipClass" mc="Standard.Enumeration" uid="0b65462d-515a-42c3-ace6-1faaccc448db"/>
+          <ATTRIBUTES>
+            <ATT name="IsElementary">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="IsLeaf">false</ATT>
+            <ATT name="IsRoot">false</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="Name"><![CDATA[ShipClass]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Value">
+              <OBJECT>
+                <ID name="Carrier" mc="Standard.EnumerationLiteral" uid="6fdfa711-bdf3-4de9-9624-bdca1d9411da"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Carrier]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="Battleships" mc="Standard.EnumerationLiteral" uid="1b128c34-75c4-4546-a8ff-1fabff856c57"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Battleships]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="Cruiser" mc="Standard.EnumerationLiteral" uid="8891c995-d7b9-40a5-9280-b91b89a06efd"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Cruiser]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="Submarine" mc="Standard.EnumerationLiteral" uid="226d447b-8b8b-4bcf-b1d5-18c573b09cfb"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Submarine]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="Speedboat" mc="Standard.EnumerationLiteral" uid="a30d3bfe-3a57-47c3-a232-01667be2e882"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Speedboat]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <COMPID name="Carrier" mc="Standard.Class" uid="b0352eb5-5a40-4e77-bad6-ccef45f2f06c"/>
+        <COMPID name="Battleship" mc="Standard.Class" uid="801ee504-0833-4a5a-8836-0539bf820c9d"/>
+        <COMPID name="Cruiser" mc="Standard.Class" uid="e612531a-8a1a-4b34-86db-2bc49384650b"/>
+        <COMPID name="Submarine" mc="Standard.Class" uid="53ea0ef4-5c18-4238-841e-a5364d1147bd"/>
+        <COMPID name="Speedboat" mc="Standard.Class" uid="da0fce00-4bf0-4258-b52c-99302610c8e4"/>
+        <COMPID name="ClassicShips" mc="Standard.Package" uid="43056cee-9063-4358-a246-a0fe2d2c057a"/>
+        <COMPID name="ModularShips" mc="Standard.Package" uid="49f71868-b5c0-4fa3-8335-a5c176e5596d"/>
+        <COMPID name="ObservingShips" mc="Standard.Package" uid="afa48d4a-8257-4ed8-89cf-416e960be6f8"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

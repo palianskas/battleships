@@ -1,13 +1,7 @@
 import { useEffect } from 'react';
-import {
-  generatePath,
-  LoaderFunctionArgs,
-  Outlet,
-  useLoaderData,
-  useNavigate,
-} from 'react-router-dom';
+import { generatePath, useLoaderData, useNavigate } from 'react-router-dom';
 import { Match } from '../../models/Match';
-import { MatchService } from '../../services/MatchService/MatchService';
+import MatchProvider from '../../services/MatchProvider/MatchProvider';
 
 export default function MatchDisplay() {
   const navigate = useNavigate();
@@ -20,7 +14,7 @@ export default function MatchDisplay() {
 
       navigate(path);
     }
-  }, []);
+  }, [match.isPregame]);
 
   return (
     <div className="container d-flex justify-content-center">
@@ -33,12 +27,6 @@ export default function MatchDisplay() {
   );
 }
 
-export async function matchLoader({
-  params,
-}: LoaderFunctionArgs): Promise<Match> {
-  const id = Number.parseInt(params.id ?? '');
-
-  const match = await MatchService.get();
-
-  return match;
+export async function matchLoader(): Promise<Match> {
+  return MatchProvider.Instance.match;
 }

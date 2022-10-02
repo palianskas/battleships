@@ -15,7 +15,7 @@ export default abstract class MatchEventsSubject {
     }
   }
 
-  public notify(event: MatchEventNames, data: string) {
+  public notify(event: MatchEventNames, data: any) {
     const eventObservers = this.observersByEvent[event];
 
     eventObservers?.forEach((observer) => observer.onNotify(data));

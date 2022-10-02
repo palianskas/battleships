@@ -29,12 +29,9 @@ export default class MatchEventsService extends MatchEventsSubject {
       await this.start();
     });
 
-    this._connection.on(
-      'ReceiveEvent',
-      (event: MatchEventNames, data: string) => {
-        this.notify(event, data);
-      }
-    );
+    this._connection.on('ReceiveEvent', (event: MatchEventNames, data: any) => {
+      this.notify(event, data);
+    });
   }
 
   public static get Instance(): MatchEventsService {
@@ -44,8 +41,6 @@ export default class MatchEventsService extends MatchEventsSubject {
   }
 
   public async sendEvent(event: MatchEventNames, data: any = {}) {
-    data = JSON.stringify(data);
-
     try {
       await this._connection.send('PropagateEvent', event, data);
     } catch (err) {

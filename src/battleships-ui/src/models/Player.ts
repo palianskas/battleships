@@ -4,10 +4,12 @@ export enum PlayerTeam {
 }
 
 export class Player {
-  name!: string;
-  team!: PlayerTeam;
+  id: number;
+  name: string;
+  team: PlayerTeam;
 
   constructor(object: Partial<Player>) {
+    this.id = Math.round(Math.random() * 1000);
     this.name = object.name ?? 'New player';
     this.team = !!object.team ? PlayerTeam[object.team] : PlayerTeam.Blue;
   }

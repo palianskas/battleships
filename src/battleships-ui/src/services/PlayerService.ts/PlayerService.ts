@@ -15,12 +15,12 @@ export class PlayerService {
     return response.data;
   }
 
-  static async createNew(name: string): Promise<Player> {
-    const response = await api.post(this.ENDPOINT_URL, {
-      name: name,
-    });
+  static createNew(name: string): Player {
+    const player = new Player({ name: name });
 
-    return response.data;
+    this.saveToLocalStorage(player);
+
+    return player;
   }
 
   static saveToLocalStorage(player: Player) {

@@ -4,16 +4,19 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import MatchEventsService, {
   MatchEventNames,
 } from '../../services/MatchEventService/MatchEventService';
+import MatchProvider from '../../services/MatchProvider/MatchProvider';
 import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
 
 export default function NewMatch() {
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    PlayerService.createNew('New player');
+    const player = PlayerService.createNew('New player');
+
+    // MatchProvider.Instance.match.players.push(player);
 
     MatchEventsService.Instance.sendEvent(MatchEventNames.PlayerJoined, {
-      player: PlayerService.getFromLocalStorage(),
+      player: player,
     });
 
     await MatchEventsService.Instance.sendEvent(MatchEventNames.NewMatch);
@@ -25,7 +28,7 @@ export default function NewMatch() {
 
   return (
     <div className="container d-flex justify-content-center">
-      <LinkContainer to={'matches'}>
+      <LinkContainer to={'match'}>
         <Button className="primary" onClick={handleClick}>
           Join a match!
         </Button>

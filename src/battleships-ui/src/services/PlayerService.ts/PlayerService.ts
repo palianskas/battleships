@@ -18,17 +18,20 @@ export class PlayerService {
   static createNew(name: string): Player {
     const player = new Player({ name: name });
 
-    this.saveToLocalStorage(player);
+    this.saveToSessionStorage(player);
 
     return player;
   }
 
-  static saveToLocalStorage(player: Player) {
-    localStorage.setItem(this.LOCAL_STORAGE_PLAYER_KEY, JSON.stringify(player));
+  static saveToSessionStorage(player: Player) {
+    sessionStorage.setItem(
+      this.LOCAL_STORAGE_PLAYER_KEY,
+      JSON.stringify(player)
+    );
   }
 
-  static getFromLocalStorage(): Player | null {
-    const value = localStorage.getItem(this.LOCAL_STORAGE_PLAYER_KEY);
+  static getFromSessionStorage(): Player | null {
+    const value = sessionStorage.getItem(this.LOCAL_STORAGE_PLAYER_KEY);
 
     if (value == null) {
       return null;

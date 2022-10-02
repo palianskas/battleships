@@ -8,11 +8,12 @@ export default function Pregame() {
   return (
     <div className="container">
       <div className="container pb-5">
-        <h1>
+        <h1>{match.name}</h1>
+        <h2>
           {match.players?.length < 2
             ? 'Waiting for the other player...'
             : 'Waiting for both players to start the match...'}
-        </h1>
+        </h2>
       </div>
 
       <MatchSettingsConfig matchSettings={match.settings}></MatchSettingsConfig>

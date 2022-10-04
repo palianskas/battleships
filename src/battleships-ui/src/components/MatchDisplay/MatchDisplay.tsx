@@ -47,13 +47,11 @@ export default function MatchDisplay() {
             <div key={indexShip}>
               <span>{ship.constructor.name}</span>
               <br />
-              {ship.parts.map((part, indexPart) =>
-                match.settings.gameMode == GameMode.FogOfWar ? (
-                  <span>10 </span>
-                ) : (
-                  <span>1 </span>
-                )
-              )}
+              {ship.parts.map((part, indexPart) => (
+                <span key={`${indexShip}-${indexPart}`}>
+                  {match.settings.gameMode == GameMode.Ammo ? 10 : 1}{' '}
+                </span>
+              ))}
               <br />
             </div>
           ))}
@@ -65,17 +63,15 @@ export default function MatchDisplay() {
           {redPlayer?.name} {redPlayer?.id} {redPlayer?.team}
         </div>
         <div>
-          {redPlayer?.ships.map((ship, index) => (
-            <div key={index}>
+          {redPlayer?.ships.map((ship, indexShip) => (
+            <div key={indexShip}>
               <span>{ship.constructor.name}</span>
               <br />
-              {ship.parts.map((part, indexPart) =>
-                match.settings.gameMode == GameMode.FogOfWar ? (
-                  <span>10 </span>
-                ) : (
-                  <span>1 </span>
-                )
-              )}
+              {ship.parts.map((part, indexPart) => (
+                <span key={`${indexShip}-${indexPart}`}>
+                  {match.settings.gameMode == GameMode.Ammo ? 10 : 1}{' '}
+                </span>
+              ))}
               <br />
             </div>
           ))}

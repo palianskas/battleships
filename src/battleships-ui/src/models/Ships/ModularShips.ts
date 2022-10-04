@@ -1,3 +1,4 @@
+import ShipPartFactory from '../../services/Factories/ShipFactories/ShipPartFactory/ShipPartFactory';
 import Ship, {
   Battleship,
   Carrier,
@@ -5,42 +6,28 @@ import Ship, {
   Speedboat,
   Submarine,
 } from './Ship';
-
-export class ShipPart {
-  hp = 10;
-  isDestroyed = false;
-}
+import { ModularShipPart } from './ShipPart';
 
 export interface IModularShip extends Ship {
-  readonly parts: ShipPart[];
+  readonly parts: ModularShipPart[];
 }
 
 export class ModularCarrier extends Carrier implements IModularShip {
-  readonly parts = constructShipParts(5);
+  readonly parts = ShipPartFactory.createParts(5, true) as ModularShipPart[];
 }
 
 export class ModularBattleship extends Battleship implements IModularShip {
-  readonly parts = constructShipParts(4);
+  readonly parts = ShipPartFactory.createParts(4, true) as ModularShipPart[];
 }
 
 export class ModularCruiser extends Cruiser implements IModularShip {
-  readonly parts = constructShipParts(3);
+  readonly parts = ShipPartFactory.createParts(3, true) as ModularShipPart[];
 }
 
 export class ModularSubmarine extends Submarine implements IModularShip {
-  readonly parts = constructShipParts(3);
+  readonly parts = ShipPartFactory.createParts(3, true) as ModularShipPart[];
 }
 
 export class ModularSpeedboat extends Speedboat implements IModularShip {
-  readonly parts = constructShipParts(2);
-}
-
-function constructShipParts(length: number): ShipPart[] {
-  const result = [];
-
-  for (let i = 0; i < length; i++) {
-    result.push(new ShipPart());
-  }
-
-  return result;
+  readonly parts = ShipPartFactory.createParts(2, true) as ModularShipPart[];
 }

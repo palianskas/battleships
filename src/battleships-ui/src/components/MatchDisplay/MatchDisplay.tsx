@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { generatePath, useLoaderData, useNavigate } from 'react-router-dom';
 import { Match } from '../../models/Match';
+import { GameMode } from '../../models/MatchSettings';
 import { Player } from '../../models/Player';
 import MatchEventsService, {
   MatchEventNames,
@@ -42,9 +43,17 @@ export default function MatchDisplay() {
           {bluePlayer?.name} {bluePlayer?.id} {bluePlayer?.team}
         </div>
         <div>
-          {bluePlayer?.ships.map((ship, index) => (
-            <div key={index}>
+          {bluePlayer?.ships.map((ship, indexShip) => (
+            <div key={indexShip}>
               <span>{ship.constructor.name}</span>
+              <br />
+              {ship.parts.map((part, indexPart) =>
+                match.settings.gameMode == GameMode.FogOfWar ? (
+                  <span>10 </span>
+                ) : (
+                  <span>1 </span>
+                )
+              )}
               <br />
             </div>
           ))}
@@ -59,6 +68,14 @@ export default function MatchDisplay() {
           {redPlayer?.ships.map((ship, index) => (
             <div key={index}>
               <span>{ship.constructor.name}</span>
+              <br />
+              {ship.parts.map((part, indexPart) =>
+                match.settings.gameMode == GameMode.FogOfWar ? (
+                  <span>10 </span>
+                ) : (
+                  <span>1 </span>
+                )
+              )}
               <br />
             </div>
           ))}

@@ -1,9 +1,11 @@
 import Vehicle from '../Vehicle';
 import { ShipClass } from './ShipClass';
+import { ShipPart } from './ShipPart';
 
 export default abstract class Ship extends Vehicle {
   readonly forwardTravelDistance = 1;
   readonly shipClass!: ShipClass;
+  readonly parts!: ShipPart[];
 }
 
 export abstract class Carrier extends Ship {

@@ -13,21 +13,36 @@ export interface IModularShip extends Ship {
 }
 
 export class ModularCarrier extends Carrier implements IModularShip {
-  readonly parts = ShipPartFactory.createParts(5, true) as ModularShipPart[];
+  readonly parts = new ShipPartFactory().createParts(
+    5,
+    true
+  ) as ModularShipPart[];
 }
 
 export class ModularBattleship extends Battleship implements IModularShip {
-  readonly parts = ShipPartFactory.createParts(4, true) as ModularShipPart[];
+  readonly parts = new ShipPartFactory().createParts(
+    4,
+    true
+  ) as ModularShipPart[];
 }
 
 export class ModularCruiser extends Cruiser implements IModularShip {
-  readonly parts = ShipPartFactory.createParts(3, true) as ModularShipPart[];
+  readonly parts = new ShipPartFactory().createParts(
+    3,
+    true
+  ) as ModularShipPart[];
 }
 
 export class ModularSubmarine extends Submarine implements IModularShip {
-  readonly parts = ShipPartFactory.createParts(3, true) as ModularShipPart[];
+  readonly parts = new ShipPartFactory().createParts(
+    3,
+    true
+  ) as ModularShipPart[];
 }
 
 export class ModularSpeedboat extends Speedboat implements IModularShip {
-  readonly parts = ShipPartFactory.createParts(2, true) as ModularShipPart[];
+  readonly parts = new ShipPartFactory().createParts(
+    2,
+    true
+  ) as ModularShipPart[];
 }

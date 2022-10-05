@@ -1,7 +1,11 @@
 import { ModularShipPart, ShipPart } from '../../../../models/Ships/ShipPart';
 
-export default class ShipPartFactory {
-  static createParts(amount: number, isModular: boolean): ShipPart[] {
+export interface IShipPartFactory {
+  createParts(amount: number, isModular: boolean): ShipPart[];
+}
+
+export default class ShipPartFactory implements IShipPartFactory {
+  createParts(amount: number, isModular: boolean): ShipPart[] {
     const result: ShipPart[] = [];
 
     for (let i = 0; i < amount; i++) {
@@ -11,7 +15,7 @@ export default class ShipPartFactory {
     return result;
   }
 
-  private static createPart(isModular: boolean) {
+  private createPart(isModular: boolean) {
     if (isModular) {
       return new ModularShipPart();
     }

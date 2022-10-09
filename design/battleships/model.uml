@@ -7,6 +7,14 @@
     <ownedComment xmi:type="uml:Comment" xmi:id="_iBnzoETNEe27rv1zb77HhA">
       <body>Generalizations/implementations inside matrix hidden to reduce clutter. Assume logical relations</body>
     </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_zbc1sEfMEe2SLYkSMgTh1A" annotatedElement="_YRTjIEfNEe2SLYkSMgTh1A">
+      <body>public static get Instance(): MatchEventsService {&#xD;
+    MatchEventsService._instance ??= new MatchEventsService();&#xD;
+&#xD;
+    return MatchEventsService._instance;&#xD;
+  }&#xD;
+</body>
+    </ownedComment>
     <packagedElement xmi:type="uml:Class" xmi:id="_zV2VgETCEe27rv1zb77HhA" name="Vehicle" isAbstract="true">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_46jUMETCEe27rv1zb77HhA" name="positionX" visibility="public">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -70,20 +78,20 @@
       </ownedEnd>
       <ownedEnd xmi:type="uml:Property" xmi:id="_uf7dgkTEEe27rv1zb77HhA" type="_tnkHkETDEe27rv1zb77HhA" association="_ufqXwETEEe27rv1zb77HhA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_BVspoETFEe27rv1zb77HhA" name="Carrier">
+    <packagedElement xmi:type="uml:Class" xmi:id="_BVspoETFEe27rv1zb77HhA" name="Carrier" isAbstract="true">
       <generalization xmi:type="uml:Generalization" xmi:id="_MRj6QETFEe27rv1zb77HhA" general="_tnkHkETDEe27rv1zb77HhA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_ClMioETFEe27rv1zb77HhA" name="Battleship">
+    <packagedElement xmi:type="uml:Class" xmi:id="_ClMioETFEe27rv1zb77HhA" name="Battleship" isAbstract="true">
       <generalization xmi:type="uml:Generalization" xmi:id="_MuzP4ETFEe27rv1zb77HhA" general="_tnkHkETDEe27rv1zb77HhA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_EJpX8ETFEe27rv1zb77HhA" name="Cruiser">
+    <packagedElement xmi:type="uml:Class" xmi:id="_EJpX8ETFEe27rv1zb77HhA" name="Cruiser" isAbstract="true">
       <generalization xmi:type="uml:Generalization" xmi:id="_NCpY8ETFEe27rv1zb77HhA" general="_tnkHkETDEe27rv1zb77HhA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_IC3sQETFEe27rv1zb77HhA" name="Submarine">
+    <packagedElement xmi:type="uml:Class" xmi:id="_IC3sQETFEe27rv1zb77HhA" name="Submarine" isAbstract="true">
       <generalization xmi:type="uml:Generalization" xmi:id="_Nbv1cETFEe27rv1zb77HhA" general="_tnkHkETDEe27rv1zb77HhA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Dependency" xmi:id="_fdxbAETGEe27rv1zb77HhA" client="_skpAEETFEe27rv1zb77HhA" supplier="_mpOnAETEEe27rv1zb77HhA"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="_J7HnUETFEe27rv1zb77HhA" name="Speedboat">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_fdxbAETGEe27rv1zb77HhA" name="parts: ModularShipPart" client="_skpAEETFEe27rv1zb77HhA" supplier="_mpOnAETEEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_J7HnUETFEe27rv1zb77HhA" name="Speedboat" isAbstract="true">
       <generalization xmi:type="uml:Generalization" xmi:id="_NyxOUETFEe27rv1zb77HhA" general="_tnkHkETDEe27rv1zb77HhA"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Interface" xmi:id="_bSjNMETFEe27rv1zb77HhA" name="IClassicShip">
@@ -174,7 +182,7 @@
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_NlkYcETIEe27rv1zb77HhA" name="team" type="_RcJBYETIEe27rv1zb77HhA"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_dvK5QkTIEe27rv1zb77HhA" name="ships" type="_tnkHkETDEe27rv1zb77HhA" association="_dvKSMETIEe27rv1zb77HhA">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dvMucETIEe27rv1zb77HhA" value="5"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dvMucETIEe27rv1zb77HhA" value="2"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dvN8kETIEe27rv1zb77HhA" value="5"/>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_CH8sUETNEe27rv1zb77HhA" name="movementTurns" type="_0yOoYETMEe27rv1zb77HhA" association="_CH7eMETNEe27rv1zb77HhA">
@@ -279,61 +287,111 @@
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_VKd7AETNEe27rv1zb77HhA" type="_2w0cAETMEe27rv1zb77HhA" association="_VKZCgETNEe27rv1zb77HhA"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_tGYRYEfJEe2SLYkSMgTh1A" name="ShipPartFactory">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_tGYRYUfJEe2SLYkSMgTh1A" client="_tGYRYEfJEe2SLYkSMgTh1A" supplier="_tGatoEfJEe2SLYkSMgTh1A" contract="_tGatoEfJEe2SLYkSMgTh1A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_tGatoEfJEe2SLYkSMgTh1A" name="IShipPartFactory">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_tGatoUfJEe2SLYkSMgTh1A" name="createParts" concurrency="concurrent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_tGatokfJEe2SLYkSMgTh1A" name="amount">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_tGato0fJEe2SLYkSMgTh1A" name="isModular">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_MjaicETJEe27rv1zb77HhA" name="ShipPartFactory">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_bEABkETKEe27rv1zb77HhA" client="_MjaicETJEe27rv1zb77HhA" supplier="_B6m7QETKEe27rv1zb77HhA" contract="_B6m7QETKEe27rv1zb77HhA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_h00qkETJEe27rv1zb77HhA" name="returns as ShipPart[]" client="_MjaicETJEe27rv1zb77HhA" supplier="_mpOnAETEEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_B6m7QETKEe27rv1zb77HhA" name="IShipPartFactory" isAbstract="true">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_DF3NcETKEe27rv1zb77HhA" name="createParts" concurrency="concurrent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_MVygsETKEe27rv1zb77HhA" name="amount">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_N1kRYETKEe27rv1zb77HhA" name="isModular">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_SXesMEfREe2SLYkSMgTh1A" name="result" type="_e4sC4ETEEe27rv1zb77HhA" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WhSaMEfREe2SLYkSMgTh1A"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_epepUEfREe2SLYkSMgTh1A" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_0NJDQEfKEe2SLYkSMgTh1A" name="returns" client="_B6m7QETKEe27rv1zb77HhA" supplier="_e4sC4ETEEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_TqjsYEfLEe2SLYkSMgTh1A" name="IShipFactory">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_YqhmUEfLEe2SLYkSMgTh1A" name="create">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_cqyWwEfLEe2SLYkSMgTh1A" name="type" type="_Qe3doETEEe27rv1zb77HhA"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_pYnskEfREe2SLYkSMgTh1A" name="result" type="_tnkHkETDEe27rv1zb77HhA" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_m0kDIEfLEe2SLYkSMgTh1A" name="ClassicShipFactory">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_pepq0EfLEe2SLYkSMgTh1A" client="_m0kDIEfLEe2SLYkSMgTh1A" supplier="_TqjsYEfLEe2SLYkSMgTh1A" contract="_TqjsYEfLEe2SLYkSMgTh1A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_qY1bIEfLEe2SLYkSMgTh1A" name="ModularShipFactory">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_uAW7cEfLEe2SLYkSMgTh1A" client="_qY1bIEfLEe2SLYkSMgTh1A" supplier="_TqjsYEfLEe2SLYkSMgTh1A" contract="_TqjsYEfLEe2SLYkSMgTh1A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_rmKw8EfLEe2SLYkSMgTh1A" name="ObservingShipFactory">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_uqjvAEfLEe2SLYkSMgTh1A" client="_rmKw8EfLEe2SLYkSMgTh1A" supplier="_TqjsYEfLEe2SLYkSMgTh1A" contract="_TqjsYEfLEe2SLYkSMgTh1A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_zA2Z0EfLEe2SLYkSMgTh1A" name="returns as Ship" client="_m0kDIEfLEe2SLYkSMgTh1A" supplier="_bSjNMETFEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_zjNgAEfLEe2SLYkSMgTh1A" name="returns as Ship" client="_qY1bIEfLEe2SLYkSMgTh1A" supplier="_skpAEETFEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_0JtfUEfLEe2SLYkSMgTh1A" name="returns as Ship" client="_rmKw8EfLEe2SLYkSMgTh1A" supplier="_umDeMETFEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_kUI6wETLEe27rv1zb77HhA" name="ConnectionMediatorService" visibility="public">
+      <generalization xmi:type="uml:Generalization" xmi:id="_v1PnMEfQEe2SLYkSMgTh1A" general="_AmYUAEfPEe2SLYkSMgTh1A"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_n1HHIETLEe27rv1zb77HhA" name="_instance" visibility="private" type="_kUI6wETLEe27rv1zb77HhA"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_YRTjI0fNEe2SLYkSMgTh1A" name="Instance" type="_kUI6wETLEe27rv1zb77HhA" association="_YRTjIEfNEe2SLYkSMgTh1A"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_BuYLMETMEe27rv1zb77HhA" name="constructor" visibility="private"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_A1x6kEfSEe2SLYkSMgTh1A" name="sendEvent" concurrency="concurrent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ELTr8EfSEe2SLYkSMgTh1A" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_FSCDcEfSEe2SLYkSMgTh1A" name="data">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_YRTjIEfNEe2SLYkSMgTh1A" memberEnd="_YRTjI0fNEe2SLYkSMgTh1A _YRXNgEfNEe2SLYkSMgTh1A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_YRTjIUfNEe2SLYkSMgTh1A" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YRTjIkfNEe2SLYkSMgTh1A" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_YRXNgEfNEe2SLYkSMgTh1A" type="_kUI6wETLEe27rv1zb77HhA" association="_YRTjIEfNEe2SLYkSMgTh1A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_QofiMEfOEe2SLYkSMgTh1A" name="MatchEventNames">
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_USkAMEfOEe2SLYkSMgTh1A" name="NewMatch"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_Wh3wYEfOEe2SLYkSMgTh1A" name="MatchCreated"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_XPj80EfOEe2SLYkSMgTh1A" name="PlayerJoined"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_X5gRsEfOEe2SLYkSMgTh1A" name="SecondPlayerConfirmation"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_YYO1EEfOEe2SLYkSMgTh1A" name="PlayerStartedMatch"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_ZO7zkEfOEe2SLYkSMgTh1A" name="PlayerUpdatedMatchSettings"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_cRzusEfOEe2SLYkSMgTh1A" name="" client="_kUI6wETLEe27rv1zb77HhA" supplier="_QofiMEfOEe2SLYkSMgTh1A"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_AmYUAEfPEe2SLYkSMgTh1A" name="MatchEventsSubject" visibility="package" isAbstract="true">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_EChOQkfQEe2SLYkSMgTh1A" name="observersByEvent" type="_No2EwEfPEe2SLYkSMgTh1A" aggregation="shared" association="_ECgnMEfQEe2SLYkSMgTh1A">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EChOQ0fQEe2SLYkSMgTh1A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EChOREfQEe2SLYkSMgTh1A" value="*"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ByBAsEfPEe2SLYkSMgTh1A" name="notify" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_TLYDwEfQEe2SLYkSMgTh1A" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Ua4j0EfQEe2SLYkSMgTh1A" name="data">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Y7avwEfQEe2SLYkSMgTh1A" name="add">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_cXw60EfQEe2SLYkSMgTh1A" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_eAU0EEfQEe2SLYkSMgTh1A" name="action" type="_cGG_kEfPEe2SLYkSMgTh1A"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_No2EwEfPEe2SLYkSMgTh1A" name="MatchEventsObserver">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_SDttkEfPEe2SLYkSMgTh1A" name="onNotify" type="_cGG_kEfPEe2SLYkSMgTh1A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_cGG_kEfPEe2SLYkSMgTh1A" name="Function"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_ECgnMEfQEe2SLYkSMgTh1A" memberEnd="_EChOQkfQEe2SLYkSMgTh1A _EChORUfQEe2SLYkSMgTh1A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_EChOQEfQEe2SLYkSMgTh1A" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_EChOQUfQEe2SLYkSMgTh1A" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_EChORUfQEe2SLYkSMgTh1A" type="_AmYUAEfPEe2SLYkSMgTh1A" association="_ECgnMEfQEe2SLYkSMgTh1A"/>
+    </packagedElement>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_jbQRMEPqEe26Q_q4HjD8wQ" name="use case diagram"/>
-  <packagedElement xmi:type="uml:Package" xmi:id="_EV9_4ETJEe27rv1zb77HhA" name="patterns">
-    <packagedElement xmi:type="uml:Package" xmi:id="_GPyBMETJEe27rv1zb77HhA" name="factory">
-      <packagedElement xmi:type="uml:Class" xmi:id="_MjaicETJEe27rv1zb77HhA" name="ShipPartFactory">
-        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_bEABkETKEe27rv1zb77HhA" client="_MjaicETJEe27rv1zb77HhA" supplier="_B6m7QETKEe27rv1zb77HhA" contract="_B6m7QETKEe27rv1zb77HhA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Dependency" xmi:id="_eaUSkETJEe27rv1zb77HhA" name="returns" client="_GPyBMETJEe27rv1zb77HhA _B6m7QETKEe27rv1zb77HhA" supplier="_e4sC4ETEEe27rv1zb77HhA"/>
-      <packagedElement xmi:type="uml:Dependency" xmi:id="_h00qkETJEe27rv1zb77HhA" name="returns as ShipPart" client="_B6m7QETKEe27rv1zb77HhA" supplier="_mpOnAETEEe27rv1zb77HhA"/>
-      <packagedElement xmi:type="uml:Interface" xmi:id="_B6m7QETKEe27rv1zb77HhA" name="IShipPartFactory">
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_DF3NcETKEe27rv1zb77HhA" name="createParts" concurrency="concurrent">
-          <ownedParameter xmi:type="uml:Parameter" xmi:id="_MVygsETKEe27rv1zb77HhA" name="amount">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </ownedParameter>
-          <ownedParameter xmi:type="uml:Parameter" xmi:id="_N1kRYETKEe27rv1zb77HhA" name="isModular">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </ownedParameter>
-        </ownedOperation>
-      </packagedElement>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Package" xmi:id="_mkVRMETKEe27rv1zb77HhA" name="abstractFactory">
-      <packagedElement xmi:type="uml:Interface" xmi:id="_rkKBMETKEe27rv1zb77HhA" name="IShipFactory">
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_vzGG0ETKEe27rv1zb77HhA" name="create">
-          <ownedParameter xmi:type="uml:Parameter" xmi:id="_yrzZUETKEe27rv1zb77HhA" name="type" type="_Qe3doETEEe27rv1zb77HhA"/>
-        </ownedOperation>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Dependency" xmi:id="_4oDVUETKEe27rv1zb77HhA" name="returns" client="_rkKBMETKEe27rv1zb77HhA" supplier="_tnkHkETDEe27rv1zb77HhA"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_7mDXgETKEe27rv1zb77HhA" name="ClassicShipFactory">
-        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_A6z1sETLEe27rv1zb77HhA" client="_7mDXgETKEe27rv1zb77HhA" supplier="_rkKBMETKEe27rv1zb77HhA" contract="_rkKBMETKEe27rv1zb77HhA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Dependency" xmi:id="_J3xwsETLEe27rv1zb77HhA" name="returns" client="_7mDXgETKEe27rv1zb77HhA" supplier="_bSjNMETFEe27rv1zb77HhA"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_LQJR0ETLEe27rv1zb77HhA" name="ModularShipFactory">
-        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_NIAyYETLEe27rv1zb77HhA" client="_LQJR0ETLEe27rv1zb77HhA" supplier="_rkKBMETKEe27rv1zb77HhA" contract="_rkKBMETKEe27rv1zb77HhA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Dependency" xmi:id="_OmIWMETLEe27rv1zb77HhA" name="returns" client="_LQJR0ETLEe27rv1zb77HhA" supplier="_skpAEETFEe27rv1zb77HhA"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_QwU84ETLEe27rv1zb77HhA" name="ObservingShipFactory">
-        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_TJUNgETLEe27rv1zb77HhA" client="_QwU84ETLEe27rv1zb77HhA" supplier="_rkKBMETKEe27rv1zb77HhA" contract="_rkKBMETKEe27rv1zb77HhA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Dependency" xmi:id="_SOMCAETLEe27rv1zb77HhA" name="returns" client="_QwU84ETLEe27rv1zb77HhA" supplier="_umDeMETFEe27rv1zb77HhA"/>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Package" xmi:id="_dh_4kETLEe27rv1zb77HhA" name="singleton">
-      <ownedComment xmi:type="uml:Comment" xmi:id="_ytaGYETLEe27rv1zb77HhA" annotatedElement="_kUI6wETLEe27rv1zb77HhA">
-        <body>public static get Instance(): MatchEventsService {&#xD;
-    MatchEventsService._instance ??= new MatchEventsService();&#xD;
-&#xD;
-    return MatchEventsService._instance;&#xD;
-  }</body>
-      </ownedComment>
-      <packagedElement xmi:type="uml:Class" xmi:id="_kUI6wETLEe27rv1zb77HhA" name="MatchEventsService">
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_n1HHIETLEe27rv1zb77HhA" name="_instance" visibility="private" type="_kUI6wETLEe27rv1zb77HhA"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_vsrgUETLEe27rv1zb77HhA" name="Instance"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_BuYLMETMEe27rv1zb77HhA" name="constructor" visibility="private"/>
-      </packagedElement>
-    </packagedElement>
-  </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_6FrDgETCEe27rv1zb77HhA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_6FrqkETCEe27rv1zb77HhA" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>

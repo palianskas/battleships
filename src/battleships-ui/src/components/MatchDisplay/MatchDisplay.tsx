@@ -1,39 +1,25 @@
-import { useEffect, useState } from 'react';
-import { generatePath, useLoaderData, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { generatePath, useNavigate } from 'react-router-dom';
 import { Match } from '../../models/Match';
 import { GameMode } from '../../models/MatchSettings';
-import { Player } from '../../models/Player';
 import ConnectionMediatorService, {
   MatchEventNames,
 } from '../../services/ConnectionMediatorService/ConnectionMediatorService';
 import MatchProvider from '../../services/MatchProvider/MatchProvider';
-import { MatchService } from '../../services/MatchService/MatchService';
-import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
 
 export default function MatchDisplay() {
   const navigate = useNavigate();
-
-  const [rerenderToggle, setRerenderToggle] = useState(false);
 
   const match = MatchProvider.Instance.match;
   const bluePlayer = match.players[0];
   const redPlayer = match.players[1];
 
   useEffect(() => {
-    ConnectionMediatorService.Instance.add(
-      MatchEventNames.PlayerJoined,
-      handlePlayerJoinedEvent
-    );
-    ConnectionMediatorService.Instance.add(
-      MatchEventNames.SecondPlayerConfirmation,
-      handlePlayerJoinedEvent
-    );
+    if (match.isPregame) {
+      const path = generatePath('pregame');
 
-    // if (match.isPregame) {
-    //   const path = generatePath('pregame');
-
-    //   navigate(path);
-    // }
+      navigate(path);
+    }
   });
 
   return (
@@ -79,43 +65,6 @@ export default function MatchDisplay() {
       </div>
     </div>
   );
-
-  function handlePlayerJoinedEvent(data: any): void {
-    const player = new Player(data.player);
-
-    const currentPlayer = PlayerService.getFromSessionStorage();
-
-    if (player.id !== currentPlayer?.id && match.players.length < 2) {
-      handleAddEnemyPlayer(player, currentPlayer);
-    }
-
-    if (player.id === currentPlayer?.id && match.players.length == 0) {
-      handleAddCurrentPlayer(player);
-    }
-
-    if (match.players.length == 2) {
-      MatchService.initMatchPlayerVehicles();
-    }
-
-    setRerenderToggle(!rerenderToggle);
-  }
-
-  function handleAddEnemyPlayer(enemyPlayer: Player, currentPlayer?: Player) {
-    enemyPlayer.invertTeam();
-
-    match.players.push(enemyPlayer);
-
-    if (currentPlayer != null) {
-      ConnectionMediatorService.Instance.sendEvent(
-        MatchEventNames.SecondPlayerConfirmation,
-        { player: currentPlayer }
-      );
-    }
-  }
-
-  function handleAddCurrentPlayer(player: Player) {
-    match.players.push(player);
-  }
 }
 
 export function matchLoader(): Match {

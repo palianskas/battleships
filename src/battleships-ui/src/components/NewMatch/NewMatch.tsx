@@ -4,7 +4,6 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import ConnectionMediatorService, {
   MatchEventNames,
 } from '../../services/ConnectionMediatorService/ConnectionMediatorService';
-import MatchProvider from '../../services/MatchProvider/MatchProvider';
 import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
 
 export default function NewMatch() {
@@ -12,8 +11,6 @@ export default function NewMatch() {
 
   const handleClick = async () => {
     const player = PlayerService.createNew('New player');
-
-    // MatchProvider.Instance.match.players.push(player);
 
     ConnectionMediatorService.Instance.sendEvent(MatchEventNames.PlayerJoined, {
       player: player,
@@ -23,7 +20,7 @@ export default function NewMatch() {
       MatchEventNames.NewMatch
     );
 
-    const path = generatePath('match');
+    const path = generatePath('match/pregame');
 
     navigate(path);
   };

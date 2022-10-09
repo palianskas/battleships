@@ -1,5 +1,5 @@
 import MatchEventsObserver from './MatchEventsObserver';
-import { MatchEventNames } from './MatchEventService';
+import { MatchEventNames } from './ConnectionMediatorService';
 
 export default abstract class MatchEventsSubject {
   protected observersByEvent: { [event: number]: MatchEventsObserver[] } = {};

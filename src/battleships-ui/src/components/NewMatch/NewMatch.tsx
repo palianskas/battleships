@@ -1,9 +1,9 @@
 import Button from 'react-bootstrap/esm/Button';
 import { LinkContainer } from 'react-router-bootstrap';
 import { generatePath, useNavigate } from 'react-router-dom';
-import MatchEventsService, {
+import ConnectionMediatorService, {
   MatchEventNames,
-} from '../../services/MatchEventService/MatchEventService';
+} from '../../services/ConnectionMediatorService/ConnectionMediatorService';
 import MatchProvider from '../../services/MatchProvider/MatchProvider';
 import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
 
@@ -15,11 +15,13 @@ export default function NewMatch() {
 
     // MatchProvider.Instance.match.players.push(player);
 
-    MatchEventsService.Instance.sendEvent(MatchEventNames.PlayerJoined, {
+    ConnectionMediatorService.Instance.sendEvent(MatchEventNames.PlayerJoined, {
       player: player,
     });
 
-    await MatchEventsService.Instance.sendEvent(MatchEventNames.NewMatch);
+    await ConnectionMediatorService.Instance.sendEvent(
+      MatchEventNames.NewMatch
+    );
 
     const path = generatePath('match');
 

@@ -3,9 +3,9 @@ import { generatePath, useLoaderData, useNavigate } from 'react-router-dom';
 import { Match } from '../../models/Match';
 import { GameMode } from '../../models/MatchSettings';
 import { Player } from '../../models/Player';
-import MatchEventsService, {
+import ConnectionMediatorService, {
   MatchEventNames,
-} from '../../services/MatchEventService/MatchEventService';
+} from '../../services/ConnectionMediatorService/ConnectionMediatorService';
 import MatchProvider from '../../services/MatchProvider/MatchProvider';
 import { MatchService } from '../../services/MatchService/MatchService';
 import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
@@ -20,11 +20,11 @@ export default function MatchDisplay() {
   const redPlayer = match.players[1];
 
   useEffect(() => {
-    MatchEventsService.Instance.add(
+    ConnectionMediatorService.Instance.add(
       MatchEventNames.PlayerJoined,
       handlePlayerJoinedEvent
     );
-    MatchEventsService.Instance.add(
+    ConnectionMediatorService.Instance.add(
       MatchEventNames.SecondPlayerConfirmation,
       handlePlayerJoinedEvent
     );
@@ -106,7 +106,7 @@ export default function MatchDisplay() {
     match.players.push(enemyPlayer);
 
     if (currentPlayer != null) {
-      MatchEventsService.Instance.sendEvent(
+      ConnectionMediatorService.Instance.sendEvent(
         MatchEventNames.SecondPlayerConfirmation,
         { player: currentPlayer }
       );

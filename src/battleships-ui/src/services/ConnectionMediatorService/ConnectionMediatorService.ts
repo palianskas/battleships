@@ -7,10 +7,10 @@ import MatchEventsSubject from './MatchEventsSubject';
 
 const HUB_ENDPOINT_URL = 'match-event-hub/';
 
-export default class MatchEventsService extends MatchEventsSubject {
+export default class ConnectionMediatorService extends MatchEventsSubject {
   private _connection: HubConnection;
 
-  private static _instance: MatchEventsService;
+  private static _instance: ConnectionMediatorService;
 
   private constructor() {
     super();
@@ -34,10 +34,10 @@ export default class MatchEventsService extends MatchEventsSubject {
     });
   }
 
-  public static get Instance(): MatchEventsService {
-    MatchEventsService._instance ??= new MatchEventsService();
+  public static get Instance(): ConnectionMediatorService {
+    ConnectionMediatorService._instance ??= new ConnectionMediatorService();
 
-    return MatchEventsService._instance;
+    return ConnectionMediatorService._instance;
   }
 
   public async sendEvent(event: MatchEventNames, data: any = {}) {

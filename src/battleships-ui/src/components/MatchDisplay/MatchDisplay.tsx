@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
+import { Ammo } from '../../models/Ammo';
 import { Match } from '../../models/Match';
+import { MapTile } from '../../models/MatchMap';
 import { GameMode } from '../../models/MatchSettings';
-import ConnectionMediatorService, {
-  MatchEventNames,
-} from '../../services/ConnectionMediatorService/ConnectionMediatorService';
 import MatchProvider from '../../services/MatchProvider/MatchProvider';
+import AmmoRack from './AmmoRack/AmmoRack';
+import MapGrid from './MapGrid/MapGrid';
 
 export default function MatchDisplay() {
   const navigate = useNavigate();
@@ -15,16 +16,17 @@ export default function MatchDisplay() {
   const redPlayer = match.players[1];
 
   useEffect(() => {
-    if (match.isPregame) {
-      const path = generatePath('pregame');
-
-      navigate(path);
-    }
+    // commented out while in dev
+    // if (match.isPregame) {
+    //   console.log('pregame');
+    //   const path = generatePath('pregame');
+    //   navigate(path);
+    // }
   });
 
   return (
     <div className="container d-flex justify-content-center">
-      <div className="col-3">
+      <div className="col-2">
         <div>
           {bluePlayer?.name} {bluePlayer?.id} {bluePlayer?.team}
         </div>
@@ -43,8 +45,18 @@ export default function MatchDisplay() {
           ))}
         </div>
       </div>
-      <div className="col-6">{match.name}</div>
-      <div className="col-3">
+      <div className="col-8">
+        <div className="w-100 d-flex justify-content-center">{match.name}</div>
+        <div className="w-100 d-flex justify-content-center">
+          <MapGrid player={bluePlayer} onTileSelect={onOwnTileSelect}></MapGrid>
+          <MapGrid
+            player={redPlayer}
+            onTileSelect={onAttackTurnTargetTileSelect}
+          ></MapGrid>
+        </div>
+        <AmmoRack onAmmoSelect={onAmmoSelect} />
+      </div>
+      <div className="col-2">
         <div>
           {redPlayer?.name} {redPlayer?.id} {redPlayer?.team}
         </div>
@@ -65,6 +77,21 @@ export default function MatchDisplay() {
       </div>
     </div>
   );
+
+  function onAmmoSelect(ammo: Ammo): void {
+    bluePlayer.attackTurns[0].ammo = ammo;
+  }
+
+  function onAttackTurnTargetTileSelect(tile: MapTile): void {
+    const turn = bluePlayer.attackTurns[0];
+
+    turn.tile = tile;
+    console.log(`attacking ${tile.x}-${tile.y} with ${turn.ammo.name}`);
+  }
+
+  function onOwnTileSelect(tile: MapTile): void {
+    console.log(`friendly fire on ${tile.x}-${tile.y}`);
+  }
 }
 
 export function matchLoader(): Match {

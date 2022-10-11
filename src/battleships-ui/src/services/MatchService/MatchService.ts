@@ -3,6 +3,7 @@ import { Match } from '../../models/Match';
 import { GameMode } from '../../models/MatchSettings';
 import Ship from '../../models/Ships/Ship';
 import { ShipClass } from '../../models/Ships/ShipClass';
+import { AmmoConstructor } from '../Builders/AmmoBuilder/AmmoConstructor';
 import ClassicShipFactory from '../Factories/ShipFactories/ClassicShipFactory';
 import ModularShipFactory from '../Factories/ShipFactories/ModularShipFactory';
 import ObservingShipFactory from '../Factories/ShipFactories/ObservingShipFactory';
@@ -51,6 +52,21 @@ export class MatchService {
     match.players.forEach((player) => {
       player.ships = this.getShipSet(factory);
     });
+  }
+
+  static initMatchAvailableAmmo(): void {
+    const match = MatchProvider.Instance.match;
+
+    const ammoConstructor = new AmmoConstructor();
+
+    if (match.settings.gameMode == GameMode.Ammo) {
+      match.availableAmmoTypes.push(ammoConstructor.getStandardAmmo());
+      match.availableAmmoTypes.push(ammoConstructor.getArmorPiercingAmmo());
+      match.availableAmmoTypes.push(ammoConstructor.getHighExplosiveAmmo());
+      match.availableAmmoTypes.push(ammoConstructor.getDepthChargeAmmo());
+    } else {
+      match.availableAmmoTypes.push(ammoConstructor.getClassicAmmo());
+    }
   }
 
   private static getShipFactoryByGameType(match: Match): IShipFactory {

@@ -120,16 +120,18 @@ export default function Pregame() {
   }
 
   function handlePlayerStartedMatchEvent(data: any): void {
+    console.log('handlePlayerStartedMatchEvent');
     const player = (data as { player: Player }).player;
 
     if (!readyPlayerIds.some((id) => id === player.id)) {
       setReadyPlayerIds([...readyPlayerIds, player.id]);
 
       // check if length > 0 because value will change only after re-rendering
-      if (readyPlayerIds.length > 0) {
+      if (readyPlayerIds.length > 0 && match.isPregame) {
         match.isPregame = false;
 
         MatchService.initMatchPlayerVehicles();
+        MatchService.initMatchAvailableAmmo();
 
         navigate('/match');
       }

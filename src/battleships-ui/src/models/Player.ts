@@ -1,4 +1,7 @@
+import MatchMap from './MatchMap';
 import Ship from './Ships/Ship';
+import { AttackTurn } from './Turns/AttackTurn';
+import { MovementTurn } from './Turns/MovementTurn';
 
 export enum PlayerTeam {
   Blue = 'Blue',
@@ -10,12 +13,17 @@ export class Player {
   name: string;
   team: PlayerTeam;
   ships: Ship[];
+  map: MatchMap;
+  movementTurns: MovementTurn[] = [];
+  attackTurns: AttackTurn[] = [];
 
   constructor(object: Partial<Player>) {
     this.id = object.id ?? Math.round(Math.random() * 1000);
     this.name = object.name ?? 'New player';
     this.team = !!object.team ? PlayerTeam[object.team] : PlayerTeam.Blue;
     this.ships = object.ships ?? [];
+    this.map = new MatchMap();
+    this.attackTurns = [new AttackTurn(), new AttackTurn()];
   }
 
   static mapList(objects?: Partial<Player>[]): Player[] {

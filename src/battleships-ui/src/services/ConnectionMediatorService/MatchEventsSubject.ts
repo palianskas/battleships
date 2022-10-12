@@ -1,8 +1,8 @@
-import MatchEventsObserver from './MatchEventsObserver';
+import MatchEventsObservable from './MatchEventsObservable';
 import { MatchEventNames } from './ConnectionMediatorService';
 
 export default abstract class MatchEventsSubject {
-  protected observersByEvent: { [event: number]: MatchEventsObserver[] } = {};
+  protected observersByEvent: { [event: number]: MatchEventsObservable[] } = {};
 
   constructor() {
     for (const event in MatchEventNames) {
@@ -22,6 +22,6 @@ export default abstract class MatchEventsSubject {
   }
 
   public add(event: MatchEventNames, action: (data: string) => void) {
-    this.observersByEvent[event].push(new MatchEventsObserver(action));
+    this.observersByEvent[event].push(new MatchEventsObservable(action));
   }
 }

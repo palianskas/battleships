@@ -1,4 +1,4 @@
-export default class MatchEventsObserver {
+export default class MatchEventsObservable {
   constructor(onNotify: (data: string) => void) {
     this.onNotify = onNotify;
   }

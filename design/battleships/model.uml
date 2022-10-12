@@ -240,7 +240,7 @@
       <ownedEnd xmi:type="uml:Property" xmi:id="_6jgnUETIEe27rv1zb77HhA" type="_lUiIIETIEe27rv1zb77HhA" association="_6jcV4ETIEe27rv1zb77HhA"/>
       <ownedEnd xmi:type="uml:Property" xmi:id="_6jcV40TIEe27rv1zb77HhA" name="matchsettings" type="_08q6oETIEe27rv1zb77HhA" association="_6jcV4ETIEe27rv1zb77HhA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_0yOoYETMEe27rv1zb77HhA" name="Turn">
+    <packagedElement xmi:type="uml:Class" xmi:id="_0yOoYETMEe27rv1zb77HhA" name="MovementTurn">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_87aWAETMEe27rv1zb77HhA" name="isDisabled">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedAttribute>
@@ -249,7 +249,6 @@
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_2w0cAETMEe27rv1zb77HhA" name="AttackTurn">
-      <generalization xmi:type="uml:Generalization" xmi:id="_5hPVMETMEe27rv1zb77HhA" general="_0yOoYETMEe27rv1zb77HhA"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_VKZpkkTNEe27rv1zb77HhA" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA" association="_VKZCgETNEe27rv1zb77HhA">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VKbewETNEe27rv1zb77HhA"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VKcs4ETNEe27rv1zb77HhA" value="1"/>
@@ -280,6 +279,7 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_QNhf4ETNEe27rv1zb77HhA" name="cooldown">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_kUS-cEo_Ee2Zp75EuR3hWg" name="type" type="_VexUoEo_Ee2Zp75EuR3hWg"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_VKZCgETNEe27rv1zb77HhA" memberEnd="_VKZpkkTNEe27rv1zb77HhA _VKd7AETNEe27rv1zb77HhA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_VKZpkETNEe27rv1zb77HhA" source="org.eclipse.papyrus">
@@ -389,6 +389,114 @@
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_EChOQUfQEe2SLYkSMgTh1A" key="nature" value="UML_Nature"/>
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_EChORUfQEe2SLYkSMgTh1A" type="_AmYUAEfPEe2SLYkSMgTh1A" association="_ECgnMEfQEe2SLYkSMgTh1A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_RpS34Eo_Ee2Zp75EuR3hWg" name="IAmmoConstructor">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_umUn4Eo_Ee2Zp75EuR3hWg" name="getClassicAmmo">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_umUn4Uo_Ee2Zp75EuR3hWg" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_wfl2oEo_Ee2Zp75EuR3hWg" name="getStandardAmmo">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_wfl2oUo_Ee2Zp75EuR3hWg" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_wp3M8Eo_Ee2Zp75EuR3hWg" name="getArmorPiercingAmmo">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_wp3M8Uo_Ee2Zp75EuR3hWg" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_wyeWYEo_Ee2Zp75EuR3hWg" name="getHighExplosiveAmmo">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_wyeWYUo_Ee2Zp75EuR3hWg" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_w09CoEo_Ee2Zp75EuR3hWg" name="getDepthChargeAmmo">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_w09CoUo_Ee2Zp75EuR3hWg" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA" direction="out"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_VexUoEo_Ee2Zp75EuR3hWg" name="AmmoType">
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_WwqaUEo_Ee2Zp75EuR3hWg" name="Classic"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_Z3oyUEo_Ee2Zp75EuR3hWg" name="Standard"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_bAJSgEo_Ee2Zp75EuR3hWg" name="ArmorPiercing"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_bxM8AEo_Ee2Zp75EuR3hWg" name="HighExplosive"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_ceF3MEo_Ee2Zp75EuR3hWg" name="DepthCharge"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_4LcvEEo_Ee2Zp75EuR3hWg" name="AmmoConstructor">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_5OW9kEo_Ee2Zp75EuR3hWg" client="_4LcvEEo_Ee2Zp75EuR3hWg" supplier="_RpS34Eo_Ee2Zp75EuR3hWg" contract="_RpS34Eo_Ee2Zp75EuR3hWg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_A9tO4EpAEe2Zp75EuR3hWg" name="IAmmoBuilder" visibility="public">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RNq2YEpAEe2Zp75EuR3hWg" name="build">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RNq2YUpAEe2Zp75EuR3hWg" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_W0IvoEpAEe2Zp75EuR3hWg" name="setName">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_cX0aoEpAEe2Zp75EuR3hWg" name="name">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_W0IvoUpAEe2Zp75EuR3hWg" name="builder" type="_A9tO4EpAEe2Zp75EuR3hWg" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_m_ot4EpAEe2Zp75EuR3hWg" name="setType">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_m_ot4UpAEe2Zp75EuR3hWg" name="type" type="_VexUoEo_Ee2Zp75EuR3hWg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_m_ot4kpAEe2Zp75EuR3hWg" name="builder" type="_A9tO4EpAEe2Zp75EuR3hWg" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_nGYPEEpAEe2Zp75EuR3hWg" name="setDamage">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_nGYPEUpAEe2Zp75EuR3hWg" name="damage">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_nGYPEkpAEe2Zp75EuR3hWg" name="builder" type="_A9tO4EpAEe2Zp75EuR3hWg" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_nNVysEpAEe2Zp75EuR3hWg" name="setImpactRadius">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_nNVysUpAEe2Zp75EuR3hWg" name="impactRadius">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_nNVyskpAEe2Zp75EuR3hWg" name="builder" type="_A9tO4EpAEe2Zp75EuR3hWg" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_nTUe4EpAEe2Zp75EuR3hWg" name="setCooldown">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_nTUe4UpAEe2Zp75EuR3hWg" name="cooldown">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_nTUe4kpAEe2Zp75EuR3hWg" name="builder" type="_A9tO4EpAEe2Zp75EuR3hWg" direction="out"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_EespYEpAEe2Zp75EuR3hWg" name="returns" client="_RpS34Eo_Ee2Zp75EuR3hWg" supplier="_L7oz8ETNEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_3jAZkEpAEe2Zp75EuR3hWg" name="AmmoBuilder">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_8-E7IEpAEe2Zp75EuR3hWg" name="ammo" visibility="private" type="_L7oz8ETNEe27rv1zb77HhA"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4uU9MEpAEe2Zp75EuR3hWg" client="_3jAZkEpAEe2Zp75EuR3hWg" supplier="_A9tO4EpAEe2Zp75EuR3hWg" contract="_A9tO4EpAEe2Zp75EuR3hWg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_BbF5AEpBEe2Zp75EuR3hWg" name="builds" client="_3jAZkEpAEe2Zp75EuR3hWg" supplier="_L7oz8ETNEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_KuR7oEpBEe2Zp75EuR3hWg" name="uses" client="_4LcvEEo_Ee2Zp75EuR3hWg" supplier="_A9tO4EpAEe2Zp75EuR3hWg"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_tg2isEpBEe2Zp75EuR3hWg" name="MatchMap"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_vGAioEpBEe2Zp75EuR3hWg" name="MapTile">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_yitTAEpBEe2Zp75EuR3hWg" name="x">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_0abCkEpBEe2Zp75EuR3hWg" name="y">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_2pjzoEpBEe2Zp75EuR3hWg" name="isAttacked">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_2yBzIEpBEe2Zp75EuR3hWg" name="isShipPartDamaged">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="__jLfsEpBEe2Zp75EuR3hWg" memberEnd="__jXs8EpBEe2Zp75EuR3hWg __jbXUEpBEe2Zp75EuR3hWg" navigableOwnedEnd="__jXs8EpBEe2Zp75EuR3hWg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__jMGwEpBEe2Zp75EuR3hWg" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="__jMGwUpBEe2Zp75EuR3hWg" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="__jbXUEpBEe2Zp75EuR3hWg" type="_tg2isEpBEe2Zp75EuR3hWg" association="__jLfsEpBEe2Zp75EuR3hWg"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="__jXs8EpBEe2Zp75EuR3hWg" name="tiles" type="_vGAioEpBEe2Zp75EuR3hWg" aggregation="composite" association="__jLfsEpBEe2Zp75EuR3hWg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__jawQEpBEe2Zp75EuR3hWg" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_IfmBEEpCEe2Zp75EuR3hWg" memberEnd="_IfmoIkpCEe2Zp75EuR3hWg _IfqSgEpCEe2Zp75EuR3hWg" navigableOwnedEnd="_IfmoIkpCEe2Zp75EuR3hWg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_IfmoIEpCEe2Zp75EuR3hWg" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_IfmoIUpCEe2Zp75EuR3hWg" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_IfqSgEpCEe2Zp75EuR3hWg" type="_Jl-WYETIEe27rv1zb77HhA" association="_IfmBEEpCEe2Zp75EuR3hWg"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_IfmoIkpCEe2Zp75EuR3hWg" name="map" type="_tg2isEpBEe2Zp75EuR3hWg" association="_IfmBEEpCEe2Zp75EuR3hWg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_VKWccEpCEe2Zp75EuR3hWg" memberEnd="_VKXDgUpCEe2Zp75EuR3hWg _VKXDhEpCEe2Zp75EuR3hWg" navigableOwnedEnd="_VKXDgUpCEe2Zp75EuR3hWg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_VKWccUpCEe2Zp75EuR3hWg" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_VKXDgEpCEe2Zp75EuR3hWg" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_VKXDhEpCEe2Zp75EuR3hWg" type="_2w0cAETMEe27rv1zb77HhA" association="_VKWccEpCEe2Zp75EuR3hWg"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_VKXDgUpCEe2Zp75EuR3hWg" name="tile" type="_vGAioEpBEe2Zp75EuR3hWg" association="_VKWccEpCEe2Zp75EuR3hWg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VKXDgkpCEe2Zp75EuR3hWg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VKXDg0pCEe2Zp75EuR3hWg" value="1"/>
+      </ownedEnd>
     </packagedElement>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_jbQRMEPqEe26Q_q4HjD8wQ" name="use case diagram"/>

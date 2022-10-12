@@ -1,5 +1,5 @@
 import { Ammo, AmmoType } from '../../../models/Ammo';
-import { AmmoBuilder } from './AmmoBuilder';
+import { AmmoBuilder, IAmmoBuilder } from './AmmoBuilder';
 
 export interface IAmmoConstructor {
   getClassicAmmo(): Ammo;
@@ -11,7 +11,7 @@ export interface IAmmoConstructor {
 
 export class AmmoConstructor implements IAmmoConstructor {
   getClassicAmmo(): Ammo {
-    const builder = new AmmoBuilder();
+    const builder: IAmmoBuilder = new AmmoBuilder();
 
     return builder
       .setName('Classic')
@@ -23,7 +23,7 @@ export class AmmoConstructor implements IAmmoConstructor {
   }
 
   getStandardAmmo(): Ammo {
-    const builder = new AmmoBuilder();
+    const builder: IAmmoBuilder = new AmmoBuilder();
 
     return builder
       .setName('Standard')
@@ -35,7 +35,7 @@ export class AmmoConstructor implements IAmmoConstructor {
   }
 
   getArmorPiercingAmmo(): Ammo {
-    const builder = new AmmoBuilder();
+    const builder: IAmmoBuilder = new AmmoBuilder();
 
     return builder
       .setName('Armor Piercing')
@@ -46,7 +46,7 @@ export class AmmoConstructor implements IAmmoConstructor {
       .build();
   }
   getHighExplosiveAmmo(): Ammo {
-    const builder = new AmmoBuilder();
+    const builder: IAmmoBuilder = new AmmoBuilder();
 
     return builder
       .setName('High Explosive')
@@ -57,7 +57,7 @@ export class AmmoConstructor implements IAmmoConstructor {
       .build();
   }
   getDepthChargeAmmo(): Ammo {
-    const builder = new AmmoBuilder();
+    const builder: IAmmoBuilder = new AmmoBuilder();
 
     return builder
       .setName('Depth Charge')

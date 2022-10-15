@@ -8,7 +8,7 @@ export default class MatchMap {
       const row: MapTile[] = [];
       this.tiles.push(row);
       for (let j = 0; j < sizeY; j++) {
-        row.push(new MapTile(i, j));
+        row.push(new MapTile(i, j, this));
       }
     }
   }
@@ -21,8 +21,12 @@ export class MapTile {
   isAttacked = Math.random() > 0.5;
   isShipPartDestroyed = Math.random() > 0.9;
 
-  constructor(x: number, y: number) {
+  map: MatchMap;
+
+  constructor(x: number, y: number, map: MatchMap) {
     this.x = x;
     this.y = y;
+
+    this.map = map;
   }
 }

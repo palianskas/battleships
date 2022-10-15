@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import Button from 'react-bootstrap/esm/Button';
+import Form from 'react-bootstrap/esm/Form';
 import { LinkContainer } from 'react-router-bootstrap';
 import { generatePath, useNavigate } from 'react-router-dom';
 import ConnectionMediatorService, {
@@ -9,8 +11,14 @@ import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
 export default function NewMatch() {
   const navigate = useNavigate();
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleClick = async () => {
-    const player = PlayerService.createNew('New player');
+    const playerName = !!inputRef.current?.value
+      ? inputRef.current?.value
+      : 'New player';
+
+    const player = PlayerService.createNew(playerName);
 
     ConnectionMediatorService.Instance.sendEvent(MatchEventNames.PlayerJoined, {
       player: player,
@@ -26,12 +34,24 @@ export default function NewMatch() {
   };
 
   return (
-    <div className="container d-flex justify-content-center">
-      <LinkContainer to={'match'}>
-        <Button className="primary" onClick={handleClick}>
-          Join a match!
-        </Button>
-      </LinkContainer>
+    <div className="vh-100 d-flex justify-content-center align-items-center">
+      <div className="container d-flex flex-column justify-content-center align-items-center">
+        <Form>
+          <Form.Group className="mb-3 text-center">
+            <Form.Control
+              required
+              type="text"
+              placeholder="New player"
+              ref={inputRef}
+            />
+          </Form.Group>
+        </Form>
+        <LinkContainer to={'match'}>
+          <Button className="primary" onClick={handleClick}>
+            Join a match!
+          </Button>
+        </LinkContainer>
+      </div>
     </div>
   );
 }

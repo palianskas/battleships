@@ -9,7 +9,40 @@ export interface IAmmoBuilder {
   setCooldown(cooldown: number): IAmmoBuilder;
 }
 
-export class AmmoBuilder implements IAmmoBuilder {
+export class ClassicAmmoBuilder implements IAmmoBuilder {
+  private ammo = new Ammo();
+
+  constructor() {
+    this.ammo.cooldown = 0;
+    this.ammo.damage = 1;
+    this.ammo.impactRadius = 1;
+    this.ammo.type = AmmoType.Classic;
+  }
+
+  build(): Ammo {
+    return this.ammo;
+  }
+  setName(name: string): IAmmoBuilder {
+    this.ammo.name = name;
+
+    return this;
+  }
+
+  setType(): IAmmoBuilder {
+    return this;
+  }
+  setDamage(): IAmmoBuilder {
+    return this;
+  }
+  setImpactRadius(): IAmmoBuilder {
+    return this;
+  }
+  setCooldown(): IAmmoBuilder {
+    return this;
+  }
+}
+
+export class CustomizableAmmoBuilder implements IAmmoBuilder {
   private ammo = new Ammo();
 
   build(): Ammo {

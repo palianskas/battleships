@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { Ammo } from '../../models/Ammo';
 import { Match } from '../../models/Match';
@@ -55,6 +56,11 @@ export default function MatchDisplay() {
           ></MapGrid>
         </div>
         <AmmoRack onAmmoSelect={onAmmoSelect} />
+        <div className="w-100 mt-3 d-flex justify-content-center">
+          <Button size="lg" variant="danger" onClick={() => onAttack()}>
+            Attack!
+          </Button>
+        </div>
       </div>
       <div className="col-2">
         <div>
@@ -86,11 +92,28 @@ export default function MatchDisplay() {
     const turn = bluePlayer.attackTurns[0];
 
     turn.tile = tile;
-    console.log(`attacking ${tile.x}-${tile.y} with ${turn.ammo.name}`);
   }
 
-  function onOwnTileSelect(tile: MapTile): void {
-    console.log(`friendly fire on ${tile.x}-${tile.y}`);
+  function onOwnTileSelect(): void {
+    const turn = bluePlayer.attackTurns[0];
+
+    turn.tile = undefined!;
+
+    console.log('Cannot attack own ships!');
+  }
+
+  function onAttack(): void {
+    const turn = bluePlayer.attackTurns[0];
+
+    if (!turn.tile || !turn.ammo) {
+      console.log('Select ammo and sector to attack first!');
+
+      return;
+    }
+
+    console.log(
+      `attacking ${turn.tile.x}-${turn.tile.y} with ${turn.ammo.name}`
+    );
   }
 }
 

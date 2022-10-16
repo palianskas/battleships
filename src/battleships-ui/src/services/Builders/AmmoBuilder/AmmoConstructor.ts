@@ -1,8 +1,4 @@
 import { Ammo, AmmoType } from '../../../models/Ammo';
-import { ArmorPiercingAttackStrategy } from '../../Strategies/AttackStrategies/ArmorPiercingAttackStrategy';
-import { DepthChargeAttackStrategy } from '../../Strategies/AttackStrategies/DepthChargeAttackStrategy';
-import { HighExplosiveAttackStrategy } from '../../Strategies/AttackStrategies/HighExplosiveAttackStrategy';
-import { StandardAttackStrategy } from '../../Strategies/AttackStrategies/StandardAttackStrategy';
 import {
   CustomizableAmmoBuilder,
   ClassicAmmoBuilder,
@@ -37,7 +33,6 @@ export class AmmoConstructor implements IAmmoConstructor {
       .setDamage(damage)
       .setImpactRadius(impactRadius)
       .setCooldown(cooldown)
-      .setAttackStrategy(new StandardAttackStrategy(damage))
       .build();
   }
 
@@ -54,7 +49,6 @@ export class AmmoConstructor implements IAmmoConstructor {
       .setDamage(damage)
       .setImpactRadius(impactRadius)
       .setCooldown(cooldown)
-      .setAttackStrategy(new ArmorPiercingAttackStrategy(damage, impactRadius))
       .build();
   }
   getHighExplosiveAmmo(): Ammo {
@@ -70,7 +64,6 @@ export class AmmoConstructor implements IAmmoConstructor {
       .setDamage(damage)
       .setImpactRadius(impactRadius)
       .setCooldown(cooldown)
-      .setAttackStrategy(new HighExplosiveAttackStrategy(damage, impactRadius))
       .build();
   }
   getDepthChargeAmmo(): Ammo {
@@ -86,7 +79,6 @@ export class AmmoConstructor implements IAmmoConstructor {
       .setDamage(damage)
       .setImpactRadius(impactRadius)
       .setCooldown(cooldown)
-      .setAttackStrategy(new DepthChargeAttackStrategy(damage, impactRadius))
       .build();
   }
 }

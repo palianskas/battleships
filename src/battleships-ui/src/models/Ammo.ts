@@ -1,6 +1,3 @@
-import { IAttackStrategy } from '../services/Strategies/AttackStrategies/AttackStrategies';
-import { StandardAttackStrategy } from '../services/Strategies/AttackStrategies/StandardAttackStrategy';
-
 // non-Classic ammo types used only in "Ammo" gamemode
 export enum AmmoType {
   Classic,
@@ -15,12 +12,7 @@ export class Ammo {
   type!: AmmoType;
   damage!: number;
   impactRadius!: number;
-  cooldown?: number;
-  attackStrategy!: IAttackStrategy;
-
-  getAttackStrategy(): IAttackStrategy {
-    return this.attackStrategy;
-  }
+  cooldown!: number;
 
   static map(object: Partial<Ammo>, model = new Ammo()): Ammo {
     if (object == null) {
@@ -32,8 +24,6 @@ export class Ammo {
     model.damage = object.damage ?? 1;
     model.impactRadius = object.impactRadius ?? 1;
     model.cooldown = object.cooldown ?? 0;
-    model.attackStrategy =
-      object.attackStrategy ?? new StandardAttackStrategy(model.damage);
 
     return model;
   }

@@ -1,18 +1,32 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { generatePath, useNavigate } from 'react-router-dom';
-import { Ammo } from '../../models/Ammo';
+import { Ammo, AmmoType } from '../../models/Ammo';
 import { Match } from '../../models/Match';
 import { MapTile } from '../../models/MatchMap';
 import { GameMode } from '../../models/MatchSettings';
+import { ModularShipPart } from '../../models/Ships/ShipPart';
+import ConnectionMediatorService, {
+  MatchEventNames,
+} from '../../services/ConnectionMediatorService/ConnectionMediatorService';
 import MatchProvider from '../../services/MatchProvider/MatchProvider';
+import { ArmorPiercingAttackStrategy } from '../../services/Strategies/AttackStrategies/ArmorPiercingAttackStrategy';
+import { IAttackStrategy } from '../../services/Strategies/AttackStrategies/AttackStrategies';
+import { ClassicAttackStrategy } from '../../services/Strategies/AttackStrategies/ClassicAttackStrategy';
+import { DepthChargeAttackStrategy } from '../../services/Strategies/AttackStrategies/DepthChargeAttackStrategy';
+import { HighExplosiveAttackStrategy } from '../../services/Strategies/AttackStrategies/HighExplosiveAttackStrategy';
+import { StandardAttackStrategy } from '../../services/Strategies/AttackStrategies/StandardAttackStrategy';
 import AmmoRack from './AmmoRack/AmmoRack';
 import MapGrid from './MapGrid/MapGrid';
 
+interface AttackTurnEventProps {
+  offencePlayerId: number;
+  defencePlayerId: number;
+  tile: MapTile;
+  ammoType: AmmoType;
+}
+
 export default function MatchDisplay() {
   const [rerenderToggle, setRerenderToggle] = useState(false);
-
-  const navigate = useNavigate();
 
   const match = MatchProvider.Instance.match;
   const bluePlayer = match.players[0];
@@ -25,7 +39,12 @@ export default function MatchDisplay() {
     //   const path = generatePath('pregame');
     //   navigate(path);
     // }
-  });
+
+    ConnectionMediatorService.Instance.addSingular(
+      MatchEventNames.AttackPerformed,
+      handleAttackTurnEvent
+    );
+  }, []);
 
   return (
     <div className="container d-flex justify-content-center">
@@ -40,7 +59,9 @@ export default function MatchDisplay() {
               <br />
               {ship.parts.map((part, indexPart) => (
                 <span key={`${indexShip}-${indexPart}`}>
-                  {match.settings.gameMode == GameMode.Ammo ? 10 : 1}{' '}
+                  {match.settings.gameMode === GameMode.Ammo
+                    ? (part as ModularShipPart).hp
+                    : 1}{' '}
                 </span>
               ))}
               <br />
@@ -75,7 +96,7 @@ export default function MatchDisplay() {
               <br />
               {ship.parts.map((part, indexPart) => (
                 <span key={`${indexShip}-${indexPart}`}>
-                  {match.settings.gameMode == GameMode.Ammo ? 10 : 1}{' '}
+                  {match.settings.gameMode === GameMode.Ammo ? 10 : 1}{' '}
                 </span>
               ))}
               <br />
@@ -113,11 +134,62 @@ export default function MatchDisplay() {
       return;
     }
 
-    turn.attackStrategy = turn.ammo.getAttackStrategy();
+    const offencePlayer = bluePlayer;
+    const defencePlayer = redPlayer;
 
-    turn.attackStrategy.attack(turn.tile, redPlayer.map);
+    ConnectionMediatorService.Instance.sendEvent(
+      MatchEventNames.AttackPerformed,
+      {
+        offencePlayerId: offencePlayer.id,
+        defencePlayerId: defencePlayer.id,
+        tile: turn.tile,
+        ammoType: turn.ammo.type,
+      }
+    );
+  }
+
+  function handleAttackTurnEvent(data: any): void {
+    const { offencePlayerId, defencePlayerId, tile, ammoType } =
+      data as AttackTurnEventProps;
+
+    const offencePlayer = match.players.find(
+      (player) => player.id === offencePlayerId
+    );
+    const defencePlayer = match.players.find(
+      (player) => player.id === defencePlayerId
+    );
+
+    const turn = offencePlayer!.attackTurns[0];
+
+    const mapTile = defencePlayer!.map.tiles[tile.x][tile.y];
+
+    turn.attackStrategy = getAttackStrategyByAmmo(ammoType);
+
+    turn.attackStrategy.attack(mapTile, defencePlayer!.map);
 
     setRerenderToggle(!rerenderToggle);
+  }
+
+  function getAttackStrategyByAmmo(ammoType: AmmoType): IAttackStrategy {
+    const ammo = match.availableAmmoTypes.find(
+      (ammo) => ammo.type === ammoType
+    );
+
+    switch (ammoType) {
+      case AmmoType.Classic:
+        return new ClassicAttackStrategy();
+      case AmmoType.Standard:
+        return new StandardAttackStrategy(ammo!.damage);
+      case AmmoType.ArmorPiercing:
+        return new ArmorPiercingAttackStrategy(ammo!.cooldown, ammo!.damage);
+      case AmmoType.HighExplosive:
+        return new HighExplosiveAttackStrategy(
+          ammo!.damage,
+          ammo!.impactRadius
+        );
+      case AmmoType.DepthCharge:
+        return new DepthChargeAttackStrategy(ammo!.damage, ammo!.impactRadius);
+    }
   }
 }
 

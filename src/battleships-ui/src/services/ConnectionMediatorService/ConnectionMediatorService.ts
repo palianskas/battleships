@@ -71,4 +71,5 @@ export enum MatchEventNames {
   SecondPlayerConfirmation,
   PlayerStartedMatch,
   PlayerUpdatedMatchSettings,
+  AttackPerformed,
 }

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { Ammo } from '../../models/Ammo';
@@ -10,6 +10,8 @@ import AmmoRack from './AmmoRack/AmmoRack';
 import MapGrid from './MapGrid/MapGrid';
 
 export default function MatchDisplay() {
+  const [rerenderToggle, setRerenderToggle] = useState(false);
+
   const navigate = useNavigate();
 
   const match = MatchProvider.Instance.match;
@@ -111,9 +113,11 @@ export default function MatchDisplay() {
       return;
     }
 
-    console.log(
-      `attacking ${turn.tile.x}-${turn.tile.y} with ${turn.ammo.name}`
-    );
+    turn.attackStrategy = turn.ammo.getAttackStrategy();
+
+    turn.attackStrategy.attack(turn.tile, redPlayer.map);
+
+    setRerenderToggle(!rerenderToggle);
   }
 }
 

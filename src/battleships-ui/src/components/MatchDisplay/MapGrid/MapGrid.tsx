@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { MapTile } from '../../../models/MatchMap';
 import { Player } from '../../../models/Player';
+import { ModularShipPart } from '../../../models/Ships/ShipPart';
 
 import './MapGrid.css';
 
@@ -37,13 +38,21 @@ export default function MapGrid({ player, onTileSelect }: MapGridProps) {
 }
 
 function MapGridTile({ tile, onTileSelect }: MapGridTileProps) {
+  let shipPartHpString =
+    tile.shipPart instanceof ModularShipPart
+      ? (tile.shipPart as ModularShipPart).hp.toString()
+      : '';
+
   return (
     <div
       className={classNames('map-tile', {
+        blue: !!tile.shipPart,
         grey: tile.isAttacked,
         red: tile.isShipPartDestroyed,
       })}
       onClick={() => onTileSelect(tile)}
-    ></div>
+    >
+      <span className="map-tile-hp-span">{shipPartHpString}</span>
+    </div>
   );
 }

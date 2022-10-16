@@ -120,7 +120,6 @@ export default function Pregame() {
   }
 
   function handlePlayerStartedMatchEvent(data: any): void {
-    console.log('handlePlayerStartedMatchEvent');
     const player = (data as { player: Player }).player;
 
     if (!readyPlayerIds.some((id) => id === player.id)) {

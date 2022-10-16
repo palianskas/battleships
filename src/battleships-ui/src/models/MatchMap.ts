@@ -1,3 +1,5 @@
+import { ShipPart } from './Ships/ShipPart';
+
 export default class MatchMap {
   tiles: MapTile[][];
 
@@ -8,7 +10,7 @@ export default class MatchMap {
       const row: MapTile[] = [];
       this.tiles.push(row);
       for (let j = 0; j < sizeY; j++) {
-        row.push(new MapTile(i, j, this));
+        row.push(new MapTile(i, j));
       }
     }
   }
@@ -18,15 +20,13 @@ export class MapTile {
   x: number;
   y: number;
 
-  isAttacked = Math.random() > 0.5;
-  isShipPartDestroyed = Math.random() > 0.9;
+  shipPart?: ShipPart;
 
-  map: MatchMap;
+  isAttacked = false;
+  isShipPartDestroyed = false;
 
-  constructor(x: number, y: number, map: MatchMap) {
+  constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
-
-    this.map = map;
   }
 }

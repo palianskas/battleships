@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/esm/Form';
-import { LinkContainer } from 'react-router-bootstrap';
 import { generatePath, useNavigate } from 'react-router-dom';
 import ConnectionMediatorService, {
   MatchEventNames,
@@ -19,6 +18,8 @@ export default function NewMatch() {
       : 'New player';
 
     const player = PlayerService.createNew(playerName);
+
+    PlayerService.saveToSessionStorage(player);
 
     ConnectionMediatorService.Instance.sendEvent(MatchEventNames.PlayerJoined, {
       player: player,

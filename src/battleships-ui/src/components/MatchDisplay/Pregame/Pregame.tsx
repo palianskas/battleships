@@ -49,7 +49,7 @@ export default function Pregame() {
         </h2>
       </div>
 
-      {match.players.length == 2 && (
+      {match.players.length === 2 && (
         <div>
           <div className="mb-5">
             <MatchSettingsConfig
@@ -83,12 +83,15 @@ export default function Pregame() {
 
     const currentPlayer = PlayerService.getFromSessionStorage();
 
-    if (player.id !== currentPlayer?.id && match.players.length < 2) {
-      handleAddEnemyPlayer(player, currentPlayer);
-    }
-
-    if (player.id === currentPlayer?.id && match.players.length == 0) {
-      handleAddCurrentPlayer(player);
+    if (
+      match.players.length < 2 &&
+      !match.players.some((matchPlayer) => matchPlayer.id == player.id)
+    ) {
+      if (player.id === currentPlayer?.id) {
+        handleAddCurrentPlayer(player);
+      } else {
+        handleAddEnemyPlayer(player, currentPlayer);
+      }
     }
   }
 
@@ -109,6 +112,8 @@ export default function Pregame() {
 
   function handleAddCurrentPlayer(player: Player) {
     match.players.push(player);
+
+    PlayerService.saveToSessionStorage(player);
   }
 
   function handleMatchSettingsChangedEvent(data: any): void {

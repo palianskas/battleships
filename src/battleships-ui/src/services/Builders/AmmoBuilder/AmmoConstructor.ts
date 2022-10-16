@@ -1,4 +1,8 @@
 import { Ammo, AmmoType } from '../../../models/Ammo';
+import { ArmorPiercingAttackStrategy } from '../../Strategies/AttackStrategies/ArmorPiercingAttackStrategy';
+import { DepthChargeAttackStrategy } from '../../Strategies/AttackStrategies/DepthChargeAttackStrategy';
+import { HighExplosiveAttackStrategy } from '../../Strategies/AttackStrategies/HighExplosiveAttackStrategy';
+import { StandardAttackStrategy } from '../../Strategies/AttackStrategies/StandardAttackStrategy';
 import {
   CustomizableAmmoBuilder,
   ClassicAmmoBuilder,
@@ -23,46 +27,66 @@ export class AmmoConstructor implements IAmmoConstructor {
   getStandardAmmo(): Ammo {
     const builder: IAmmoBuilder = new CustomizableAmmoBuilder();
 
+    const damage = 3;
+    const impactRadius = 1;
+    const cooldown = 0;
+
     return builder
       .setName('Standard')
       .setType(AmmoType.Standard)
-      .setDamage(3)
-      .setImpactRadius(1)
-      .setCooldown(0)
+      .setDamage(damage)
+      .setImpactRadius(impactRadius)
+      .setCooldown(cooldown)
+      .setAttackStrategy(new StandardAttackStrategy(damage))
       .build();
   }
 
   getArmorPiercingAmmo(): Ammo {
     const builder: IAmmoBuilder = new CustomizableAmmoBuilder();
 
+    const damage = 10;
+    const impactRadius = 1;
+    const cooldown = 1;
+
     return builder
       .setName('Armor Piercing')
       .setType(AmmoType.ArmorPiercing)
-      .setDamage(10)
-      .setImpactRadius(1)
-      .setCooldown(1)
+      .setDamage(damage)
+      .setImpactRadius(impactRadius)
+      .setCooldown(cooldown)
+      .setAttackStrategy(new ArmorPiercingAttackStrategy(damage, impactRadius))
       .build();
   }
   getHighExplosiveAmmo(): Ammo {
     const builder: IAmmoBuilder = new CustomizableAmmoBuilder();
 
+    const damage = 2;
+    const impactRadius = 2;
+    const cooldown = 0;
+
     return builder
       .setName('High Explosive')
       .setType(AmmoType.HighExplosive)
-      .setDamage(2)
-      .setImpactRadius(2)
-      .setCooldown(0)
+      .setDamage(damage)
+      .setImpactRadius(impactRadius)
+      .setCooldown(cooldown)
+      .setAttackStrategy(new HighExplosiveAttackStrategy(damage, impactRadius))
       .build();
   }
   getDepthChargeAmmo(): Ammo {
     const builder: IAmmoBuilder = new CustomizableAmmoBuilder();
 
+    const damage = 4;
+    const impactRadius = 2;
+    const cooldown = 0;
+
     return builder
       .setName('Depth Charge')
       .setType(AmmoType.DepthCharge)
-      .setDamage(5)
-      .setImpactRadius(2)
-      .setCooldown(0)
+      .setDamage(damage)
+      .setImpactRadius(impactRadius)
+      .setCooldown(cooldown)
+      .setAttackStrategy(new DepthChargeAttackStrategy(damage, impactRadius))
       .build();
   }
 }

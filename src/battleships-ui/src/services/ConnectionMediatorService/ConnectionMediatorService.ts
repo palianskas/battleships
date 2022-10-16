@@ -35,6 +35,13 @@ export default class ConnectionMediatorService extends MatchEventsSubject {
   }
 
   public static get Instance(): ConnectionMediatorService {
+    // console.log(
+    //   'ConnectionMediatorService: ',
+    //   !!ConnectionMediatorService._instance
+    //     ? 'get existing instance'
+    //     : 'get new instance'
+    // );
+
     ConnectionMediatorService._instance ??= new ConnectionMediatorService();
 
     return ConnectionMediatorService._instance;

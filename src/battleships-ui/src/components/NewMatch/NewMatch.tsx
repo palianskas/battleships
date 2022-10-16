@@ -46,11 +46,9 @@ export default function NewMatch() {
             />
           </Form.Group>
         </Form>
-        <LinkContainer to={'match'}>
-          <Button className="primary" onClick={handleClick}>
-            Join a match!
-          </Button>
-        </LinkContainer>
+        <Button className="primary" onClick={handleClick}>
+          Join a match!
+        </Button>
       </div>
     </div>
   );

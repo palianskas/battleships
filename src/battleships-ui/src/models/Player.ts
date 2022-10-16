@@ -16,6 +16,7 @@ export class Player {
   map: MatchMap;
   movementTurns: MovementTurn[] = [];
   attackTurns: AttackTurn[] = [];
+  turnOverDraw = 0;
 
   constructor(object: Partial<Player>) {
     this.id = object.id ?? Math.round(Math.random() * 1000);

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Match } from '../../models/Match';
+import MatchMap from '../../models/MatchMap';
 import { GameMode } from '../../models/MatchSettings';
 import Ship from '../../models/Ships/Ship';
 import { ShipClass } from '../../models/Ships/ShipClass';
@@ -51,6 +52,8 @@ export class MatchService {
 
     match.players.forEach((player) => {
       player.ships = this.getShipSet(factory);
+
+      this.initPlayerShipsPlacement(player.map, player.ships);
     });
   }
 
@@ -81,6 +84,17 @@ export class MatchService {
         return ObservingShipFactory.Instance;
       }
     }
+  }
+
+  // debug version
+  private static initPlayerShipsPlacement(map: MatchMap, ships: Ship[]): void {
+    ships.forEach((ship, index) => {
+      const rowIndex = index * 2;
+
+      ship.parts.forEach((part, partIndex) => {
+        map.tiles[rowIndex][partIndex].shipPart = part;
+      });
+    });
   }
 
   private static getShipSet(factory: IShipFactory): Ship[] {

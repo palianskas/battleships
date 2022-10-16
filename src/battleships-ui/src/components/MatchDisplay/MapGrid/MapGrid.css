@@ -11,6 +11,14 @@
   border: 1px solid black;
 }
 
+.map-tile-hp-span {
+  position: fixed;
+}
+
+.map-tile.blue {
+  background-color: blue;
+}
+
 .map-tile.grey {
   background-color: grey;
 }

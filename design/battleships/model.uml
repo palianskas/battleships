@@ -364,11 +364,12 @@
       <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_ZO7zkEfOEe2SLYkSMgTh1A" name="PlayerUpdatedMatchSettings"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_cRzusEfOEe2SLYkSMgTh1A" name="" client="_kUI6wETLEe27rv1zb77HhA" supplier="_QofiMEfOEe2SLYkSMgTh1A"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="_AmYUAEfPEe2SLYkSMgTh1A" name="MatchEventsSubject" visibility="package" isAbstract="true">
+    <packagedElement xmi:type="uml:Class" xmi:id="_AmYUAEfPEe2SLYkSMgTh1A" name="MatchEventsSubject" visibility="public" isAbstract="true">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_EChOQkfQEe2SLYkSMgTh1A" name="observersByEvent" type="_No2EwEfPEe2SLYkSMgTh1A" aggregation="shared" association="_ECgnMEfQEe2SLYkSMgTh1A">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EChOQ0fQEe2SLYkSMgTh1A"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EChOREfQEe2SLYkSMgTh1A" value="*"/>
       </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_Yx_9kE7tEe2G5_JTnjT6tw" client="_AmYUAEfPEe2SLYkSMgTh1A" supplier="_54U6sE7sEe2G5_JTnjT6tw" contract="_54U6sE7sEe2G5_JTnjT6tw"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_ByBAsEfPEe2SLYkSMgTh1A" name="notify" visibility="public">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_TLYDwEfQEe2SLYkSMgTh1A" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_Ua4j0EfQEe2SLYkSMgTh1A" name="data">
@@ -379,9 +380,13 @@
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_cXw60EfQEe2SLYkSMgTh1A" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_eAU0EEfQEe2SLYkSMgTh1A" name="action" type="_cGG_kEfPEe2SLYkSMgTh1A"/>
       </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_U0UAAE7tEe2G5_JTnjT6tw" name="addSingular">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_U0UAAU7tEe2G5_JTnjT6tw" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_U0UAAk7tEe2G5_JTnjT6tw" name="action" type="_cGG_kEfPEe2SLYkSMgTh1A"/>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_No2EwEfPEe2SLYkSMgTh1A" name="MatchEventsObserver">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_SDttkEfPEe2SLYkSMgTh1A" name="onNotify" type="_cGG_kEfPEe2SLYkSMgTh1A"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_x9kqoE7sEe2G5_JTnjT6tw" client="_No2EwEfPEe2SLYkSMgTh1A" supplier="_ntuLcE7sEe2G5_JTnjT6tw" contract="_ntuLcE7sEe2G5_JTnjT6tw"/>
     </packagedElement>
     <packagedElement xmi:type="uml:DataType" xmi:id="_cGG_kEfPEe2SLYkSMgTh1A" name="Function"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_ECgnMEfQEe2SLYkSMgTh1A" memberEnd="_EChOQkfQEe2SLYkSMgTh1A _EChORUfQEe2SLYkSMgTh1A">
@@ -451,7 +456,7 @@
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_EespYEpAEe2Zp75EuR3hWg" name="returns" client="_RpS34Eo_Ee2Zp75EuR3hWg" supplier="_L7oz8ETNEe27rv1zb77HhA"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="_3jAZkEpAEe2Zp75EuR3hWg" name="AmmoBuilder">
+    <packagedElement xmi:type="uml:Class" xmi:id="_3jAZkEpAEe2Zp75EuR3hWg" name="CustomizableAmmoBuilder">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_8-E7IEpAEe2Zp75EuR3hWg" name="ammo" visibility="private" type="_L7oz8ETNEe27rv1zb77HhA"/>
       <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4uU9MEpAEe2Zp75EuR3hWg" client="_3jAZkEpAEe2Zp75EuR3hWg" supplier="_A9tO4EpAEe2Zp75EuR3hWg" contract="_A9tO4EpAEe2Zp75EuR3hWg"/>
     </packagedElement>
@@ -498,6 +503,134 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VKXDg0pCEe2Zp75EuR3hWg" value="1"/>
       </ownedEnd>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_JjhdsE7sEe2G5_JTnjT6tw" name="ClassicAmmoBuilder">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_Qk0WME7sEe2G5_JTnjT6tw" name="ammo" visibility="private" type="_L7oz8ETNEe27rv1zb77HhA"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_gHeLwE7sEe2G5_JTnjT6tw" client="_JjhdsE7sEe2G5_JTnjT6tw" supplier="_A9tO4EpAEe2Zp75EuR3hWg" contract="_A9tO4EpAEe2Zp75EuR3hWg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_YrYNoE7sEe2G5_JTnjT6tw" name="builds" client="_JjhdsE7sEe2G5_JTnjT6tw" supplier="_L7oz8ETNEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_ntuLcE7sEe2G5_JTnjT6tw" name="IObservable">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_uKJcUE7sEe2G5_JTnjT6tw" name="onNotify">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_uKJcUU7sEe2G5_JTnjT6tw" name="data">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_54U6sE7sEe2G5_JTnjT6tw" name="ISubject">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Iro-AE7tEe2G5_JTnjT6tw" name="notify">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Iro-AU7tEe2G5_JTnjT6tw" name="event"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Iro-Ak7tEe2G5_JTnjT6tw" name="data"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_OF3LAE7tEe2G5_JTnjT6tw" name="add">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_OF3LAU7tEe2G5_JTnjT6tw" name="event"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_OF3LAk7tEe2G5_JTnjT6tw" name="action" type="_cGG_kEfPEe2SLYkSMgTh1A"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RQdewE7tEe2G5_JTnjT6tw" name="addSingular">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RQdewU7tEe2G5_JTnjT6tw" name="event"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RQdewk7tEe2G5_JTnjT6tw" name="action" type="_cGG_kEfPEe2SLYkSMgTh1A"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_QUI5EE7wEe2G5_JTnjT6tw" name="IAttackStrategy">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_V8C8wE7wEe2G5_JTnjT6tw" name="attack">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_V8C8wU7wEe2G5_JTnjT6tw" name="tile" type="_vGAioEpBEe2Zp75EuR3hWg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_V8C8wk7wEe2G5_JTnjT6tw" name="map" type="_tg2isEpBEe2Zp75EuR3hWg"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Yuf2QE7wEe2G5_JTnjT6tw" name="AttackStrategyDecorator" isAbstract="true">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_qPExEE7wEe2G5_JTnjT6tw" name="baseAttackStrategy" visibility="protected" type="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_adFfAE7wEe2G5_JTnjT6tw" client="_Yuf2QE7wEe2G5_JTnjT6tw" supplier="_QUI5EE7wEe2G5_JTnjT6tw" contract="_QUI5EE7wEe2G5_JTnjT6tw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_6cbwgE7wEe2G5_JTnjT6tw" name="DefaultAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="_8-_z4E7wEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_PhnagE7xEe2G5_JTnjT6tw" name="DamageAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="_-NRS8E7yEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_kwkEgE7xEe2G5_JTnjT6tw" name="damage" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_tn6fsE7xEe2G5_JTnjT6tw" name="constructor">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_tn6fsU7xEe2G5_JTnjT6tw" name="baseAttackStrategy" type="_QUI5EE7wEe2G5_JTnjT6tw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_tn6fsk7xEe2G5_JTnjT6tw" name="damage">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_VZU0wE7xEe2G5_JTnjT6tw" name="AreaAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="_BQcJAE7zEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_640VEE7xEe2G5_JTnjT6tw" name="impactRadius" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_9qjc4E7xEe2G5_JTnjT6tw" name="constructor">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_9qjc4U7xEe2G5_JTnjT6tw" name="baseAttackStrategy" type="_QUI5EE7wEe2G5_JTnjT6tw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_9qjc4k7xEe2G5_JTnjT6tw" name="impactRadius">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_acgawE7xEe2G5_JTnjT6tw" name="CooldownAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="_Ae-24E7zEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_EJUQEE7yEe2G5_JTnjT6tw" name="cooldown" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_AieFME7yEe2G5_JTnjT6tw" name="constructor">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_AieFMU7yEe2G5_JTnjT6tw" name="baseAttackStrategy" type="_QUI5EE7wEe2G5_JTnjT6tw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_AieFMk7yEe2G5_JTnjT6tw" name="cooldown">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_f8kKAE7xEe2G5_JTnjT6tw" name="ShipSpecificAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="__lS10E7yEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_OTu1oE7yEe2G5_JTnjT6tw" name="affectedClasses" visibility="private" type="_Qe3doETEEe27rv1zb77HhA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VIBz8E7yEe2G5_JTnjT6tw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_U32C4E7yEe2G5_JTnjT6tw" value="*"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_PKdCQE7yEe2G5_JTnjT6tw" name="constructor">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_PKdCQU7yEe2G5_JTnjT6tw" name="baseAttackStrategy" type="_QUI5EE7wEe2G5_JTnjT6tw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_PKdCQk7yEe2G5_JTnjT6tw" name="affectedClasses" type="_Qe3doETEEe27rv1zb77HhA">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ryjs8E7yEe2G5_JTnjT6tw"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ry32AE7yEe2G5_JTnjT6tw" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_zu8vYE7xEe2G5_JTnjT6tw" name="baseAttackStrategy" client="_PhnagE7xEe2G5_JTnjT6tw" supplier="_6cbwgE7wEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_m9LQkE7yEe2G5_JTnjT6tw" name="baseAttackStrategy" client="_f8kKAE7xEe2G5_JTnjT6tw" supplier="_PhnagE7xEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_xyz9YE7yEe2G5_JTnjT6tw" name="baseAttackStrategy" client="_acgawE7xEe2G5_JTnjT6tw" supplier="_f8kKAE7xEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_22D00E7yEe2G5_JTnjT6tw" name="baseAttackStrategy" client="_VZU0wE7xEe2G5_JTnjT6tw" supplier="_f8kKAE7xEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Jk5SgE7zEe2G5_JTnjT6tw" name="ClassicAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="_d_LlYE7zEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Roc5QE7zEe2G5_JTnjT6tw" name="StandardAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="_hoi4wE7zEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_U47LgE7zEe2G5_JTnjT6tw" name="HighExplosiveAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="_iMLKQE7zEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_YayIsE7zEe2G5_JTnjT6tw" name="ArmorPiercingAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="_irx3YE7zEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_blzTME7zEe2G5_JTnjT6tw" name="DepthChargeAttackStrategy">
+      <generalization xmi:type="uml:Generalization" xmi:id="_jOJkoE7zEe2G5_JTnjT6tw" general="_Yuf2QE7wEe2G5_JTnjT6tw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_q0pb8E7zEe2G5_JTnjT6tw" name="baseAttackStrategy" client="_Jk5SgE7zEe2G5_JTnjT6tw" supplier="_6cbwgE7wEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_wwvm8E7zEe2G5_JTnjT6tw" name="baseAttackStrategy" client="_Roc5QE7zEe2G5_JTnjT6tw" supplier="_f8kKAE7xEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_z_2nQE7zEe2G5_JTnjT6tw" name="baseAttackStrategy" client="_U47LgE7zEe2G5_JTnjT6tw" supplier="_VZU0wE7xEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_3DZQwE7zEe2G5_JTnjT6tw" name="baseAttackStrategy" client="_blzTME7zEe2G5_JTnjT6tw" supplier="_VZU0wE7xEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_5m1d4E7zEe2G5_JTnjT6tw" name="baseAttackStrategy" client="_YayIsE7zEe2G5_JTnjT6tw" supplier="_acgawE7xEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_BNz2UE70Ee2G5_JTnjT6tw" memberEnd="_BN7yIE70Ee2G5_JTnjT6tw _BN-1cE70Ee2G5_JTnjT6tw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_BN0dYE70Ee2G5_JTnjT6tw" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_BN0dYU70Ee2G5_JTnjT6tw" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_BN-1cE70Ee2G5_JTnjT6tw" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA" association="_BNz2UE70Ee2G5_JTnjT6tw"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_BN7yIE70Ee2G5_JTnjT6tw" name="attackStrategy" type="_QUI5EE7wEe2G5_JTnjT6tw" association="_BNz2UE70Ee2G5_JTnjT6tw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BN9AQE70Ee2G5_JTnjT6tw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BN-OYE70Ee2G5_JTnjT6tw" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_enRDoE70Ee2G5_JTnjT6tw" name="AttackStrategy" client="_L7oz8ETNEe27rv1zb77HhA" supplier="_Jk5SgE7zEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_tTgOkE70Ee2G5_JTnjT6tw" client="_L7oz8ETNEe27rv1zb77HhA" supplier="_Roc5QE7zEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_utPosE70Ee2G5_JTnjT6tw" client="_L7oz8ETNEe27rv1zb77HhA" supplier="_U47LgE7zEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_vObqME70Ee2G5_JTnjT6tw" client="_L7oz8ETNEe27rv1zb77HhA" supplier="_YayIsE7zEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_v2S7cE70Ee2G5_JTnjT6tw" client="_L7oz8ETNEe27rv1zb77HhA" supplier="_blzTME7zEe2G5_JTnjT6tw"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_jbQRMEPqEe26Q_q4HjD8wQ" name="use case diagram"/>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_6FrDgETCEe27rv1zb77HhA">

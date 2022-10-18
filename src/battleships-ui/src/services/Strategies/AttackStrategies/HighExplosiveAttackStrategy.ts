@@ -1,18 +1,18 @@
 import MatchMap, { MapTile } from '../../../models/MatchMap';
 import { ShipClass } from '../../../models/Ships/ShipClass';
+import { AttackStrategyDecorator } from '../../Decorators/AttackStrategyDecorators/AttackStrategyDecorator';
 import {
   AreaAttackStrategy,
-  BaseAttackStrategy,
+  DefaultAttackStrategy,
   DamageAttackStrategy,
-  IAttackStrategy,
   ShipSpecificAttackStrategy,
 } from './AttackStrategies';
 
-export class HighExplosiveAttackStrategy implements IAttackStrategy {
-  baseAttackStrategy: IAttackStrategy;
-
+export class HighExplosiveAttackStrategy extends AttackStrategyDecorator {
   constructor(damage: number, impactRadius: number) {
-    const defaultAttackStrategy = new BaseAttackStrategy();
+    super();
+
+    const defaultAttackStrategy = new DefaultAttackStrategy();
     const damageAttackStrategy = new DamageAttackStrategy(
       defaultAttackStrategy,
       damage
@@ -37,7 +37,7 @@ export class HighExplosiveAttackStrategy implements IAttackStrategy {
   }
 
   attack(tile: MapTile, map: MatchMap): void {
-    this.baseAttackStrategy.attack(tile, map);
+    this.baseAttackStrategy!.attack(tile, map);
     console.log(`high explosive attack on ${tile.x}-${tile.y}`);
   }
 }

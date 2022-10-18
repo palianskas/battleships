@@ -1,34 +1,34 @@
 import MatchMap, { MapTile } from '../../../models/MatchMap';
 import { ShipClass } from '../../../models/Ships/ShipClass';
 import { ModularShipPart } from '../../../models/Ships/ShipPart';
+import { AttackStrategyDecorator } from '../../Decorators/AttackStrategyDecorators/AttackStrategyDecorator';
 import MatchProvider from '../../MatchProvider/MatchProvider';
 
 export interface IAttackStrategy {
   attack(tile: MapTile, map: MatchMap): void;
 }
 
-export class BaseAttackStrategy implements IAttackStrategy {
+export class DefaultAttackStrategy extends AttackStrategyDecorator {
   attack(tile: MapTile, map: MatchMap): void {
     tile.isAttacked = true;
 
-    console.log(`base attack on ${tile.x}-${tile.y}`);
+    console.log(`default attack on ${tile.x}-${tile.y}`);
   }
 }
 
-export class DamageAttackStrategy implements IAttackStrategy {
+export class DamageAttackStrategy extends AttackStrategyDecorator {
   private damage: number;
 
-  private baseAttackStrategy: IAttackStrategy;
-
   constructor(baseAttackStrategy: IAttackStrategy, damage: number) {
+    super();
+
     this.baseAttackStrategy = baseAttackStrategy;
     this.damage = damage;
   }
 
   attack(tile: MapTile, map: MatchMap): void {
-    this.baseAttackStrategy.attack(tile, map);
+    this.baseAttackStrategy!.attack(tile, map);
 
-    console.log('1', tile.shipPart);
     if (!!tile.shipPart) {
       const shipPart = tile.shipPart as ModularShipPart;
 
@@ -40,18 +40,17 @@ export class DamageAttackStrategy implements IAttackStrategy {
         tile.isShipPartDestroyed = true;
       }
     }
-    console.log('2', tile.shipPart);
 
     console.log(`damage(${this.damage}) attack on ${tile.x}-${tile.y}`);
   }
 }
 
-export class AreaAttackStrategy implements IAttackStrategy {
+export class AreaAttackStrategy extends AttackStrategyDecorator {
   private impactRadius: number;
 
-  private baseAttackStrategy: IAttackStrategy;
-
   constructor(baseAttackStrategy: IAttackStrategy, impactRadius: number) {
+    super();
+
     this.baseAttackStrategy = baseAttackStrategy;
     this.impactRadius = impactRadius;
   }
@@ -72,25 +71,25 @@ export class AreaAttackStrategy implements IAttackStrategy {
         }
 
         const tile = map.tiles[i][j];
-        this.baseAttackStrategy.attack(tile, map);
+        this.baseAttackStrategy!.attack(tile, map);
         console.log(`area(${this.impactRadius}) attack on ${tile.x}-${tile.y}`);
       }
     }
   }
 }
 
-export class CooldownAttackStrategy implements IAttackStrategy {
+export class CooldownAttackStrategy extends AttackStrategyDecorator {
   private cooldown: number;
 
-  private baseAttackStrategy: IAttackStrategy;
-
   constructor(baseAttackStrategy: IAttackStrategy, cooldown: number) {
+    super();
+
     this.baseAttackStrategy = baseAttackStrategy;
     this.cooldown = cooldown;
   }
 
   attack(tile: MapTile, map: MatchMap): void {
-    this.baseAttackStrategy.attack(tile, map);
+    this.baseAttackStrategy!.attack(tile, map);
 
     const player = MatchProvider.Instance.match.players[0];
 
@@ -104,15 +103,15 @@ export class CooldownAttackStrategy implements IAttackStrategy {
   }
 }
 
-export class ShipSpecificAttackStrategy implements IAttackStrategy {
+export class ShipSpecificAttackStrategy extends AttackStrategyDecorator {
   private affectedClasses: ShipClass[];
-
-  private baseAttackStrategy: IAttackStrategy;
 
   constructor(
     baseAttackStrategy: IAttackStrategy,
     affectedClasses: ShipClass[]
   ) {
+    super();
+
     this.baseAttackStrategy = baseAttackStrategy;
     this.affectedClasses = affectedClasses;
   }
@@ -122,7 +121,7 @@ export class ShipSpecificAttackStrategy implements IAttackStrategy {
       !tile.shipPart ||
       this.affectedClasses.includes(tile.shipPart.shipClass)
     ) {
-      this.baseAttackStrategy.attack(tile, map);
+      this.baseAttackStrategy!.attack(tile, map);
 
       console.log(
         `ship specific(${this.affectedClasses}) attack on ${tile.x}-${tile.y}`

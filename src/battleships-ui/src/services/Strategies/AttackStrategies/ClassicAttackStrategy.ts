@@ -1,15 +1,16 @@
 import MatchMap, { MapTile } from '../../../models/MatchMap';
-import { BaseAttackStrategy, IAttackStrategy } from './AttackStrategies';
+import { AttackStrategyDecorator } from '../../Decorators/AttackStrategyDecorators/AttackStrategyDecorator';
+import { DefaultAttackStrategy } from './AttackStrategies';
 
-export class ClassicAttackStrategy implements IAttackStrategy {
-  baseAttackStrategy: IAttackStrategy;
-
+export class ClassicAttackStrategy extends AttackStrategyDecorator {
   constructor() {
-    this.baseAttackStrategy = new BaseAttackStrategy();
+    super();
+
+    this.baseAttackStrategy = new DefaultAttackStrategy();
   }
 
   attack(tile: MapTile, map: MatchMap): void {
-    this.baseAttackStrategy.attack(tile, map);
+    this.baseAttackStrategy!.attack(tile, map);
 
     if (!!tile.shipPart) {
       tile.shipPart.isDestroyed = true;

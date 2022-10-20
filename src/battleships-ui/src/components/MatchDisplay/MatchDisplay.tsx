@@ -26,7 +26,7 @@ interface AttackTurnEventProps {
 }
 
 export default function MatchDisplay() {
-  const [rerenderToggle, setRerenderToggle] = useState(false);
+  const [rerenderToggle, setRerenderToggle] = useState(0);
 
   const match = MatchProvider.Instance.match;
   const bluePlayer = match.players[0];
@@ -167,7 +167,7 @@ export default function MatchDisplay() {
 
     turn.attackStrategy.attack(mapTile, defencePlayer!.map);
 
-    setRerenderToggle(!rerenderToggle);
+    setRerenderToggle(Math.random());
   }
 
   function getAttackStrategyByAmmo(ammoType: AmmoType): IAttackStrategy {

@@ -66,7 +66,7 @@ export class AreaAttackStrategy extends AttackStrategyDecorator {
         j < tile.y + this.impactRadius;
         j++
       ) {
-        if (i < 0 || i > map.tiles.length || j < 0 || j > map.tiles.length) {
+        if (i < 0 || i >= map.tiles.length || j < 0 || j >= map.tiles.length) {
           continue;
         }
 

@@ -32,8 +32,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --group=-integration",
-    "test-integration": "jest --group=integration",
+    "test": "jest --group=-integration --group=-todo",
+    "test-integration": "jest --group=integration --group=-todo",
     "react-test": "react-scripts test",
     "eject": "react-scripts eject"
   },

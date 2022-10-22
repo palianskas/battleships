@@ -6,6 +6,7 @@ import ConnectionMediatorService, {
  * Integration tests
  *
  * @group integration/connection-mediator-service
+ * @group todo/connection-mediator-service
  */
 
 beforeAll(() => {

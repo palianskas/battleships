@@ -22,11 +22,11 @@ export default class MatchEventsSubject implements ISubject {
     eventObservers?.forEach((observer) => observer.onNotify(data));
   }
 
-  public add(event: MatchEventNames, action: (data: string) => void) {
+  public add(event: MatchEventNames, action: (data: any) => void) {
     this.observersByEvent[event].push(new MatchEventsObservable(action));
   }
 
-  public addSingular(event: MatchEventNames, action: (data: string) => void) {
+  public addSingular(event: MatchEventNames, action: (data: any) => void) {
     if (this.observersByEvent[event].length === 0) {
       this.observersByEvent[event].push(new MatchEventsObservable(action));
     }

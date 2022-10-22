@@ -3,7 +3,7 @@ import {
   HttpTransportType,
   HubConnection,
 } from '@microsoft/signalr';
-import MatchEventsSubject from './MatchEventsSubject';
+import MatchEventsSubject from '../Observers/MatchEventsObserver/MatchEventsSubject';
 
 const HUB_ENDPOINT_URL = 'match-event-hub/';
 
@@ -48,6 +48,10 @@ export default class ConnectionMediatorService extends MatchEventsSubject {
   }
 
   public async sendEvent(event: MatchEventNames, data: any = {}) {
+    await this.handleSendEvent(event, data);
+  }
+
+  private async handleSendEvent(event: MatchEventNames, data: any = {}) {
     try {
       await this._connection.send('PropagateEvent', event, data);
     } catch (err) {

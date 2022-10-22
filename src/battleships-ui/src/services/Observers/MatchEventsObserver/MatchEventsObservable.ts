@@ -1,6 +1,4 @@
-export interface IObservable {
-  onNotify(data: string): void;
-}
+import { IObservable } from '../Observer';
 
 export default class MatchEventsObservable implements IObservable {
   constructor(onNotify: (data: string) => void) {

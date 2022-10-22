@@ -1,11 +1,6 @@
+import { MatchEventNames } from '../../ConnectionMediatorService/ConnectionMediatorService';
+import { ISubject } from '../Observer';
 import MatchEventsObservable from './MatchEventsObservable';
-import { MatchEventNames } from './ConnectionMediatorService';
-
-export interface ISubject {
-  notify(event: any, data: any): void;
-  add(event: any, action: Function): void;
-  addSingular(event: any, action: Function): void;
-}
 
 export default class MatchEventsSubject implements ISubject {
   protected observersByEvent: { [event: number]: MatchEventsObservable[] } = {};

@@ -12,7 +12,7 @@ export class DefaultAttackStrategy extends AttackStrategyDecorator {
   attack(tile: MapTile, map: MatchMap): void {
     tile.isAttacked = true;
 
-    console.log(`default attack on ${tile.x}-${tile.y}`);
+    // console.log(`default attack on ${tile.x}-${tile.y}`);
   }
 }
 
@@ -41,7 +41,7 @@ export class DamageAttackStrategy extends AttackStrategyDecorator {
       }
     }
 
-    console.log(`damage(${this.damage}) attack on ${tile.x}-${tile.y}`);
+    // console.log(`damage(${this.damage}) attack on ${tile.x}-${tile.y}`);
   }
 }
 
@@ -72,7 +72,7 @@ export class AreaAttackStrategy extends AttackStrategyDecorator {
 
         const tile = map.tiles[i][j];
         this.baseAttackStrategy!.attack(tile, map);
-        console.log(`area(${this.impactRadius}) attack on ${tile.x}-${tile.y}`);
+        // console.log(`area(${this.impactRadius}) attack on ${tile.x}-${tile.y}`);
       }
     }
   }
@@ -99,7 +99,7 @@ export class CooldownAttackStrategy extends AttackStrategyDecorator {
       player.turnOverDraw += this.cooldown;
     }
 
-    console.log(`cooldown(${this.cooldown}) attack on ${tile.x}-${tile.y}`);
+    // console.log(`cooldown(${this.cooldown}) attack on ${tile.x}-${tile.y}`);
   }
 }
 
@@ -123,9 +123,9 @@ export class ShipSpecificAttackStrategy extends AttackStrategyDecorator {
     ) {
       this.baseAttackStrategy!.attack(tile, map);
 
-      console.log(
-        `ship specific(${this.affectedClasses}) attack on ${tile.x}-${tile.y}`
-      );
+      // console.log(
+      //   `ship specific(${this.affectedClasses}) attack on ${tile.x}-${tile.y}`
+      // );
     }
   }
 }

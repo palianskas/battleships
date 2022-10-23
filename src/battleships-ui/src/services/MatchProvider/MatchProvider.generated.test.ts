@@ -4,10 +4,10 @@ import MatchProvider from './MatchProvider';
 jest.mock('../../models/Match');
 
 describe('MatchProvider', () => {
-  let instance;
+  let instance: any;
 
   beforeEach(() => {
-    instance = new MatchProvider();
+    instance = MatchProvider.Instance;
   });
 
   it('instance should be an instanceof MatchProvider', () => {

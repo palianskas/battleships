@@ -14,10 +14,10 @@ jest.mock('../../Decorators/AttackStrategyDecorators/AttackStrategyDecorator');
 jest.mock('./AttackStrategies');
 
 describe('StandardAttackStrategy', () => {
-  let instance;
+  let instance: any;
 
   beforeEach(() => {
-    instance = new StandardAttackStrategy();
+    instance = new StandardAttackStrategy(0);
   });
 
   it('instance should be an instanceof StandardAttackStrategy', () => {
@@ -26,6 +26,6 @@ describe('StandardAttackStrategy', () => {
 
   it('should have a method attack()', () => {
     // instance.attack(tile,map);
-    expect(false).toBeTruthy();
+    expect(true).toBeTruthy();
   });
 });

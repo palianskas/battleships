@@ -1,0 +1,1 @@
+For /R ./src/services %%G IN (*.ts) do npx jest-test-gen %%G

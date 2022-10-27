@@ -1,4 +1,5 @@
 import Vehicle from '../Vehicle';
+import Ship from '../Ships/Ship';
 
 export enum AirshipClass {
   Plane,
@@ -7,9 +8,14 @@ export enum AirshipClass {
 
 export abstract class Airship extends Vehicle {
   readonly travelRadius!: number;
-  readonly type!: AirshipClass;
+    readonly type!: AirshipClass;
+    readonly ship!: Ship;
+    constructor(ship: Ship) {
+        super(ship.positionX, ship.positionY, ship.directionDegrees);
+        this.ship = ship;
+    }
 }
-
+    
 export class Plane extends Airship {
   readonly travelRadius = 7;
   readonly type = AirshipClass.Plane;

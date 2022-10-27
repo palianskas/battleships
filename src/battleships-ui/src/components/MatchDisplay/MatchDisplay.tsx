@@ -6,7 +6,7 @@ import { MapTile } from '../../models/MatchMap';
 import { GameMode } from '../../models/MatchSettings';
 import { ModularShipPart } from '../../models/Ships/ShipPart';
 import ConnectionMediatorService, {
-  MatchEventNames,
+  MatchEventNames
 } from '../../services/ConnectionMediatorService/ConnectionMediatorService';
 import MatchProvider from '../../services/MatchProvider/MatchProvider';
 import { ArmorPiercingAttackStrategy } from '../../services/Strategies/AttackStrategies/ArmorPiercingAttackStrategy';
@@ -27,6 +27,7 @@ interface AttackTurnEventProps {
 
 export default function MatchDisplay() {
   const [rerenderToggle, setRerenderToggle] = useState(0);
+  const [selectedTile, setSelectedTile] = useState<MapTile | null>(null);
 
   const match = MatchProvider.Instance.match;
   const bluePlayer = match.players[0];
@@ -72,15 +73,16 @@ export default function MatchDisplay() {
       <div className="col-8">
         <div className="w-100 d-flex justify-content-center">{match.name}</div>
         <div className="w-100 d-flex justify-content-center">
-          <MapGrid player={bluePlayer} onTileSelect={onOwnTileSelect}></MapGrid>
+          <MapGrid player={bluePlayer} selectedTile={selectedTile} onTileSelect={onOwnTileSelect}/>
           <MapGrid
             player={redPlayer}
+            selectedTile={selectedTile}
             onTileSelect={onAttackTurnTargetTileSelect}
-          ></MapGrid>
+            />
         </div>
         <AmmoRack onAmmoSelect={onAmmoSelect} />
         <div className="w-100 mt-3 d-flex justify-content-center">
-          <Button size="lg" variant="danger" onClick={() => onAttack()}>
+          <Button size="lg" disabled={!selectedTile} variant="danger" onClick={() => onAttack()}>
             Attack!
           </Button>
         </div>
@@ -113,13 +115,14 @@ export default function MatchDisplay() {
 
   function onAttackTurnTargetTileSelect(tile: MapTile): void {
     const turn = bluePlayer.attackTurns[0];
+    setSelectedTile(tile);
 
     turn.tile = tile;
   }
 
   function onOwnTileSelect(): void {
     const turn = bluePlayer.attackTurns[0];
-
+    setSelectedTile(null);
     turn.tile = undefined!;
 
     console.log('Cannot attack own ships!');
@@ -134,30 +137,24 @@ export default function MatchDisplay() {
       return;
     }
 
-    const offencePlayer = bluePlayer;
-    const defencePlayer = redPlayer;
-
     ConnectionMediatorService.Instance.sendEvent(
       MatchEventNames.AttackPerformed,
       {
-        offencePlayerId: offencePlayer.id,
-        defencePlayerId: defencePlayer.id,
+        offencePlayerId: bluePlayer.id,
+        defencePlayerId: redPlayer.id,
         tile: turn.tile,
         ammoType: turn.ammo.type,
       }
     );
+    setSelectedTile(null);
   }
 
   function handleAttackTurnEvent(data: any): void {
     const { offencePlayerId, defencePlayerId, tile, ammoType } =
       data as AttackTurnEventProps;
 
-    const offencePlayer = match.players.find(
-      (player) => player.id === offencePlayerId
-    );
-    const defencePlayer = match.players.find(
-      (player) => player.id === defencePlayerId
-    );
+    const offencePlayer = MatchProvider.getPlayer(offencePlayerId);
+    const defencePlayer = MatchProvider.getPlayer(defencePlayerId)
 
     const turn = offencePlayer!.attackTurns[0];
 

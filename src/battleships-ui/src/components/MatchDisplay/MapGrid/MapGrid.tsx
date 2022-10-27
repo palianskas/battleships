@@ -7,6 +7,7 @@ import './MapGrid.css';
 
 interface MapGridProps {
   player: Player;
+  selectedTile: MapTile | null;
   onTileSelect: (tile: MapTile) => void;
 }
 
@@ -14,34 +15,37 @@ interface MapGridTileProps {
   tile: MapTile;
   onTileSelect: (tile: MapTile) => void;
   isEnemyMap: boolean;
+  isSelected: boolean;
 }
 
-export default function MapGrid({ player, onTileSelect }: MapGridProps) {
-  const isEnemyMap = player.team == PlayerTeam.Red;
+export default function MapGrid({ player, selectedTile, onTileSelect }: MapGridProps) {
+  const isEnemyMap = player?.team == PlayerTeam.Red;
 
   return (
-    <div className="w-100 d-flex justify-content-center">
+    (player ? <div className="w-100 d-flex justify-content-center">
       <div>
         {player.map.tiles.map((row, idxX) => (
           <div className="map-row" key={idxX}>
             {row.map((tile, idxY) => {
               return (
                 <MapGridTile
+                  isSelected={selectedTile == tile}
                   tile={tile}
                   onTileSelect={onTileSelect}
                   isEnemyMap={isEnemyMap}
                   key={idxY}
-                ></MapGridTile>
+                />
               );
             })}
           </div>
         ))}
       </div>
-    </div>
+    </div> : <div>Disconnected</div> )
+
   );
 }
 
-function MapGridTile({ tile, onTileSelect, isEnemyMap }: MapGridTileProps) {
+function MapGridTile({ tile, onTileSelect, isEnemyMap, isSelected }: MapGridTileProps) {
   let shipPartHpString =
     tile.shipPart instanceof ModularShipPart && !isEnemyMap
       ? (tile.shipPart as ModularShipPart).hp.toString()
@@ -49,16 +53,20 @@ function MapGridTile({ tile, onTileSelect, isEnemyMap }: MapGridTileProps) {
 
   return (
     <div
-      className={classNames('map-tile', resolveTileColorClass())}
+      className={classNames('map-tile', resolveTileColorClass(isSelected))}
       onClick={() => onTileSelect(tile)}
     >
       <span className="map-tile-hp-span">{shipPartHpString}</span>
     </div>
   );
 
-  function resolveTileColorClass(): string {
-    if (isEnemyMap && !tile.isAttacked) {
+  function resolveTileColorClass(isSelected: boolean): string {
+    if (isEnemyMap && !tile.isAttacked && !isSelected) {
       return '';
+    }
+
+    if (isSelected) {
+      return 'grey';
     }
 
     if (tile.isShipPartDestroyed) {
@@ -70,7 +78,7 @@ function MapGridTile({ tile, onTileSelect, isEnemyMap }: MapGridTileProps) {
     }
 
     if (tile.isAttacked) {
-      return 'grey';
+      return 'yellow';
     }
 
     return '';

@@ -9,6 +9,12 @@ export default class MatchProvider {
     this.match = new Match();
   }
 
+  public static getPlayer(id: number) {
+    return this.Instance.match.players.find(
+      (player) => player.id === id
+    );
+  }
+
   public static get Instance(): MatchProvider {
     MatchProvider._instance ??= new MatchProvider();
 

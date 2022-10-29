@@ -57,7 +57,7 @@
       <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_VWFEMETEEe27rv1zb77HhA" name="Submarine"/>
       <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_WJ2qgETEEe27rv1zb77HhA" name="Speedboat"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_e4sC4ETEEe27rv1zb77HhA" name="ShipPart">
+    <packagedElement xmi:type="uml:Class" xmi:id="_e4sC4ETEEe27rv1zb77HhA" name="ShipPart" isAbstract="true">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_hwjA0ETEEe27rv1zb77HhA" name="isDestroyed">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedAttribute>
@@ -91,7 +91,7 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_IC3sQETFEe27rv1zb77HhA" name="Submarine" isAbstract="true">
       <generalization xmi:type="uml:Generalization" xmi:id="_Nbv1cETFEe27rv1zb77HhA" general="_tnkHkETDEe27rv1zb77HhA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Dependency" xmi:id="_fdxbAETGEe27rv1zb77HhA" name="parts: ModularShipPart" client="_skpAEETFEe27rv1zb77HhA" supplier="_mpOnAETEEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_fdxbAETGEe27rv1zb77HhA" name="parts: ModularShipPart[]" client="_skpAEETFEe27rv1zb77HhA" supplier="_mpOnAETEEe27rv1zb77HhA"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_J7HnUETFEe27rv1zb77HhA" name="Speedboat" isAbstract="true">
       <generalization xmi:type="uml:Generalization" xmi:id="_NyxOUETFEe27rv1zb77HhA" general="_tnkHkETDEe27rv1zb77HhA"/>
     </packagedElement>
@@ -305,22 +305,18 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_MjaicETJEe27rv1zb77HhA" name="ShipPartFactory">
       <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_bEABkETKEe27rv1zb77HhA" client="_MjaicETJEe27rv1zb77HhA" supplier="_B6m7QETKEe27rv1zb77HhA" contract="_B6m7QETKEe27rv1zb77HhA"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_ChrV4E-MEe297sxi5mTzYA" name="createPart" visibility="private">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ChrV4U-MEe297sxi5mTzYA" name="isModular">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ChrV4U-MEe297sxi5mTzYA" name="type" type="_d1YXYFd-Ee29SKV9opnUhw"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_ChrV4k-MEe297sxi5mTzYA" name="part" type="_e4sC4ETEEe27rv1zb77HhA" direction="return"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_GrPC4E-lEe297sxi5mTzYA" name="shipClass" type="_Qe3doETEEe27rv1zb77HhA"/>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Dependency" xmi:id="_h00qkETJEe27rv1zb77HhA" name="returns " client="_B6m7QETKEe27rv1zb77HhA" supplier="_mpOnAETEEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_h00qkETJEe27rv1zb77HhA" name="returns as ShipPart" client="_MjaicETJEe27rv1zb77HhA" supplier="_iB7GwEPqEe26Q_q4HjD8wQ"/>
     <packagedElement xmi:type="uml:Interface" xmi:id="_B6m7QETKEe27rv1zb77HhA" name="IShipPartFactory" isAbstract="true">
       <ownedOperation xmi:type="uml:Operation" xmi:id="_DF3NcETKEe27rv1zb77HhA" name="createParts">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_MVygsETKEe27rv1zb77HhA" name="amount">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_N1kRYETKEe27rv1zb77HhA" name="isModular">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_N1kRYETKEe27rv1zb77HhA" name="type" type="_d1YXYFd-Ee29SKV9opnUhw"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_SXesMEfREe2SLYkSMgTh1A" name="result" type="_e4sC4ETEEe27rv1zb77HhA" direction="return">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WhSaMEfREe2SLYkSMgTh1A"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_epepUEfREe2SLYkSMgTh1A" value="*"/>
@@ -753,6 +749,39 @@
     <packagedElement xmi:type="uml:Dependency" xmi:id="_bxZSYE-nEe297sxi5mTzYA" client="_iB7GwEPqEe26Q_q4HjD8wQ _2NM4QE-mEe297sxi5mTzYA _vPuIwE-mEe297sxi5mTzYA" supplier="_4LcvEEo_Ee2Zp75EuR3hWg"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_Ro2_UE-rEe297sxi5mTzYA" client="_RUFT4E-EEe297sxi5mTzYA" supplier="_2w0cAETMEe27rv1zb77HhA"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_SavIME-rEe297sxi5mTzYA" client="_RUFT4E-EEe297sxi5mTzYA" supplier="_QUI5EE7wEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_2eMLEFd8Ee29SKV9opnUhw" name="ClassicShipPart">
+      <generalization xmi:type="uml:Generalization" xmi:id="_SAvhIFd9Ee29SKV9opnUhw" general="_e4sC4ETEEe27rv1zb77HhA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_4k5_8Fd8Ee29SKV9opnUhw" name="ObservingShipPart">
+      <generalization xmi:type="uml:Generalization" xmi:id="_RpZYIFd9Ee29SKV9opnUhw" general="_e4sC4ETEEe27rv1zb77HhA"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_71aHYFd8Ee29SKV9opnUhw" name="reconDistance">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_Avh4AFd9Ee29SKV9opnUhw" name="parts as ClassicShipPart[]" client="_bSjNMETFEe27rv1zb77HhA" supplier="_2eMLEFd8Ee29SKV9opnUhw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_FxEfQFd9Ee29SKV9opnUhw" name="parts as ObservingShipPart[]" client="_umDeMETFEe27rv1zb77HhA" supplier="_4k5_8Fd8Ee29SKV9opnUhw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_ej5fsFd9Ee29SKV9opnUhw" client="_MjaicETJEe27rv1zb77HhA" supplier="_4k5_8Fd8Ee29SKV9opnUhw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_fBCHoFd9Ee29SKV9opnUhw" client="_MjaicETJEe27rv1zb77HhA" supplier="_2eMLEFd8Ee29SKV9opnUhw"/>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_d1YXYFd-Ee29SKV9opnUhw" name="ShipPartType">
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_fhhJEFd-Ee29SKV9opnUhw" name="Classic"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_f_rEsFd-Ee29SKV9opnUhw" name="Modular"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_gxC3QFd-Ee29SKV9opnUhw" name="Observing"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_5eY6wFd-Ee29SKV9opnUhw" client="_yjfkIETFEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_6QhiUFd-Ee29SKV9opnUhw" client="_0BfMIETFEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_6m4z4Fd-Ee29SKV9opnUhw" client="_z7AwsETFEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_67IlkFd-Ee29SKV9opnUhw" client="_zznIMETFEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_7XzTcFd-Ee29SKV9opnUhw" client="_zrIhoETFEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_7r0boFd-Ee29SKV9opnUhw" client="_CSDuwkTGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_8sGM4Fd-Ee29SKV9opnUhw" client="_CSDuwETGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_9Ovm8Fd-Ee29SKV9opnUhw" client="_CSDHsETGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_91fd4Fd-Ee29SKV9opnUhw" client="_CSDuwUTGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_-Ls-cFd-Ee29SKV9opnUhw" client="_CSDuw0TGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_-nj0AFd-Ee29SKV9opnUhw" client="_NVzwEETGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_-_w4oFd-Ee29SKV9opnUhw" client="_NVzJAETGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="__XjGgFd-Ee29SKV9opnUhw" client="_NVzwEUTGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="__3t0UFd-Ee29SKV9opnUhw" client="_NVzJAUTGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_AUmkoFd_Ee29SKV9opnUhw" name="uses" client="_NVzJAkTGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_jbQRMEPqEe26Q_q4HjD8wQ" name="use case diagram"/>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_6FrDgETCEe27rv1zb77HhA">

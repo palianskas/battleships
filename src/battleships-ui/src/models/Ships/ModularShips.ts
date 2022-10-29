@@ -1,4 +1,6 @@
-import ShipPartFactory from '../../services/Factories/ShipFactories/ShipPartFactory/ShipPartFactory';
+import ShipPartFactory, {
+  ShipPartType,
+} from '../../services/Factories/ShipFactories/ShipPartFactory/ShipPartFactory';
 import Ship, {
   Battleship,
   Carrier,
@@ -16,7 +18,7 @@ export interface IModularShip extends Ship {
 export class ModularCarrier extends Carrier implements IModularShip {
   readonly parts = new ShipPartFactory().createParts(
     5,
-    true,
+    ShipPartType.Modular,
     ShipClass.Carrier
   ) as ModularShipPart[];
 }
@@ -24,7 +26,7 @@ export class ModularCarrier extends Carrier implements IModularShip {
 export class ModularBattleship extends Battleship implements IModularShip {
   readonly parts = new ShipPartFactory().createParts(
     4,
-    true,
+    ShipPartType.Modular,
     ShipClass.Battleship
   ) as ModularShipPart[];
 }
@@ -32,7 +34,7 @@ export class ModularBattleship extends Battleship implements IModularShip {
 export class ModularCruiser extends Cruiser implements IModularShip {
   readonly parts = new ShipPartFactory().createParts(
     3,
-    true,
+    ShipPartType.Modular,
     ShipClass.Cruiser
   ) as ModularShipPart[];
 }
@@ -40,7 +42,7 @@ export class ModularCruiser extends Cruiser implements IModularShip {
 export class ModularSubmarine extends Submarine implements IModularShip {
   readonly parts = new ShipPartFactory().createParts(
     3,
-    true,
+    ShipPartType.Modular,
     ShipClass.Submarine
   ) as ModularShipPart[];
 }
@@ -48,7 +50,7 @@ export class ModularSubmarine extends Submarine implements IModularShip {
 export class ModularSpeedboat extends Speedboat implements IModularShip {
   readonly parts = new ShipPartFactory().createParts(
     2,
-    true,
+    ShipPartType.Modular,
     ShipClass.Speedboat
   ) as ModularShipPart[];
 }

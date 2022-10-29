@@ -1,6 +1,6 @@
 import { ShipClass } from './ShipClass';
 
-export class ShipPart {
+export abstract class ShipPart {
   constructor(shipClass: ShipClass) {
     this.shipClass = shipClass;
   }
@@ -8,6 +8,13 @@ export class ShipPart {
   isDestroyed = false;
   shipClass: ShipClass;
 }
+
+export class ClassicShipPart extends ShipPart {}
+
 export class ModularShipPart extends ShipPart {
   hp = 10;
+}
+
+export class ObservingShipPart extends ShipPart {
+  reconDistance!: number;
 }

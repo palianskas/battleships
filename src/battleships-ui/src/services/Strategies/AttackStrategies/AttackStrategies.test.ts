@@ -1,6 +1,10 @@
 import MatchMap from '../../../models/MatchMap';
 import { ShipClass } from '../../../models/Ships/ShipClass';
-import { ModularShipPart, ShipPart } from '../../../models/Ships/ShipPart';
+import {
+  ClassicShipPart,
+  ModularShipPart,
+  ShipPart,
+} from '../../../models/Ships/ShipPart';
 import {
   AreaAttackStrategy,
   DamageAttackStrategy,
@@ -212,7 +216,7 @@ describe('ShipSpecificAttackStrategy', () => {
 
       const tile = map.tiles[0][0];
 
-      tile.shipPart = new ShipPart(ShipClass.Battleship);
+      tile.shipPart = new ClassicShipPart(ShipClass.Battleship);
 
       jest.spyOn(defaultStrategy, 'attack');
       jest.spyOn(damageStrategy, 'attack');

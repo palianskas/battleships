@@ -1,6 +1,7 @@
 import MatchMap, { MapTile } from '../../../models/MatchMap';
 import { ShipClass } from '../../../models/Ships/ShipClass';
 import { AttackStrategyDecorator } from '../../Decorators/AttackStrategyDecorators/AttackStrategyDecorator';
+import LoggerService, { PatternTypes } from '../../LoggerService/LoggerService';
 import {
   AreaAttackStrategy,
   DefaultAttackStrategy,
@@ -37,7 +38,10 @@ export class HighExplosiveAttackStrategy extends AttackStrategyDecorator {
   }
 
   attack(tile: MapTile, map: MatchMap): void {
+    const log = `HighExplosiveAttackStrategy.attack() on (${tile.x}:${tile.y})`;
+    this.strategyLogger.log(log);
+    this.decoratorLogger.log(log);
+
     this.baseAttackStrategy!.attack(tile, map);
-    console.log(`high explosive attack on ${tile.x}-${tile.y}`);
   }
 }

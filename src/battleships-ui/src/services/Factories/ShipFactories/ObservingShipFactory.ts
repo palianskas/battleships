@@ -7,6 +7,7 @@ import {
   IObservingShip,
 } from '../../../models/Ships/ObservingShips';
 import { ShipClass } from '../../../models/Ships/ShipClass';
+import LoggerService, { PatternTypes } from '../../LoggerService/LoggerService';
 import { IShipFactory } from './ShipFactory';
 
 export default class ObservingShipFactory implements IShipFactory {
@@ -14,11 +15,17 @@ export default class ObservingShipFactory implements IShipFactory {
 
   private constructor() {}
 
+  private logger = LoggerService.Instance.getLogger(
+    PatternTypes.AbstractFactory
+  );
+
   public static get Instance(): ObservingShipFactory {
     return ObservingShipFactory._intance;
   }
 
   create(type: ShipClass): IObservingShip {
+    this.logger.log(`ObservingShipFactory.create(): type: ${ShipClass[type]}`);
+
     switch (type) {
       case ShipClass.Carrier: {
         return new ObservingCarrier();

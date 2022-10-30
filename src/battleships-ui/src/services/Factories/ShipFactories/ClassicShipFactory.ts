@@ -7,6 +7,7 @@ import {
   IClassicShip,
 } from '../../../models/Ships/ClassicShips';
 import { ShipClass } from '../../../models/Ships/ShipClass';
+import LoggerService, { PatternTypes } from '../../LoggerService/LoggerService';
 import { IShipFactory } from './ShipFactory';
 
 export default class ClassicShipFactory implements IShipFactory {
@@ -14,11 +15,17 @@ export default class ClassicShipFactory implements IShipFactory {
 
   private constructor() {}
 
+  private logger = LoggerService.Instance.getLogger(
+    PatternTypes.AbstractFactory
+  );
+
   public static get Instance(): ClassicShipFactory {
     return ClassicShipFactory._intance;
   }
 
   create(type: ShipClass): IClassicShip {
+    this.logger.log(`ClassicShipFactory.create(): type: ${ShipClass[type]}`);
+
     switch (type) {
       case ShipClass.Carrier: {
         return new ClassicCarrier();

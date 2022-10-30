@@ -5,6 +5,9 @@ import {
   ObservingShipPart,
   ShipPart,
 } from '../../../../models/Ships/ShipPart';
+import LoggerService, {
+  PatternTypes,
+} from '../../../LoggerService/LoggerService';
 
 export enum ShipPartType {
   Classic,
@@ -21,6 +24,8 @@ export interface IShipPartFactory {
 }
 
 export default class ShipPartFactory implements IShipPartFactory {
+  logger = LoggerService.Instance.getLogger(PatternTypes.Factory);
+
   createParts(
     amount: number,
     type: ShipPartType,
@@ -28,6 +33,9 @@ export default class ShipPartFactory implements IShipPartFactory {
   ): ShipPart[] {
     const result: ShipPart[] = [];
 
+    this.logger.log(
+      `ShipPartFactory.createParts(): creating ${amount} of ${ShipPartType[type]} ${ShipClass[shipClass]} parts`
+    );
     for (let i = 0; i < amount; i++) {
       result.push(this.createPart(type, shipClass));
     }

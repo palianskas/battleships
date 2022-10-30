@@ -3,6 +3,7 @@ import {
   HttpTransportType,
   HubConnection,
 } from '@microsoft/signalr';
+import LoggerService, { PatternTypes } from '../LoggerService/LoggerService';
 import MatchEventsSubject from '../Observers/MatchEventsObserver/MatchEventsSubject';
 
 const HUB_ENDPOINT_URL = 'match-event-hub/';
@@ -11,6 +12,10 @@ export default class ConnectionMediatorService extends MatchEventsSubject {
   private _connection: HubConnection;
 
   private static _instance: ConnectionMediatorService;
+
+  private static logger = LoggerService.Instance.getLogger(
+    PatternTypes.Singleton
+  );
 
   private constructor() {
     super();
@@ -35,16 +40,15 @@ export default class ConnectionMediatorService extends MatchEventsSubject {
   }
 
   public static get Instance(): ConnectionMediatorService {
-    // console.log(
-    //   'ConnectionMediatorService: ',
-    //   !!ConnectionMediatorService._instance
-    //     ? 'get existing instance'
-    //     : 'get new instance'
-    // );
+    this.logger.log(
+      `Singleton ConnectionMediatorService getting ${
+        !this._instance ? 'NEW' : 'EXISTING'
+      } instance`
+    );
 
-    ConnectionMediatorService._instance ??= new ConnectionMediatorService();
+    this._instance ??= new ConnectionMediatorService();
 
-    return ConnectionMediatorService._instance;
+    return this._instance;
   }
 
   public async sendEvent(event: MatchEventNames, data: any = {}) {

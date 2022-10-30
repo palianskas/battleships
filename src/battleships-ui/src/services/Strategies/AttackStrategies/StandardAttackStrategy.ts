@@ -1,6 +1,7 @@
 import MatchMap, { MapTile } from '../../../models/MatchMap';
 import { ShipClass } from '../../../models/Ships/ShipClass';
 import { AttackStrategyDecorator } from '../../Decorators/AttackStrategyDecorators/AttackStrategyDecorator';
+import LoggerService, { PatternTypes } from '../../LoggerService/LoggerService';
 import {
   DefaultAttackStrategy,
   DamageAttackStrategy,
@@ -8,6 +9,8 @@ import {
 } from './AttackStrategies';
 
 export class StandardAttackStrategy extends AttackStrategyDecorator {
+  private logger = LoggerService.Instance.getLogger(PatternTypes.Strategy);
+
   constructor(damage: number) {
     super();
 
@@ -32,7 +35,10 @@ export class StandardAttackStrategy extends AttackStrategyDecorator {
   }
 
   attack(tile: MapTile, map: MatchMap): void {
+    const log = `StandardAttackStrategy.attack() on (${tile.x}:${tile.y})`;
+    this.strategyLogger.log(log);
+    this.decoratorLogger.log(log);
+
     this.baseAttackStrategy!.attack(tile, map);
-    console.log(`standard attack on ${tile.x}-${tile.y}`);
   }
 }

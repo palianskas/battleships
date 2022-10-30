@@ -1,8 +1,10 @@
 import { MatchEventNames } from '../../ConnectionMediatorService/ConnectionMediatorService';
+import LoggerService, { PatternTypes } from '../../LoggerService/LoggerService';
 import { ISubject } from '../Observer';
 import MatchEventsObservable from './MatchEventsObservable';
 
 export default class MatchEventsSubject implements ISubject {
+  private logger = LoggerService.Instance.getLogger(PatternTypes.Observer);
   protected observersByEvent: { [event: number]: MatchEventsObservable[] } = {};
 
   constructor() {
@@ -18,6 +20,10 @@ export default class MatchEventsSubject implements ISubject {
 
   public notify(event: MatchEventNames, data: any): void {
     const eventObservers = this.observersByEvent[event];
+
+    this.logger.log(
+      `MatchEventsSubject.notify(), event: ${MatchEventNames[event]}, found ${eventObservers.length} observers for event`
+    );
 
     eventObservers?.forEach((observer) => observer.onNotify(data));
   }

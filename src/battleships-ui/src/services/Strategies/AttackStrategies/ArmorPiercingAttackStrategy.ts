@@ -37,7 +37,10 @@ export class ArmorPiercingAttackStrategy extends AttackStrategyDecorator {
   }
 
   attack(tile: MapTile, map: MatchMap): void {
+    const log = `ArmorPiercingAttackStrategy.attack() on (${tile.x}:${tile.y})`;
+    this.strategyLogger.log(log);
+    this.decoratorLogger.log(log);
+
     this.baseAttackStrategy!.attack(tile, map);
-    console.log(`armor piercing attack on ${tile.x}-${tile.y}`);
   }
 }

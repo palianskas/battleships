@@ -10,16 +10,18 @@ export interface IAttackStrategy {
 
 export class DefaultAttackStrategy extends AttackStrategyDecorator {
   attack(tile: MapTile, map: MatchMap): void {
-    tile.isAttacked = true;
+    const log = `DefaultAttackStrategy.attack() on (${tile.x}:${tile.y})`;
+    this.strategyLogger.log(log);
+    this.decoratorLogger.log(log);
 
-    // console.log(`default attack on ${tile.x}-${tile.y}`);
+    tile.isAttacked = true;
   }
 }
 
 export class DamageAttackStrategy extends AttackStrategyDecorator {
   private damage: number;
 
-  constructor(baseAttackStrategy: IAttackStrategy, damage: number) {
+  constructor(baseAttackStrategy: AttackStrategyDecorator, damage: number) {
     super();
 
     this.baseAttackStrategy = baseAttackStrategy;
@@ -27,6 +29,10 @@ export class DamageAttackStrategy extends AttackStrategyDecorator {
   }
 
   attack(tile: MapTile, map: MatchMap): void {
+    const log = `DamageAttackStrategy.attack() on (${tile.x}:${tile.y})`;
+    this.strategyLogger.log(log);
+    this.decoratorLogger.log(log);
+
     this.baseAttackStrategy!.attack(tile, map);
 
     if (!!tile.shipPart) {
@@ -40,15 +46,16 @@ export class DamageAttackStrategy extends AttackStrategyDecorator {
         tile.isShipPartDestroyed = true;
       }
     }
-
-    // console.log(`damage(${this.damage}) attack on ${tile.x}-${tile.y}`);
   }
 }
 
 export class AreaAttackStrategy extends AttackStrategyDecorator {
   private impactRadius: number;
 
-  constructor(baseAttackStrategy: IAttackStrategy, impactRadius: number) {
+  constructor(
+    baseAttackStrategy: AttackStrategyDecorator,
+    impactRadius: number
+  ) {
     super();
 
     this.baseAttackStrategy = baseAttackStrategy;
@@ -56,6 +63,10 @@ export class AreaAttackStrategy extends AttackStrategyDecorator {
   }
 
   attack(tile: MapTile, map: MatchMap): void {
+    const log = `AreaAttackStrategy.attack() on (${tile.x}:${tile.y})`;
+    this.strategyLogger.log(log);
+    this.decoratorLogger.log(log);
+
     for (
       let i = tile.x - (this.impactRadius - 1);
       i < tile.x + this.impactRadius;
@@ -72,7 +83,6 @@ export class AreaAttackStrategy extends AttackStrategyDecorator {
 
         const tile = map.tiles[i][j];
         this.baseAttackStrategy!.attack(tile, map);
-        // console.log(`area(${this.impactRadius}) attack on ${tile.x}-${tile.y}`);
       }
     }
   }
@@ -81,7 +91,7 @@ export class AreaAttackStrategy extends AttackStrategyDecorator {
 export class CooldownAttackStrategy extends AttackStrategyDecorator {
   private cooldown: number;
 
-  constructor(baseAttackStrategy: IAttackStrategy, cooldown: number) {
+  constructor(baseAttackStrategy: AttackStrategyDecorator, cooldown: number) {
     super();
 
     this.baseAttackStrategy = baseAttackStrategy;
@@ -89,6 +99,10 @@ export class CooldownAttackStrategy extends AttackStrategyDecorator {
   }
 
   attack(tile: MapTile, map: MatchMap): void {
+    const log = `CooldownAttackStrategy.attack() on (${tile.x}:${tile.y})`;
+    this.strategyLogger.log(log);
+    this.decoratorLogger.log(log);
+
     this.baseAttackStrategy!.attack(tile, map);
 
     const player = MatchProvider.Instance.match.players[0];
@@ -98,8 +112,6 @@ export class CooldownAttackStrategy extends AttackStrategyDecorator {
     } else {
       player.turnOverDraw += this.cooldown;
     }
-
-    // console.log(`cooldown(${this.cooldown}) attack on ${tile.x}-${tile.y}`);
   }
 }
 
@@ -107,7 +119,7 @@ export class ShipSpecificAttackStrategy extends AttackStrategyDecorator {
   private affectedClasses: ShipClass[];
 
   constructor(
-    baseAttackStrategy: IAttackStrategy,
+    baseAttackStrategy: AttackStrategyDecorator,
     affectedClasses: ShipClass[]
   ) {
     super();
@@ -117,15 +129,15 @@ export class ShipSpecificAttackStrategy extends AttackStrategyDecorator {
   }
 
   attack(tile: MapTile, map: MatchMap): void {
+    const log = `ShipSpecificAttackStrategy.attack() on (${tile.x}:${tile.y})`;
+    this.strategyLogger.log(log);
+    this.decoratorLogger.log(log);
+
     if (
       !tile.shipPart ||
       this.affectedClasses.includes(tile.shipPart.shipClass)
     ) {
       this.baseAttackStrategy!.attack(tile, map);
-
-      // console.log(
-      //   `ship specific(${this.affectedClasses}) attack on ${tile.x}-${tile.y}`
-      // );
     }
   }
 }

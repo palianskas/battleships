@@ -1,9 +1,13 @@
 import { Outlet } from 'react-router-dom';
+import LoggerConfig from '../../components/LoggerConfig/LoggerConfig';
 
 export default function Root() {
   return (
-    <div className="container mt-5 d-flex justify-content-center align-items-center">
-      <Outlet />
+    <div>
+      <LoggerConfig />
+      <div className="container mt-5 d-flex justify-content-center align-items-center">
+        <Outlet />
+      </div>
     </div>
   );
 }

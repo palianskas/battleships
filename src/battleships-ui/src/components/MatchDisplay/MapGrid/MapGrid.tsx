@@ -4,6 +4,10 @@ import { Player, PlayerTeam } from '../../../models/Player';
 import { ModularShipPart } from '../../../models/Ships/ShipPart';
 
 import './MapGrid.css';
+import { SelectedTileDecorator } from '../../../models/Map/SelectedTileDecorator';
+import { DestroyedTileDecorator } from '../../../models/Map/DestroyedTileDecorator';
+import { ShipPartTileDecorator } from '../../../models/Map/ShipPartTileDecorator';
+import { AttackedTileDecorator } from '../../../models/Map/AttackedTileDecorator';
 
 interface MapGridProps {
   player: Player;
@@ -51,36 +55,25 @@ function MapGridTile({ tile, onTileSelect, isEnemyMap, isSelected }: MapGridTile
       ? (tile.shipPart as ModularShipPart).hp.toString()
       : '';
 
+  if(isSelected){
+    tile = new SelectedTileDecorator(tile);
+  }
+  if(tile.isShipPartDestroyed){
+    tile = new DestroyedTileDecorator(tile);
+  }
+  if(tile.shipPart){
+    tile = new ShipPartTileDecorator(tile);
+  }
+  if(tile.isAttacked){
+    tile = new AttackedTileDecorator(tile);
+  }
+
   return (
     <div
-      className={classNames('map-tile', resolveTileColorClass(isSelected))}
+      className={classNames('map-tile', tile.getColor())}
       onClick={() => onTileSelect(tile)}
     >
       <span className="map-tile-hp-span">{shipPartHpString}</span>
     </div>
   );
-
-  function resolveTileColorClass(isSelected: boolean): string {
-    if (isEnemyMap && !tile.isAttacked && !isSelected) {
-      return '';
-    }
-
-    if (isSelected) {
-      return 'grey';
-    }
-
-    if (tile.isShipPartDestroyed) {
-      return 'red';
-    }
-
-    if (tile.shipPart) {
-      return 'blue';
-    }
-
-    if (tile.isAttacked) {
-      return 'yellow';
-    }
-
-    return '';
-  }
 }

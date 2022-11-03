@@ -1,4 +1,5 @@
 import { ShipPart } from './Ships/ShipPart';
+import { TileColor } from './Map/TileColors';
 
 export default class MatchMap {
   tiles: MapTile[][];
@@ -28,5 +29,9 @@ export class MapTile {
   constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
+  }
+
+  getColor(){
+    return TileColor.transparent;
   }
 }

@@ -205,27 +205,19 @@ export default function MatchDisplay() {
     }
     function onAddAirship(type: AirshipClass) {
         const carrier = bluePlayer.ships.find(s => s.shipClass == ShipClass.Carrier) ?? ObservingShipFactory.Instance.create(ShipClass.Carrier);
-        var foundAirship: Airship | null = null;
+        let foundAirship: Airship | undefined;
         if (type == AirshipClass.Plane) {
-            foundAirship == bluePlayer.airships.find(a => a.type == AirshipClass.Plane);
-            if (!foundAirship) {
-                const factory = new AirshipFactory();
-
-                bluePlayer.airships = [...bluePlayer.airships, factory.create(carrier, type)]
-            }
-            else if (foundAirship == undefined) {
-                bluePlayer.airships = [...bluePlayer.airships, foundAirship.clone()]
-            }
+            foundAirship = bluePlayer.airships.find(a => a.type == AirshipClass.Plane);
         }
         if (type == AirshipClass.Drone) {
-            foundAirship == bluePlayer.airships.find(a => a.type == AirshipClass.Drone);
-            if (!foundAirship) {
-                const factory = new AirshipFactory();
-                bluePlayer.airships = [...bluePlayer.airships, factory.create(carrier, type)]
-            }
-            else if (foundAirship == undefined) {
-                bluePlayer.airships = [...bluePlayer.airships, foundAirship.clone()]
-            }
+            foundAirship = bluePlayer.airships.find(a => a.type == AirshipClass.Drone);
+        }
+        if (!foundAirship) {
+            const factory = new AirshipFactory();
+            bluePlayer.airships = [...bluePlayer.airships, factory.create(carrier, type)]
+        }
+        else {
+            bluePlayer.airships = [...bluePlayer.airships, foundAirship.clone()]
         }
     }
 }

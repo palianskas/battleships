@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\MatchDisplay",
+    "\\src\\models",
+    "\\src\\models\\Airships",
+    "\\src\\services",
+    "\\src\\services\\Commands",
+    "\\src\\services\\Factories",
+    "\\src\\services\\Factories\\ShipFactories"
+  ],
+  "PreviewInSolutionExplorer": false
+}

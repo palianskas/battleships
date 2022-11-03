@@ -23,28 +23,28 @@ abstract class VehicleCommand {
 
 class MoveUp extends VehicleCommand {
     execute() {
-        this.vehicle.positionY += 1
+        this.vehicle.MoveUp
         return this.vehicle
     }
 }
 
 class MoveDown extends VehicleCommand {
     execute() {
-        this.vehicle.positionY -= 1
+        this.vehicle.MoveDown
         return this.vehicle
     }
 }
 
 class MoveRight extends VehicleCommand {
     execute() {
-        this.vehicle.positionX += 1
+        this.vehicle.MoveRight
         return this.vehicle
     }
 }
 
 class MoveLeft extends VehicleCommand {
     execute() {
-        this.vehicle.positionX -= 1
+        this.vehicle.MoveLeft
         return this.vehicle
     }
 }

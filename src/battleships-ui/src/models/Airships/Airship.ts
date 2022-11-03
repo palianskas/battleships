@@ -15,9 +15,8 @@ export abstract class Airship extends Vehicle implements Cloneable {
         this.ship = ship;
     }
     clone(): this {
-        const ret: this = Object.create(this.constructor.prototype);
-        Object.assign(ret, this);
-        return ret;
+        const objCloneByJsonStringfy = JSON.parse(JSON.stringify(this));
+        return objCloneByJsonStringfy;
     }
 }
     

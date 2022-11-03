@@ -203,6 +203,7 @@ export default function MatchDisplay() {
                 return new DepthChargeAttackStrategy(ammo!.damage, ammo!.impactRadius);
         }
     }
+
     function onAddAirship(type: AirshipClass) {
         const carrier = bluePlayer.ships.find(s => s.shipClass == ShipClass.Carrier) ?? ObservingShipFactory.Instance.create(ShipClass.Carrier);
         let foundAirship: Airship | undefined;

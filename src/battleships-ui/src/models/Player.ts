@@ -14,7 +14,7 @@ export class Player {
     name: string;
     team: PlayerTeam;
     ships: Ship[];
-    airships: Airship[];
+    airships: Airship[]; 
     map: MatchMap;
     movementTurns: MovementTurn[] = [];
     attackTurns: AttackTurn[] = [];

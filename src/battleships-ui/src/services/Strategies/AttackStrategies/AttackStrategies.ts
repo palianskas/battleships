@@ -11,7 +11,6 @@ export interface IAttackStrategy {
 export class DefaultAttackStrategy extends AttackStrategyDecorator {
   attack(tile: MapTile, map: MatchMap): void {
     const log = `DefaultAttackStrategy.attack() on (${tile.x}:${tile.y})`;
-    this.strategyLogger.log(log);
     this.decoratorLogger.log(log);
 
     tile.isAttacked = true;
@@ -30,7 +29,6 @@ export class DamageAttackStrategy extends AttackStrategyDecorator {
 
   attack(tile: MapTile, map: MatchMap): void {
     const log = `DamageAttackStrategy.attack() on (${tile.x}:${tile.y})`;
-    this.strategyLogger.log(log);
     this.decoratorLogger.log(log);
 
     this.baseAttackStrategy!.attack(tile, map);
@@ -64,7 +62,6 @@ export class AreaAttackStrategy extends AttackStrategyDecorator {
 
   attack(tile: MapTile, map: MatchMap): void {
     const log = `AreaAttackStrategy.attack() on (${tile.x}:${tile.y})`;
-    this.strategyLogger.log(log);
     this.decoratorLogger.log(log);
 
     for (
@@ -100,7 +97,6 @@ export class CooldownAttackStrategy extends AttackStrategyDecorator {
 
   attack(tile: MapTile, map: MatchMap): void {
     const log = `CooldownAttackStrategy.attack() on (${tile.x}:${tile.y})`;
-    this.strategyLogger.log(log);
     this.decoratorLogger.log(log);
 
     this.baseAttackStrategy!.attack(tile, map);
@@ -130,7 +126,6 @@ export class ShipSpecificAttackStrategy extends AttackStrategyDecorator {
 
   attack(tile: MapTile, map: MatchMap): void {
     const log = `ShipSpecificAttackStrategy.attack() on (${tile.x}:${tile.y})`;
-    this.strategyLogger.log(log);
     this.decoratorLogger.log(log);
 
     if (

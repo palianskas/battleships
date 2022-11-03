@@ -2,33 +2,33 @@ import Vehicle from '../Vehicle';
 import Ship from '../Ships/Ship';
 
 export enum AirshipClass {
-  Plane,
-  Drone,
+    Plane,
+    Drone,
 }
 
-export abstract class Airship extends Vehicle {
-  readonly travelRadius!: number;
+export abstract class Airship extends Vehicle implements Cloneable {
+    readonly travelRadius!: number;
     readonly type!: AirshipClass;
     readonly ship!: Ship;
     constructor(ship: Ship) {
         super(ship.positionX, ship.positionY, ship.directionDegrees);
         this.ship = ship;
     }
-<<<<<<< Updated upstream
-=======
     clone(): this {
-        const myDeepCopy = JSON.parse(JSON.stringify(this));
-        return myDeepCopy;
+        const objCloneByJsonStringfy = JSON.parse(JSON.stringify(this));
+        return objCloneByJsonStringfy;
     }
->>>>>>> Stashed changes
 }
-    
+
 export class Plane extends Airship {
-  readonly travelRadius = 7;
-  readonly type = AirshipClass.Plane;
+    readonly travelRadius = 7;
+    readonly type = AirshipClass.Plane;
 }
 
 export class Drone extends Airship {
-  readonly travelRadius = 4;
-  readonly type = AirshipClass.Drone;
+    readonly travelRadius = 4;
+    readonly type = AirshipClass.Drone;
+}
+interface Cloneable {
+    clone(): this;
 }

@@ -32,6 +32,13 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_4gMeAETDEe27rv1zb77HhA" name="type" type="_1P-qcETDEe27rv1zb77HhA"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_iSOFclu4Ee2NIKDFAE6egA" name="ship" type="_tnkHkETDEe27rv1zb77HhA" association="_iSNeYFu4Ee2NIKDFAE6egA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iSOsgFu4Ee2NIKDFAE6egA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iSOsgVu4Ee2NIKDFAE6egA" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_2pOI4Fu6Ee2NIKDFAE6egA" name="Ship" type="_tnkHkETDEe27rv1zb77HhA"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_oaSlAFu6Ee2NIKDFAE6egA" client="_PHZJ0ETDEe27rv1zb77HhA" supplier="_xM8i4Fu5Ee2NIKDFAE6egA" contract="_xM8i4Fu5Ee2NIKDFAE6egA"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EKTkwFu6Ee2NIKDFAE6egA" name="clone" visibility="private"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_ilWXUETDEe27rv1zb77HhA" name="Plane">
       <generalization xmi:type="uml:Generalization" xmi:id="_mcnj0ETDEe27rv1zb77HhA" general="_PHZJ0ETDEe27rv1zb77HhA"/>
@@ -783,6 +790,13 @@
     <packagedElement xmi:type="uml:Dependency" xmi:id="__3t0UFd-Ee29SKV9opnUhw" client="_NVzJAUTGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_AUmkoFd_Ee29SKV9opnUhw" name="uses" client="_NVzJAkTGEe27rv1zb77HhA" supplier="_MjaicETJEe27rv1zb77HhA"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_r_a3YFeCEe29SKV9opnUhw" client="_2w0cAETMEe27rv1zb77HhA" supplier="_QUI5EE7wEe2G5_JTnjT6tw"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_iSNeYFu4Ee2NIKDFAE6egA" memberEnd="_iSOFclu4Ee2NIKDFAE6egA _iSOsglu4Ee2NIKDFAE6egA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_iSOFcFu4Ee2NIKDFAE6egA" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_iSOFcVu4Ee2NIKDFAE6egA" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_iSOsglu4Ee2NIKDFAE6egA" name="airship" type="_PHZJ0ETDEe27rv1zb77HhA" association="_iSNeYFu4Ee2NIKDFAE6egA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_xM8i4Fu5Ee2NIKDFAE6egA" name="ICloneable"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_jbQRMEPqEe26Q_q4HjD8wQ" name="use case diagram"/>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_6FrDgETCEe27rv1zb77HhA">

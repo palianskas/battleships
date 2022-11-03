@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\models",
-    "\\src\\models\\Airships",
+    "\\src\\components",
+    "\\src\\components\\MatchDisplay",
     "\\src\\services",
     "\\src\\services\\Commands",
     "\\src\\services\\ConnectionMediatorService",
@@ -11,6 +11,6 @@
     "\\src\\services\\Factories\\ShipFactories",
     "\\src\\services\\LoggerService"
   ],
-  "SelectedNode": "\\src\\services\\ConnectionMediatorService\\ConnectionMediatorService.ts",
+  "SelectedNode": "\\src\\components\\MatchDisplay\\MatchDisplay.tsx",
   "PreviewInSolutionExplorer": false
 }

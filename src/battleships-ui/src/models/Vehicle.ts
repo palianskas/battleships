@@ -7,4 +7,24 @@ export default abstract class Vehicle {
         this.positionY = positionY;
         this.directionDegrees = directionDegrees;
     }
+
+    MoveUp(this: any) {
+        this.positionY += 1
+        return this.vehicle
+    }
+
+    MoveDown(this: any) {
+        this.positionY -= 1
+        return this.vehicle
+    }
+
+    MoveRight(this: any) {
+        this.positionX += 1
+        return this.vehicle
+    }
+
+    MoveLeft(this: any) {
+        this.positionX -= 1
+        return this.vehicle
+    }
 }

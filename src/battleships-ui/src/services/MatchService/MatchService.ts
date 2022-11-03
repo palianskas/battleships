@@ -68,12 +68,7 @@ export class MatchService {
     });
   }
 
-    private static getShipSet(factory: IShipFactory): Ship[] {
-        if (factory instanceof ObservingShipFactory) {
-            return [
-                factory.create(ShipClass.Carrier),             
-            ];
-        }
+  private static getShipSet(factory: IShipFactory): Ship[] {
     return [
       factory.create(ShipClass.Carrier),
       factory.create(ShipClass.Battleship),

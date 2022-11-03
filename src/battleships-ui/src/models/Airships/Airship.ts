@@ -6,18 +6,13 @@ export enum AirshipClass {
   Drone,
 }
 
-export abstract class Airship extends Vehicle implements Cloneable {
+export abstract class Airship extends Vehicle {
   readonly travelRadius!: number;
     readonly type!: AirshipClass;
     readonly ship!: Ship;
     constructor(ship: Ship) {
         super(ship.positionX, ship.positionY, ship.directionDegrees);
         this.ship = ship;
-    }
-    clone(): this {
-        const ret: this = Object.create(this.constructor.prototype);
-        Object.assign(ret, this);
-        return ret;
     }
 }
     
@@ -30,9 +25,3 @@ export class Drone extends Airship {
   readonly travelRadius = 4;
   readonly type = AirshipClass.Drone;
 }
-interface Cloneable {
-    clone(): this;
-}
-
-
-

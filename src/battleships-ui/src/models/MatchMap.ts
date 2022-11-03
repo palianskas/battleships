@@ -30,6 +30,3 @@ export class MapTile {
     this.y = y;
   }
 }
-const shallowCopy = <T>(obj: T): T => {
-    return Object.assign({}, obj);
-}

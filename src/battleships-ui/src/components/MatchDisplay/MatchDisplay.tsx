@@ -8,6 +8,12 @@ import { ModularShipPart } from '../../models/Ships/ShipPart';
 import ConnectionMediatorService, {
   MatchEventNames
 } from '../../services/ConnectionMediatorService/ConnectionMediatorService';
+<<<<<<< Updated upstream
+=======
+import AirshipFactory from '../../services/Factories/AirshipFactories/AirshipFactory';
+import ObservingShipFactory from '../../services/Factories/ShipFactories/ObservingShipFactory';
+import LoggerService, { PatternTypes } from '../../services/LoggerService/LoggerService';
+>>>>>>> Stashed changes
 import MatchProvider from '../../services/MatchProvider/MatchProvider';
 import { ArmorPiercingAttackStrategy } from '../../services/Strategies/AttackStrategies/ArmorPiercingAttackStrategy';
 import { IAttackStrategy } from '../../services/Strategies/AttackStrategies/AttackStrategies';
@@ -167,6 +173,7 @@ export default function MatchDisplay() {
     setRerenderToggle(Math.random());
   }
 
+<<<<<<< Updated upstream
   function getAttackStrategyByAmmo(ammoType: AmmoType): IAttackStrategy {
     const ammo = match.availableAmmoTypes.find(
       (ammo) => ammo.type === ammoType
@@ -188,6 +195,44 @@ export default function MatchDisplay() {
         return new DepthChargeAttackStrategy(ammo!.damage, ammo!.impactRadius);
     }
   }
+=======
+        switch (ammoType) {
+            case AmmoType.Classic:
+                return new ClassicAttackStrategy();
+            case AmmoType.Standard:
+                return new StandardAttackStrategy(ammo!.damage);
+            case AmmoType.ArmorPiercing:
+                return new ArmorPiercingAttackStrategy(ammo!.cooldown, ammo!.damage);
+            case AmmoType.HighExplosive:
+                return new HighExplosiveAttackStrategy(
+                    ammo!.damage,
+                    ammo!.impactRadius
+                );
+            case AmmoType.DepthCharge:
+                return new DepthChargeAttackStrategy(ammo!.damage, ammo!.impactRadius);
+        }
+    }
+    function onAddAirship(type: AirshipClass) {
+        const carrier = bluePlayer.ships.find(s => s.shipClass == ShipClass.Carrier) ?? ObservingShipFactory.Instance.create(ShipClass.Carrier);
+        let foundAirship: Airship | undefined;
+        if (type == AirshipClass.Plane) {
+            foundAirship = bluePlayer.airships.find(a => a.type == AirshipClass.Plane);
+        }
+        if (type == AirshipClass.Drone) {
+            foundAirship = bluePlayer.airships.find(a => a.type == AirshipClass.Drone);
+        }
+        if (!foundAirship) {
+            const factory = new AirshipFactory();
+            bluePlayer.airships = [...bluePlayer.airships, factory.create(carrier, type)]
+        }
+        else {
+            bluePlayer.airships = [...bluePlayer.airships, foundAirship.clone()]
+            var logger = LoggerService.Instance.getLogger(PatternTypes.Prototype);
+            logger.log('cloned from : ', foundAirship, 'clone:  ', foundAirship.clone(), 'is same object?' ,Object.is(foundAirship, foundAirship.clone()))
+        }
+    }
+
+>>>>>>> Stashed changes
 }
 
 export function matchLoader(): Match {
@@ -195,3 +240,4 @@ export function matchLoader(): Match {
 
   return match;
 }
+

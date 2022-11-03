@@ -14,6 +14,13 @@ export abstract class Airship extends Vehicle {
         super(ship.positionX, ship.positionY, ship.directionDegrees);
         this.ship = ship;
     }
+<<<<<<< Updated upstream
+=======
+    clone(): this {
+        const myDeepCopy = JSON.parse(JSON.stringify(this));
+        return myDeepCopy;
+    }
+>>>>>>> Stashed changes
 }
     
 export class Plane extends Airship {

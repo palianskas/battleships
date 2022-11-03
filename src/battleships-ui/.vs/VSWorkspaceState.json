@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\models",
+    "\\src\\models\\Airships",
+    "\\src\\services",
+    "\\src\\services\\Commands",
+    "\\src\\services\\ConnectionMediatorService",
+    "\\src\\services\\Factories",
+    "\\src\\services\\Factories\\ShipFactories",
+    "\\src\\services\\LoggerService"
+  ],
+  "SelectedNode": "\\src\\services\\ConnectionMediatorService\\ConnectionMediatorService.ts",
+  "PreviewInSolutionExplorer": false
+}

@@ -22,11 +22,15 @@ interface MapGridTileProps {
   isSelected: boolean;
 }
 
-export default function MapGrid({ player, selectedTile, onTileSelect }: MapGridProps) {
+export default function MapGrid({
+  player,
+  selectedTile,
+  onTileSelect,
+}: MapGridProps) {
   const isEnemyMap = player?.team == PlayerTeam.Red;
 
-  return (
-    (player ? <div className="w-100 d-flex justify-content-center">
+  return player ? (
+    <div className="w-100 d-flex justify-content-center">
       <div>
         {player.map.tiles.map((row, idxX) => (
           <div className="map-row" key={idxX}>
@@ -44,27 +48,33 @@ export default function MapGrid({ player, selectedTile, onTileSelect }: MapGridP
           </div>
         ))}
       </div>
-    </div> : <div>Disconnected</div> )
-
+    </div>
+  ) : (
+    <div>Disconnected</div>
   );
 }
 
-function MapGridTile({ tile, onTileSelect, isEnemyMap, isSelected }: MapGridTileProps) {
+function MapGridTile({
+  tile,
+  onTileSelect,
+  isEnemyMap,
+  isSelected,
+}: MapGridTileProps) {
   let shipPartHpString =
     tile.shipPart instanceof ModularShipPart && !isEnemyMap
       ? (tile.shipPart as ModularShipPart).hp.toString()
       : '';
 
-  if(isSelected){
+  if (isSelected) {
     tile = new SelectedTileDecorator(tile);
   }
-  if(tile.isShipPartDestroyed){
+  if (tile.isShipPartDestroyed) {
     tile = new DestroyedTileDecorator(tile);
   }
-  if(tile.shipPart){
+  if (tile.shipPart) {
     tile = new ShipPartTileDecorator(tile);
   }
-  if(tile.isAttacked){
+  if (tile.isAttacked) {
     tile = new AttackedTileDecorator(tile);
   }
 

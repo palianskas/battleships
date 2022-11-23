@@ -31,7 +31,7 @@ export class MapTile {
     this.y = y;
   }
 
-  getColor(){
+  getColor() {
     return TileColor.transparent;
   }
 }

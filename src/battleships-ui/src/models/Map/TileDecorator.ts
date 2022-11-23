@@ -16,4 +16,3 @@ export abstract class TileDecorator implements MapTile {
 
   abstract getColor(): TileColor;
 }
-

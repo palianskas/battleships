@@ -2,7 +2,7 @@ import { TileDecorator } from './TileDecorator';
 import { TileColor } from './TileColors';
 
 export class SelectedTileDecorator extends TileDecorator {
-  getColor(){
+  getColor() {
     return TileColor.grey;
   }
 }

@@ -10,9 +10,7 @@ export default class MatchProvider {
   }
 
   public static getPlayer(id: number) {
-    return this.Instance.match.players.find(
-      (player) => player.id === id
-    );
+    return this.Instance.match.players.find((player) => player.id === id);
   }
 
   public static get Instance(): MatchProvider {

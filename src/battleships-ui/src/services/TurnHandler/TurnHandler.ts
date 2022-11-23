@@ -53,7 +53,7 @@ export class AttackTurnHandler extends TurnHandler {
   protected getTurn(player: Player): PlayerTurn {
     return player.attackTurns[0];
   }
-  protected execute(turn: PlayerTurn, data: any): void {
+  protected execute(player: Player, turn: PlayerTurn, data: any): void {
     const { defencePlayerId, tile, ammoType } = data as AttackTurnEventProps;
 
     const defencePlayer = MatchProvider.getPlayer(defencePlayerId)!;

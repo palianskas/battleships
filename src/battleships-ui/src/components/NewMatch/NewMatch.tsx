@@ -5,7 +5,7 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import ConnectionMediatorService, {
   MatchEventNames,
 } from '../../services/ConnectionMediatorService/ConnectionMediatorService';
-import { PlayerService } from '../../services/PlayerService.ts/PlayerService';
+import { PlayerService } from '../../services/PlayerService/PlayerService';
 
 export default function NewMatch() {
   const navigate = useNavigate();

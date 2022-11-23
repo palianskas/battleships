@@ -8,7 +8,7 @@ import ConnectionMediatorService, {
   MatchEventNames,
 } from '../../../services/ConnectionMediatorService/ConnectionMediatorService';
 import { MatchService } from '../../../services/MatchService/MatchService';
-import { PlayerService } from '../../../services/PlayerService.ts/PlayerService';
+import { PlayerService } from '../../../services/PlayerService/PlayerService';
 import MatchSettingsConfig from '../MatchSettings/MatchSettings';
 
 export default function Pregame() {

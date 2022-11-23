@@ -5,6 +5,7 @@ import { Ammo, AmmoType } from '../../models/Ammo';
 import { Match } from '../../models/Match';
 import { MapTile } from '../../models/MatchMap';
 import { GameMode } from '../../models/MatchSettings';
+import { PlayerTeam } from '../../models/Player';
 import { ShipClass } from '../../models/Ships/ShipClass';
 import { ModularShipPart } from '../../models/Ships/ShipPart';
 import { ShipToStringAdapter } from '../../services/Adapter/ShipToStringAdapter';
@@ -23,6 +24,7 @@ import { ClassicAttackStrategy } from '../../services/Strategies/AttackStrategie
 import { DepthChargeAttackStrategy } from '../../services/Strategies/AttackStrategies/DepthChargeAttackStrategy';
 import { HighExplosiveAttackStrategy } from '../../services/Strategies/AttackStrategies/HighExplosiveAttackStrategy';
 import { StandardAttackStrategy } from '../../services/Strategies/AttackStrategies/StandardAttackStrategy';
+import { AttackTurnHandler } from '../../services/TurnHandler/TurnHandler';
 import AmmoRack from './AmmoRack/AmmoRack';
 import MapGrid from './MapGrid/MapGrid';
 
@@ -38,8 +40,10 @@ export default function MatchDisplay() {
   const [selectedTile, setSelectedTile] = useState<MapTile | null>(null);
 
   const match = MatchProvider.Instance.match;
-  const bluePlayer = match.players[0];
-  const redPlayer = match.players[1];
+  const bluePlayerIdx = match.players[0].team === PlayerTeam.Blue ? 0 : 1;
+  const redPlayerIdx = Math.abs(bluePlayerIdx - 1);
+  const bluePlayer = match.players[bluePlayerIdx];
+  const redPlayer = match.players[redPlayerIdx];
 
   useEffect(() => {
     // commented out while in dev
@@ -49,9 +53,15 @@ export default function MatchDisplay() {
     //   navigate(path);
     // }
 
+    const attackTurnHandler = new AttackTurnHandler(
+      getAttackStrategyByAmmo,
+      [(_) => rerender()],
+      [(_) => true]
+    );
+
     ConnectionMediatorService.Instance.addSingular(
       MatchEventNames.AttackPerformed,
-      handleAttackTurnEvent
+      attackTurnHandler.perform
     );
   }, []);
 
@@ -189,24 +199,6 @@ export default function MatchDisplay() {
     adapter.create();
   }
 
-  function handleAttackTurnEvent(data: any): void {
-    const { offencePlayerId, defencePlayerId, tile, ammoType } =
-      data as AttackTurnEventProps;
-
-    const offencePlayer = MatchProvider.getPlayer(offencePlayerId);
-    const defencePlayer = MatchProvider.getPlayer(defencePlayerId);
-
-    const turn = offencePlayer!.attackTurns[0];
-
-    const mapTile = defencePlayer!.map.tiles[tile.x][tile.y];
-
-    turn.attackStrategy = getAttackStrategyByAmmo(ammoType);
-
-    turn.attackStrategy.attack(mapTile, defencePlayer!.map);
-
-    setRerenderToggle(Math.random());
-  }
-
   function getAttackStrategyByAmmo(ammoType: AmmoType): IAttackStrategy {
     const ammo = match.availableAmmoTypes.find(
       (ammo) => ammo.type === ammoType
@@ -262,6 +254,10 @@ export default function MatchDisplay() {
         Object.is(foundAirship, foundAirship.clone())
       );
     }
+  }
+
+  function rerender(): void {
+    setRerenderToggle(Math.random() * 100);
   }
 }
 

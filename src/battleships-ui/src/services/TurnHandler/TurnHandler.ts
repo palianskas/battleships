@@ -64,6 +64,8 @@ export class AttackTurnHandler extends TurnHandler {
     attackTurn.attackStrategy.attack(mapTile, defencePlayer.map);
   }
   protected subtractTurn(player: Player): void {
+    return; // TODO: implement turns
+
     if (player.attackTurns.length > 0) {
       player.attackTurns.shift();
     } else {

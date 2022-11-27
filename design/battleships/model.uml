@@ -241,6 +241,7 @@
       <ownedEnd xmi:type="uml:Property" xmi:id="_6jcV40TIEe27rv1zb77HhA" name="matchsettings" type="_08q6oETIEe27rv1zb77HhA" association="_6jcV4ETIEe27rv1zb77HhA"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_0yOoYETMEe27rv1zb77HhA" name="MovementTurn">
+      <generalization xmi:type="uml:Generalization" xmi:id="_gFNtIG5VEe20wvk3qqtsBQ" general="_cUaVAG5VEe20wvk3qqtsBQ"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_87aWAETMEe27rv1zb77HhA" name="isDisabled">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedAttribute>
@@ -249,6 +250,7 @@
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_2w0cAETMEe27rv1zb77HhA" name="AttackTurn">
+      <generalization xmi:type="uml:Generalization" xmi:id="_gcxRgG5VEe20wvk3qqtsBQ" general="_cUaVAG5VEe20wvk3qqtsBQ"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_u5P3kE-oEe297sxi5mTzYA" name="attackStrategy" type="_QUI5EE7wEe2G5_JTnjT6tw"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_CH7eMETNEe27rv1zb77HhA" memberEnd="_CH8sUETNEe27rv1zb77HhA _CH8sU0TNEe27rv1zb77HhA" navigableOwnedEnd="_CH8sUETNEe27rv1zb77HhA">
@@ -694,6 +696,13 @@
     <packagedElement xmi:type="uml:Dependency" xmi:id="_t1xywE-EEe297sxi5mTzYA" client="_J10ykE-EEe297sxi5mTzYA" supplier="_kUI6wETLEe27rv1zb77HhA"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_uJCF8E-EEe297sxi5mTzYA" client="_RUFT4E-EEe297sxi5mTzYA" supplier="_kUI6wETLEe27rv1zb77HhA"/>
     <packagedElement xmi:type="uml:Package" xmi:id="_PYlwME-HEe297sxi5mTzYA" name="patterns">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_XrSi4G5XEe20wvk3qqtsBQ">
+        <body>Before&#xD;
+</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_ZXaGcG5XEe20wvk3qqtsBQ">
+        <body>After</body>
+      </ownedComment>
       <packagedElement xmi:type="uml:Interaction" xmi:id="_pgLAcE-wEe297sxi5mTzYA" name="Interaction1">
         <ownedAttribute xmi:type="uml:Property" xmi:id="_wU6DoE-wEe297sxi5mTzYA" name="" type="_AmYUAEfPEe2SLYkSMgTh1A"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_wq0CMU-wEe297sxi5mTzYA" name="" type="_No2EwEfPEe2SLYkSMgTh1A"/>
@@ -740,6 +749,137 @@
         <message xmi:type="uml:Message" xmi:id="_LcN14E-2Ee297sxi5mTzYA" name="constructor" messageSort="createMessage" receiveEvent="_LcOc8U-2Ee297sxi5mTzYA" sendEvent="_LcOc8E-2Ee297sxi5mTzYA">
           <argument xmi:type="uml:Expression" xmi:id="_PBfTcE-2Ee297sxi5mTzYA" name="action" type="_cGG_kEfPEe2SLYkSMgTh1A"/>
         </message>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_EuE84G5VEe20wvk3qqtsBQ" name="MatchDisplay">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_EuE84W5VEe20wvk3qqtsBQ" name="onAmmoSelect">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_EuE84m5VEe20wvk3qqtsBQ" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_EuE8425VEe20wvk3qqtsBQ" name="onAttackTurnTargetTileSelect">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_EuE85G5VEe20wvk3qqtsBQ" name="tile" type="_vGAioEpBEe2Zp75EuR3hWg"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_EuE85W5VEe20wvk3qqtsBQ" name="onOwnTileSelect"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_EuE85m5VEe20wvk3qqtsBQ" name="onAttack"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_EuE8525VEe20wvk3qqtsBQ" name="handleAttackTurnEvent">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_EuE86G5VEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_EuE86W5VEe20wvk3qqtsBQ" name="getAttackStrategyByAmmo">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_EuE86m5VEe20wvk3qqtsBQ" name="ammoType" type="_VexUoEo_Ee2Zp75EuR3hWg"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_EuE8625VEe20wvk3qqtsBQ" name="strategy" type="_QUI5EE7wEe2G5_JTnjT6tw" direction="out"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_PMe1cG5VEe20wvk3qqtsBQ" name="MatchDisplay">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_PMe1cW5VEe20wvk3qqtsBQ" name="onAmmoSelect">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_PMe1cm5VEe20wvk3qqtsBQ" name="ammo" type="_L7oz8ETNEe27rv1zb77HhA"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_PMe1c25VEe20wvk3qqtsBQ" name="onAttackTurnTargetTileSelect">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_PMe1dG5VEe20wvk3qqtsBQ" name="tile" type="_vGAioEpBEe2Zp75EuR3hWg"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_PMe1dW5VEe20wvk3qqtsBQ" name="onOwnTileSelect"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_PMe1dm5VEe20wvk3qqtsBQ" name="onAttack"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_PMe1d25VEe20wvk3qqtsBQ" name="handleAttackTurnEvent">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_PMe1eG5VEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_PMe1eW5VEe20wvk3qqtsBQ" name="getAttackStrategyByAmmo">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_PMe1em5VEe20wvk3qqtsBQ" name="ammoType" type="_VexUoEo_Ee2Zp75EuR3hWg"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_PMe1e25VEe20wvk3qqtsBQ" name="strategy" type="_QUI5EE7wEe2G5_JTnjT6tw" direction="out"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_nAO-gG5VEe20wvk3qqtsBQ" name="TurnHandler" visibility="public" isAbstract="true">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_gqQecG5WEe20wvk3qqtsBQ" name="postOperations" type="_cGG_kEfPEe2SLYkSMgTh1A">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JzMxsG5XEe20wvk3qqtsBQ"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JzfsoG5XEe20wvk3qqtsBQ" value="*"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_igFXoG5WEe20wvk3qqtsBQ" name="postOperationHooks" type="_cGG_kEfPEe2SLYkSMgTh1A">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LVm_oG5XEe20wvk3qqtsBQ"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LV5TgG5XEe20wvk3qqtsBQ" value="*"/>
+        </ownedAttribute>
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_vi2f0G5VEe20wvk3qqtsBQ" client="_nAO-gG5VEe20wvk3qqtsBQ" supplier="_p6X0YG5VEe20wvk3qqtsBQ" contract="_p6X0YG5VEe20wvk3qqtsBQ"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_6Z6wAG5VEe20wvk3qqtsBQ" name="perform">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_6Z6wAW5VEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_HpOp8G5WEe20wvk3qqtsBQ" name="getPlayer" isAbstract="true">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_HpOp8W5WEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_HpOp8m5WEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_KVYuMG5WEe20wvk3qqtsBQ" name="getTurn" isAbstract="true">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_KVYuMm5WEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_KVYuMW5WEe20wvk3qqtsBQ" name="turn" type="_cUaVAG5VEe20wvk3qqtsBQ" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_RYMpoG5WEe20wvk3qqtsBQ" name="execute" isAbstract="true">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_RYMpoW5WEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_RYMpom5WEe20wvk3qqtsBQ" name="turn" type="_cUaVAG5VEe20wvk3qqtsBQ"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_UTjngG5WEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_YAyHMG5WEe20wvk3qqtsBQ" name="subtractTurn" isAbstract="true">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_YAyHMW5WEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_p6X0YG5VEe20wvk3qqtsBQ" name="ITurnHandler">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_tz0LIG5VEe20wvk3qqtsBQ" name="perform">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_tz0LIW5VEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_tkvX4G5WEe20wvk3qqtsBQ" name="AttackTurnHandler">
+        <generalization xmi:type="uml:Generalization" xmi:id="_v_lpsG5WEe20wvk3qqtsBQ" general="_nAO-gG5VEe20wvk3qqtsBQ"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_5ftVEG5WEe20wvk3qqtsBQ" name="resolveAttackStrategy" visibility="private">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_5ftVEW5WEe20wvk3qqtsBQ" name="ammoType" type="_VexUoEo_Ee2Zp75EuR3hWg"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_5ftVEm5WEe20wvk3qqtsBQ" name="strategy" type="_QUI5EE7wEe2G5_JTnjT6tw" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_Ek5g0G5XEe20wvk3qqtsBQ" name="getPlayer">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_Ek5g0W5XEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_Ek5g0m5XEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_FvlLQG5XEe20wvk3qqtsBQ" name="execute">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_FvlLQW5XEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_FvlLQm5XEe20wvk3qqtsBQ" name="turn" type="_cUaVAG5VEe20wvk3qqtsBQ"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_FvlLQ25XEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_FvmZYG5XEe20wvk3qqtsBQ" name="subtractTurn">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_FvmZYW5XEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_FvnngG5XEe20wvk3qqtsBQ" name="getTurn">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_FvnngW5XEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_Fvnngm5XEe20wvk3qqtsBQ" name="turn" type="_cUaVAG5VEe20wvk3qqtsBQ" direction="return"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_MyWDYG5XEe20wvk3qqtsBQ" name="MovementTurnHandler">
+        <generalization xmi:type="uml:Generalization" xmi:id="_MyWDYW5XEe20wvk3qqtsBQ" general="_nAO-gG5VEe20wvk3qqtsBQ"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_MyWDZW5XEe20wvk3qqtsBQ" name="getPlayer">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_MyWDZm5XEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_MyWDZ25XEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_MyWDaG5XEe20wvk3qqtsBQ" name="execute">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_MyWDaW5XEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_MyWDam5XEe20wvk3qqtsBQ" name="turn" type="_cUaVAG5VEe20wvk3qqtsBQ"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_MyWDa25XEe20wvk3qqtsBQ" name="data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_MyWDbG5XEe20wvk3qqtsBQ" name="subtractTurn">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_MyWDbW5XEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_MyWDbm5XEe20wvk3qqtsBQ" name="getTurn">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_MyWDb25XEe20wvk3qqtsBQ" name="player" type="_Jl-WYETIEe27rv1zb77HhA"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_MyWDcG5XEe20wvk3qqtsBQ" name="turn" type="_cUaVAG5VEe20wvk3qqtsBQ" direction="return"/>
+        </ownedOperation>
       </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_vPuIwE-mEe297sxi5mTzYA" name="MatchService">
@@ -797,6 +937,9 @@
       <ownedEnd xmi:type="uml:Property" xmi:id="_iSOsglu4Ee2NIKDFAE6egA" name="airship" type="_PHZJ0ETDEe27rv1zb77HhA" association="_iSNeYFu4Ee2NIKDFAE6egA"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Interface" xmi:id="_xM8i4Fu5Ee2NIKDFAE6egA" name="ICloneable"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_cUaVAG5VEe20wvk3qqtsBQ" name="PlayerTurn" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_dtMa8G5XEe20wvk3qqtsBQ" client="_RUFT4E-EEe297sxi5mTzYA" supplier="_tkvX4G5WEe20wvk3qqtsBQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_t8tWgG5XEe20wvk3qqtsBQ" client="_RUFT4E-EEe297sxi5mTzYA" supplier="_MyWDYG5XEe20wvk3qqtsBQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_jbQRMEPqEe26Q_q4HjD8wQ" name="use case diagram"/>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_6FrDgETCEe27rv1zb77HhA">

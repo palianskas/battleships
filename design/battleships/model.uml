@@ -942,6 +942,32 @@
     <packagedElement xmi:type="uml:Dependency" xmi:id="_t8tWgG5XEe20wvk3qqtsBQ" client="_RUFT4E-EEe297sxi5mTzYA" supplier="_MyWDYG5XEe20wvk3qqtsBQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_jbQRMEPqEe26Q_q4HjD8wQ" name="use case diagram"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_W1cg0HV6Ee2ggqz0hPIOvA" name="state diagrams">
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="_mT2IgHV6Ee2ggqz0hPIOvA" name="Match states">
+      <region xmi:type="uml:Region" xmi:id="_mqCa8HV6Ee2ggqz0hPIOvA" name="Region1">
+        <transition xmi:type="uml:Transition" xmi:id="_4hknwHV7Ee2ggqz0hPIOvA" name="Player joins" source="_-fd_AHV6Ee2ggqz0hPIOvA" target="_3th7sHV7Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_LxickHV8Ee2ggqz0hPIOvA" name="Second player joins" source="_3th7sHV7Ee2ggqz0hPIOvA" target="_G5GG8HV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_kT-QkHV8Ee2ggqz0hPIOvA" name="Settings submitted" source="_G5GG8HV8Ee2ggqz0hPIOvA" target="_eQBKEHV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_rUVU8HV8Ee2ggqz0hPIOvA" name="True" source="_eQBKEHV8Ee2ggqz0hPIOvA" target="_ZAuasHV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_0eRU8HV8Ee2ggqz0hPIOvA" name="False" source="_eQBKEHV8Ee2ggqz0hPIOvA" target="_TqvNcHV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_6qwsYHV8Ee2ggqz0hPIOvA" name="Enemy turn finished" source="_ZAuasHV8Ee2ggqz0hPIOvA" target="_TqvNcHV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_CLq5EHV9Ee2ggqz0hPIOvA" name="Player turn finished" source="_TqvNcHV8Ee2ggqz0hPIOvA" target="_ZAuasHV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_Hm4vIHV-Ee2ggqz0hPIOvA" name="All player ships destroyed" source="_ZAuasHV8Ee2ggqz0hPIOvA" target="_EEDhkHV-Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_IPnjEHV-Ee2ggqz0hPIOvA" name="All enemy player ships destroyed" source="_TqvNcHV8Ee2ggqz0hPIOvA" target="_EEDhkHV-Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_TwFVkHV-Ee2ggqz0hPIOvA" source="_EEDhkHV-Ee2ggqz0hPIOvA" target="_OnBKAHV-Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_ZAamwHV-Ee2ggqz0hPIOvA" name="Both players exit" source="_OnBKAHV-Ee2ggqz0hPIOvA" target="_YApL0HV-Ee2ggqz0hPIOvA"/>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_-fd_AHV6Ee2ggqz0hPIOvA" name=""/>
+        <subvertex xmi:type="uml:State" xmi:id="_3th7sHV7Ee2ggqz0hPIOvA" name="Matchmaking"/>
+        <subvertex xmi:type="uml:State" xmi:id="_G5GG8HV8Ee2ggqz0hPIOvA" name="Match settings setup"/>
+        <subvertex xmi:type="uml:State" xmi:id="_TqvNcHV8Ee2ggqz0hPIOvA" name="Player turn"/>
+        <subvertex xmi:type="uml:State" xmi:id="_ZAuasHV8Ee2ggqz0hPIOvA" name="Enemy turn"/>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_eQBKEHV8Ee2ggqz0hPIOvA" name="First turn assigned to enemy" kind="choice"/>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_EEDhkHV-Ee2ggqz0hPIOvA" name="" kind="junction"/>
+        <subvertex xmi:type="uml:State" xmi:id="_OnBKAHV-Ee2ggqz0hPIOvA" name="Match finished"/>
+        <subvertex xmi:type="uml:FinalState" xmi:id="_YApL0HV-Ee2ggqz0hPIOvA"/>
+      </region>
+    </packagedElement>
+  </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_6FrDgETCEe27rv1zb77HhA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_6FrqkETCEe27rv1zb77HhA" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>

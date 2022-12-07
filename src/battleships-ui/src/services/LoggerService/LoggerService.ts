@@ -11,6 +11,9 @@ export enum PatternTypes {
   Command,
   Facade,
   Bridge,
+  Template,
+  State,
+  Interpreter,
 }
 
 export default class LoggerService {

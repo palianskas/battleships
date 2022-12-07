@@ -20,7 +20,7 @@ export default function LoggerConfig() {
 
   return (
     <div className="logger-config-body vw-100 d-flex justify-content-center align-items-center">
-      <div className="container d-flex flex-row justify-content-between">
+      <div className="container d-flex flex-row justify-content-between m-5">
         {patterns.map((pattern, idx) => (
           <div className="d-flex border border-dark rounded p-1 m-1 " key={idx}>
             <span className="m-1">{PatternTypes[pattern]}</span>

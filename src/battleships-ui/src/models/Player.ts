@@ -27,7 +27,7 @@ export class Player {
     this.ships = object.ships ?? [];
     this.airships = object.airships ?? [];
     this.map = new MatchMap();
-    this.attackTurns = [new AttackTurn(), new AttackTurn()];
+    this.attackTurns = [];
   }
 
   static mapList(objects?: Partial<Player>[]): Player[] {

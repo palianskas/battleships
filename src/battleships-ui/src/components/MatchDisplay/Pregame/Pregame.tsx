@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/esm/Button';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Match } from '../../../models/Match';
 import MatchSettings from '../../../models/MatchSettings';
-import { Player } from '../../../models/Player';
+import { Player, PlayerTeam } from '../../../models/Player';
+import { AttackTurn } from '../../../models/Turns/AttackTurn';
 import ConnectionMediatorService, {
   MatchEventNames,
 } from '../../../services/ConnectionMediatorService/ConnectionMediatorService';
@@ -11,32 +12,45 @@ import { MatchService } from '../../../services/MatchService/MatchService';
 import { PlayerService } from '../../../services/PlayerService/PlayerService';
 import MatchSettingsConfig from '../MatchSettings/MatchSettings';
 
+interface FirstTurnClaimProps {
+  playerId: number;
+  claimStrength: number;
+}
+
 export default function Pregame() {
   const navigate = useNavigate();
 
   const match = useLoaderData() as Match;
 
-  const [rerenderToggle, setRerenderToggle] = useState(false);
+  let firstTurnClaimStrength: number;
+
+  const [_, setRerenderToggle] = useState(0);
   const [readyPlayerIds, setReadyPlayerIds] = useState([] as number[]);
 
   useEffect(() => {
-    ConnectionMediatorService.Instance.add(
+    ConnectionMediatorService.Instance.addSingular(
       MatchEventNames.PlayerJoined,
       handlePlayerJoinedEvent
     );
-    ConnectionMediatorService.Instance.add(
-      MatchEventNames.SecondPlayerConfirmation,
+    ConnectionMediatorService.Instance.addSingular(
+      MatchEventNames.SecondPlayerJoinedConfirmation,
       handlePlayerJoinedEvent
     );
-    ConnectionMediatorService.Instance.add(
+    ConnectionMediatorService.Instance.addSingular(
       MatchEventNames.PlayerUpdatedMatchSettings,
       handleMatchSettingsChangedEvent
     );
-    ConnectionMediatorService.Instance.add(
-      MatchEventNames.PlayerStartedMatch,
-      handlePlayerStartedMatchEvent
+    ConnectionMediatorService.Instance.addSingular(
+      MatchEventNames.PlayerLockedInSettings,
+      handlePlayerLockedInSettingsEvent
     );
-  });
+    ConnectionMediatorService.Instance.addSingular(
+      MatchEventNames.PlayerFirstTurnClaim,
+      handleFirstTurnClaimEvent
+    );
+
+    firstTurnClaimStrength = Math.random();
+  }, []);
 
   return (
     <div className="container">
@@ -73,7 +87,7 @@ export default function Pregame() {
     const currentPlayer = PlayerService.getFromSessionStorage();
 
     ConnectionMediatorService.Instance.sendEvent(
-      MatchEventNames.PlayerStartedMatch,
+      MatchEventNames.PlayerLockedInSettings,
       { player: currentPlayer }
     );
   }
@@ -102,12 +116,12 @@ export default function Pregame() {
 
     if (currentPlayer != null) {
       ConnectionMediatorService.Instance.sendEvent(
-        MatchEventNames.SecondPlayerConfirmation,
+        MatchEventNames.SecondPlayerJoinedConfirmation,
         { player: currentPlayer }
       );
     }
 
-    setRerenderToggle(!rerenderToggle);
+    setRerenderToggle(Math.random());
   }
 
   function handleAddCurrentPlayer(player: Player) {
@@ -121,24 +135,68 @@ export default function Pregame() {
 
     match.settings = data.matchSettings;
 
-    setRerenderToggle(!rerenderToggle);
+    setRerenderToggle(Math.random());
   }
 
-  function handlePlayerStartedMatchEvent(data: any): void {
+  function handlePlayerLockedInSettingsEvent(data: any): void {
     const player = (data as { player: Player }).player;
 
     if (!readyPlayerIds.some((id) => id === player.id)) {
-      setReadyPlayerIds([...readyPlayerIds, player.id]);
+      readyPlayerIds.push(player.id);
+      setReadyPlayerIds([...readyPlayerIds]);
 
       // check if length > 0 because value will change only after re-rendering
-      if (readyPlayerIds.length > 0 && match.isPregame) {
+      if (readyPlayerIds.length > 1 && match.isPregame) {
         match.isPregame = false;
 
         MatchService.initMatchPlayerVehicles();
         MatchService.initMatchAvailableAmmo();
 
-        navigate('/match');
+        ConnectionMediatorService.Instance.sendEvent(
+          MatchEventNames.MatchStarted
+        );
+
+        submitFirstTurnClaim();
       }
     }
+  }
+
+  function handleFirstTurnClaimEvent(eventData: any): void {
+    const data = eventData as FirstTurnClaimProps;
+
+    const currentPlayer = match.players.find(
+      (player) => player.team == PlayerTeam.Blue
+    )!;
+    const enemyPlayer = match.players.find(
+      (player) => player.team == PlayerTeam.Red
+    )!;
+
+    if (data.playerId != currentPlayer.id) {
+      if (data.claimStrength > firstTurnClaimStrength) {
+        enemyPlayer.attackTurns.push(new AttackTurn());
+      } else {
+        currentPlayer.attackTurns.push(new AttackTurn());
+      }
+
+      beginMatch();
+    }
+  }
+
+  function submitFirstTurnClaim(): void {
+    const currentPlayer = PlayerService.getFromSessionStorage()!;
+
+    const data = {
+      playerId: currentPlayer?.id,
+      claimStrength: firstTurnClaimStrength,
+    } as FirstTurnClaimProps;
+
+    ConnectionMediatorService.Instance.sendEvent(
+      MatchEventNames.PlayerFirstTurnClaim,
+      data
+    );
+  }
+
+  function beginMatch(): void {
+    navigate('/match');
   }
 }

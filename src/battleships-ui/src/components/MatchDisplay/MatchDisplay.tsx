@@ -28,13 +28,6 @@ import { AttackTurnHandler } from '../../services/TurnHandler/TurnHandler';
 import AmmoRack from './AmmoRack/AmmoRack';
 import MapGrid from './MapGrid/MapGrid';
 
-interface AttackTurnEventProps {
-  offencePlayerId: number;
-  defencePlayerId: number;
-  tile: MapTile;
-  ammoType: AmmoType;
-}
-
 export default function MatchDisplay() {
   const [rerenderToggle, setRerenderToggle] = useState(0);
   const [selectedTile, setSelectedTile] = useState<MapTile | null>(null);
@@ -106,7 +99,7 @@ export default function MatchDisplay() {
         <div className="w-100 mt-3 d-flex justify-content-center">
           <Button
             size="lg"
-            disabled={!selectedTile}
+            disabled={!selectedTile || bluePlayer.attackTurns.length < 1}
             variant="danger"
             onClick={() => onAttack()}
           >
@@ -161,6 +154,11 @@ export default function MatchDisplay() {
   }
 
   function onAttackTurnTargetTileSelect(tile: MapTile): void {
+    if (bluePlayer.attackTurns.length < 1) {
+      console.error('No attack turns left!');
+      return;
+    }
+
     const turn = bluePlayer.attackTurns[0];
     setSelectedTile(tile);
 
@@ -171,15 +169,14 @@ export default function MatchDisplay() {
     const turn = bluePlayer.attackTurns[0];
     setSelectedTile(null);
     turn.tile = undefined!;
-
-    console.log('Cannot attack own ships!');
+    console.error('Cannot attack own ships!');
   }
 
   function onAttack(): void {
     const turn = bluePlayer.attackTurns[0];
 
     if (!turn.tile || !turn.ammo) {
-      console.log('Select ammo and sector to attack first!');
+      console.error('Select ammo and sector to attack first!');
 
       return;
     }

@@ -35,13 +35,13 @@ describe('sendEvent(event, data)', () => {
     { event: MatchEventNames.MatchCreated, data: { data: 'data 2' } },
     { event: MatchEventNames.NewMatch, data: { data: 'data 3' } },
     { event: MatchEventNames.PlayerJoined, data: { data: 'data 4' } },
-    { event: MatchEventNames.PlayerStartedMatch, data: { data: 'data 5' } },
+    { event: MatchEventNames.PlayerLockedInSettings, data: { data: 'data 5' } },
     {
       event: MatchEventNames.PlayerUpdatedMatchSettings,
       data: { data: 'data 6' },
     },
     {
-      event: MatchEventNames.SecondPlayerConfirmation,
+      event: MatchEventNames.SecondPlayerJoinedConfirmation,
       data: { data: 'data 7' },
     },
   ])('Should received propagated events with data', ({ event, data }) => {

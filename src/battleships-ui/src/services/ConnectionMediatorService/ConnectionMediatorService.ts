@@ -5,17 +5,29 @@ import {
 } from '@microsoft/signalr';
 import LoggerService, { PatternTypes } from '../LoggerService/LoggerService';
 import MatchEventsSubject from '../Observers/MatchEventsObserver/MatchEventsSubject';
+import {
+  IStateContext,
+  IStateEventHandler,
+  MatchSettingsStateEventHandler,
+  NewMatchStateEventHandler,
+  PlayerTurnStateEventHandler,
+} from './MatchStateEventHandler/MatchStateEventHandler';
 
 const HUB_ENDPOINT_URL = 'match-event-hub/';
 
-export default class ConnectionMediatorService extends MatchEventsSubject {
+export default class ConnectionMediatorService
+  extends MatchEventsSubject
+  implements IStateContext
+{
   private _connection: HubConnection;
+  private _statefulEventHandler: IStateEventHandler;
 
   private static _instance: ConnectionMediatorService;
 
-  private static logger = LoggerService.Instance.getLogger(
+  private static _loggerSingleton = LoggerService.Instance.getLogger(
     PatternTypes.Singleton
   );
+  private _loggerState = LoggerService.Instance.getLogger(PatternTypes.State);
 
   private constructor() {
     super();
@@ -37,10 +49,30 @@ export default class ConnectionMediatorService extends MatchEventsSubject {
     this._connection.on('ReceiveEvent', (event: MatchEventNames, data: any) => {
       this.notify(event, data);
     });
+
+    this._statefulEventHandler = new NewMatchStateEventHandler(
+      this,
+      this.getEventSenderFunc()
+    );
+
+    this.initStateTransitionObservers();
+  }
+
+  setStatefulEventHandler(statefulEventHandler: IStateEventHandler): void {
+    this._loggerState.log(
+      `State transition FROM ${this._statefulEventHandler.getName()} TO ${statefulEventHandler.getName()}`
+    );
+
+    if (this._statefulEventHandler.isTransitionPossible(statefulEventHandler)) {
+      this._loggerState.log('State transition SUCCESSFUL');
+      this._statefulEventHandler = statefulEventHandler;
+    } else {
+      this._loggerState.log('State transition FAILED');
+    }
   }
 
   public static get Instance(): ConnectionMediatorService {
-    this.logger.log(
+    this._loggerSingleton.log(
       `Singleton ConnectionMediatorService getting ${
         !this._instance ? 'NEW' : 'EXISTING'
       } instance`
@@ -55,9 +87,30 @@ export default class ConnectionMediatorService extends MatchEventsSubject {
     await this.handleSendEvent(event, data);
   }
 
+  private initStateTransitionObservers(): void {
+    this.addSingular(MatchEventNames.SecondPlayerJoinedConfirmation, (_) => {
+      this.setStatefulEventHandler(
+        new MatchSettingsStateEventHandler(this, this.getEventSenderFunc())
+      );
+    });
+    this.addSingular(MatchEventNames.MatchStarted, (_) => {
+      this.setStatefulEventHandler(
+        new PlayerTurnStateEventHandler(this, this.getEventSenderFunc())
+      );
+    });
+  }
+
+  private getEventSenderFunc(): (
+    event: MatchEventNames,
+    data: any
+  ) => Promise<void> {
+    return (event: MatchEventNames, data: any) =>
+      this._connection.send('PropagateEvent', event, data);
+  }
+
   private async handleSendEvent(event: MatchEventNames, data: any = {}) {
     try {
-      await this._connection.send('PropagateEvent', event, data);
+      await this._statefulEventHandler.sendEvent(event, data);
     } catch (err) {
       setTimeout(() => this.sendEvent(event, data), 1000);
     }
@@ -76,8 +129,10 @@ export enum MatchEventNames {
   NewMatch,
   MatchCreated,
   PlayerJoined,
-  SecondPlayerConfirmation,
-  PlayerStartedMatch,
+  SecondPlayerJoinedConfirmation,
+  PlayerLockedInSettings,
   PlayerUpdatedMatchSettings,
   AttackPerformed,
+  MatchStarted,
+  PlayerFirstTurnClaim,
 }

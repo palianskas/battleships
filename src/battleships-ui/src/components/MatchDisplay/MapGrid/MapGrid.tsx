@@ -71,7 +71,7 @@ function MapGridTile({
   if (tile.isShipPartDestroyed) {
     tile = new DestroyedTileDecorator(tile);
   }
-  if (tile.shipPart) {
+  if (!isEnemyMap && tile.shipPart) {
     tile = new ShipPartTileDecorator(tile);
   }
   if (tile.isAttacked) {

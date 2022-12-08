@@ -28,19 +28,19 @@ export default function Pregame() {
   const [readyPlayerIds, setReadyPlayerIds] = useState([] as number[]);
 
   useEffect(() => {
-    ConnectionMediatorService.Instance.addSingular(
+    ConnectionMediatorService.Instance.add(
       MatchEventNames.PlayerJoined,
       handlePlayerJoinedEvent
     );
-    ConnectionMediatorService.Instance.addSingular(
+    ConnectionMediatorService.Instance.add(
       MatchEventNames.SecondPlayerJoinedConfirmation,
       handlePlayerJoinedEvent
     );
-    ConnectionMediatorService.Instance.addSingular(
+    ConnectionMediatorService.Instance.add(
       MatchEventNames.PlayerUpdatedMatchSettings,
       handleMatchSettingsChangedEvent
     );
-    ConnectionMediatorService.Instance.addSingular(
+    ConnectionMediatorService.Instance.add(
       MatchEventNames.PlayerLockedInSettings,
       handlePlayerLockedInSettingsEvent
     );

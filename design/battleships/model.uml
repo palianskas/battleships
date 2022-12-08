@@ -355,7 +355,8 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_kUI6wETLEe27rv1zb77HhA" name="ConnectionMediatorService" visibility="public">
       <generalization xmi:type="uml:Generalization" xmi:id="_v1PnMEfQEe2SLYkSMgTh1A" general="_AmYUAEfPEe2SLYkSMgTh1A"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_n1HHIETLEe27rv1zb77HhA" name="_instance" visibility="private" type="_kUI6wETLEe27rv1zb77HhA"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_YRTjI0fNEe2SLYkSMgTh1A" name="Instance" type="_kUI6wETLEe27rv1zb77HhA" association="_YRTjIEfNEe2SLYkSMgTh1A"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_iy-E0HcREe2nmrtQ6XcJKQ" name="_statefulEventHandler" visibility="private" type="_OT1joHcQEe2nmrtQ6XcJKQ"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_l18RIHcSEe2nmrtQ6XcJKQ" client="_kUI6wETLEe27rv1zb77HhA" supplier="_OT1joHcQEe2nmrtQ6XcJKQ" contract="_OT1joHcQEe2nmrtQ6XcJKQ"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_BuYLMETMEe27rv1zb77HhA" name="constructor" visibility="private"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_A1x6kEfSEe2SLYkSMgTh1A" name="sendEvent" concurrency="concurrent">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_ELTr8EfSEe2SLYkSMgTh1A" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
@@ -363,12 +364,14 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </ownedParameter>
       </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_5hgSQHcREe2nmrtQ6XcJKQ" name="initStateTransitionObservers" visibility="private"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Association" xmi:id="_YRTjIEfNEe2SLYkSMgTh1A" memberEnd="_YRTjI0fNEe2SLYkSMgTh1A _YRXNgEfNEe2SLYkSMgTh1A">
+    <packagedElement xmi:type="uml:Association" xmi:id="_YRTjIEfNEe2SLYkSMgTh1A" memberEnd="_YRTjI0fNEe2SLYkSMgTh1A _YRXNgEfNEe2SLYkSMgTh1A" navigableOwnedEnd="_YRTjI0fNEe2SLYkSMgTh1A">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_YRTjIUfNEe2SLYkSMgTh1A" source="org.eclipse.papyrus">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YRTjIkfNEe2SLYkSMgTh1A" key="nature" value="UML_Nature"/>
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_YRXNgEfNEe2SLYkSMgTh1A" type="_kUI6wETLEe27rv1zb77HhA" association="_YRTjIEfNEe2SLYkSMgTh1A"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_YRTjI0fNEe2SLYkSMgTh1A" name="Instance" type="_kUI6wETLEe27rv1zb77HhA" association="_YRTjIEfNEe2SLYkSMgTh1A"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_QofiMEfOEe2SLYkSMgTh1A" name="MatchEventNames">
       <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_USkAMEfOEe2SLYkSMgTh1A" name="NewMatch"/>
@@ -940,6 +943,151 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_cUaVAG5VEe20wvk3qqtsBQ" name="PlayerTurn" isAbstract="true"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_dtMa8G5XEe20wvk3qqtsBQ" client="_RUFT4E-EEe297sxi5mTzYA" supplier="_tkvX4G5WEe20wvk3qqtsBQ"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_t8tWgG5XEe20wvk3qqtsBQ" client="_RUFT4E-EEe297sxi5mTzYA" supplier="_MyWDYG5XEe20wvk3qqtsBQ"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_G8vaQHcQEe2nmrtQ6XcJKQ" name="MatchStateEventHandler" isAbstract="true">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ruGCMHcQEe2nmrtQ6XcJKQ" name="_context" visibility="protected" type="_OT1joHcQEe2nmrtQ6XcJKQ"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_uG_zQHcQEe2nmrtQ6XcJKQ" name="_sendFunction" visibility="private" type="_cGG_kEfPEe2SLYkSMgTh1A"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_ySHI0HcQEe2nmrtQ6XcJKQ" client="_G8vaQHcQEe2nmrtQ6XcJKQ" supplier="_SQrzsHcQEe2nmrtQ6XcJKQ" contract="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2C7IAHcQEe2nmrtQ6XcJKQ" name="sendEvent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_2C7IAXcQEe2nmrtQ6XcJKQ" name="event">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_2C7IAncQEe2nmrtQ6XcJKQ" name="data">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2C8WIHcQEe2nmrtQ6XcJKQ" name="isTransitionPossible" isAbstract="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_2C8WIXcQEe2nmrtQ6XcJKQ" name="next" type="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_2C8WIncQEe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2C89MHcQEe2nmrtQ6XcJKQ" name="getName" isAbstract="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_2C89MXcQEe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7hiFwHcQEe2nmrtQ6XcJKQ" name="isEventAllowed" isAbstract="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_7hiFwXcQEe2nmrtQ6XcJKQ" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_OT1joHcQEe2nmrtQ6XcJKQ" name="IStateContext">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RqWMcHcQEe2nmrtQ6XcJKQ" name="setStatefulEventHandler">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_jZDC0HcQEe2nmrtQ6XcJKQ" name="stateFilter" type="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_SQrzsHcQEe2nmrtQ6XcJKQ" name="IStateEventHandler">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_YAt4oHcQEe2nmrtQ6XcJKQ" name="sendEvent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_YAt4oXcQEe2nmrtQ6XcJKQ" name="event">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_YAt4oncQEe2nmrtQ6XcJKQ" name="data">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_dO-tQHcQEe2nmrtQ6XcJKQ" name="isTransitionPossible">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_dO-tQXcQEe2nmrtQ6XcJKQ" name="next" type="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_dO-tQncQEe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_foQ40HcQEe2nmrtQ6XcJKQ" name="getName">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_foQ40XcQEe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_nRkzkHcQEe2nmrtQ6XcJKQ" client="_OT1joHcQEe2nmrtQ6XcJKQ" supplier="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_CUnjIHcREe2nmrtQ6XcJKQ" name="NewMatchStateEventHandler">
+      <generalization xmi:type="uml:Generalization" xmi:id="_DMsaoHcREe2nmrtQ6XcJKQ" general="_G8vaQHcQEe2nmrtQ6XcJKQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EdNAQHcREe2nmrtQ6XcJKQ" name="isEventAllowed">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_EdNAQXcREe2nmrtQ6XcJKQ" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EdOOYHcREe2nmrtQ6XcJKQ" name="getName">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_EdOOYXcREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EdO1cHcREe2nmrtQ6XcJKQ" name="isTransitionPossible">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_EdO1cXcREe2nmrtQ6XcJKQ" name="next" type="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_EdO1cncREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_F_c2IHcREe2nmrtQ6XcJKQ" name="MatchSettingsStateEventHandler">
+      <generalization xmi:type="uml:Generalization" xmi:id="_PxzhAHcREe2nmrtQ6XcJKQ" general="_G8vaQHcQEe2nmrtQ6XcJKQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ISAHkHcREe2nmrtQ6XcJKQ" name="isTransitionPossible">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ISAHkXcREe2nmrtQ6XcJKQ" name="next" type="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ISAHkncREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ISBVsHcREe2nmrtQ6XcJKQ" name="isEventAllowed">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ISBVsXcREe2nmrtQ6XcJKQ" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ISCj0HcREe2nmrtQ6XcJKQ" name="getName">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ISCj0XcREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_LPWpgHcREe2nmrtQ6XcJKQ" name="PlayerTurnStateEventHandler">
+      <generalization xmi:type="uml:Generalization" xmi:id="_QCm9IHcREe2nmrtQ6XcJKQ" general="_G8vaQHcQEe2nmrtQ6XcJKQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_M74cwHcREe2nmrtQ6XcJKQ" name="isEventAllowed">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_M74cwXcREe2nmrtQ6XcJKQ" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_M75D0HcREe2nmrtQ6XcJKQ" name="getName">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_M75D0XcREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_M76R8HcREe2nmrtQ6XcJKQ" name="isTransitionPossible">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_M76R8XcREe2nmrtQ6XcJKQ" name="next" type="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_M76R8ncREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_NtYLIHcREe2nmrtQ6XcJKQ" name="EnemyTurnStateEventHandler">
+      <generalization xmi:type="uml:Generalization" xmi:id="_QScI4HcREe2nmrtQ6XcJKQ" general="_G8vaQHcQEe2nmrtQ6XcJKQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_O7HwoHcREe2nmrtQ6XcJKQ" name="isEventAllowed">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_O7HwoXcREe2nmrtQ6XcJKQ" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_O7I-wHcREe2nmrtQ6XcJKQ" name="isTransitionPossible">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_O7I-wXcREe2nmrtQ6XcJKQ" name="next" type="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_O7I-wncREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_O7Jl0HcREe2nmrtQ6XcJKQ" name="getName">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_O7Jl0XcREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Vgm24HcREe2nmrtQ6XcJKQ" name="MatchEndStateEventHandler">
+      <generalization xmi:type="uml:Generalization" xmi:id="_YyTRIHcREe2nmrtQ6XcJKQ" general="_G8vaQHcQEe2nmrtQ6XcJKQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_W5UWQHcREe2nmrtQ6XcJKQ" name="isEventAllowed">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_W5UWQXcREe2nmrtQ6XcJKQ" name="event" type="_QofiMEfOEe2SLYkSMgTh1A"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_W5VkYHcREe2nmrtQ6XcJKQ" name="getName">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_W5VkYXcREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_W5WLcHcREe2nmrtQ6XcJKQ" name="isTransitionPossible">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_W5WLcXcREe2nmrtQ6XcJKQ" name="next" type="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_W5WLcncREe2nmrtQ6XcJKQ" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_qQdKEHcREe2nmrtQ6XcJKQ" client="_kUI6wETLEe27rv1zb77HhA" supplier="_SQrzsHcQEe2nmrtQ6XcJKQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_xw3AcHcREe2nmrtQ6XcJKQ" client="_kUI6wETLEe27rv1zb77HhA" supplier="_F_c2IHcREe2nmrtQ6XcJKQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_zCCUcHcREe2nmrtQ6XcJKQ" client="_kUI6wETLEe27rv1zb77HhA" supplier="_LPWpgHcREe2nmrtQ6XcJKQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_zgWoIHcREe2nmrtQ6XcJKQ" client="_kUI6wETLEe27rv1zb77HhA" supplier="_NtYLIHcREe2nmrtQ6XcJKQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_z4PjsHcREe2nmrtQ6XcJKQ" client="_kUI6wETLEe27rv1zb77HhA" supplier="_Vgm24HcREe2nmrtQ6XcJKQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_taavMHcSEe2nmrtQ6XcJKQ" client="_G8vaQHcQEe2nmrtQ6XcJKQ" supplier="_OT1joHcQEe2nmrtQ6XcJKQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_jbQRMEPqEe26Q_q4HjD8wQ" name="use case diagram"/>
   <packagedElement xmi:type="uml:Package" xmi:id="_W1cg0HV6Ee2ggqz0hPIOvA" name="state diagrams">

@@ -25,9 +25,7 @@ export default function NewMatch() {
       player: player,
     });
 
-    await ConnectionMediatorService.Instance.sendEvent(
-      MatchEventNames.NewMatch
-    );
+    ConnectionMediatorService.Instance.sendEvent(MatchEventNames.NewMatch);
 
     const path = generatePath('match/pregame');
 

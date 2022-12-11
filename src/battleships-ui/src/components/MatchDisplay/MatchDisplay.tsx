@@ -150,6 +150,11 @@ export default function MatchDisplay() {
   );
 
   function onAmmoSelect(ammo: Ammo): void {
+    if (bluePlayer.attackTurns.length < 1) {
+      console.error('No attack turns left!');
+      return;
+    }
+
     bluePlayer.attackTurns[0].ammo = ammo;
   }
 
@@ -200,6 +205,14 @@ export default function MatchDisplay() {
     const ammo = match.availableAmmoTypes.find(
       (ammo) => ammo.type === ammoType
     );
+
+    if (!ammo) {
+      console.error(
+        `Unable to resolve attack strategy by type ${ammoType}. Available types are: ${JSON.stringify(
+          match.availableAmmoTypes
+        )}`
+      );
+    }
 
     switch (ammoType) {
       case AmmoType.Classic:

@@ -94,7 +94,7 @@ export class MovementTurnHandler extends TurnHandler {
   protected postOperationHooks: ((data: any) => boolean)[] = [];
 }
 
-interface AttackTurnEventProps {
+export interface AttackTurnEventProps {
   offencePlayerId: number;
   defencePlayerId: number;
   tile: MapTile;

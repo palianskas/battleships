@@ -4,7 +4,12 @@ import {
   AttackCommandExpression,
   AttackCommandExpressionContext,
 } from '../Expressions/AttackCommandExpression';
+import {
+  EmoteCommandExpression,
+  EmoteCommandExpressionContext,
+} from '../Expressions/EmoteCommandExpression';
 import { IExpression } from '../Expressions/Expressions';
+const AsciiEmojiParser = require('ascii-emoji-parser');
 
 export interface IInterpreter {
   interpret(input: string): void;
@@ -12,6 +17,8 @@ export interface IInterpreter {
 
 export class Interpreter implements IInterpreter {
   private _logger = LoggerService.Instance.getLogger(PatternTypes.Interpreter);
+
+  private emojiParser = new AsciiEmojiParser(':');
 
   interpret(input: string): void {
     const tokens = input
@@ -44,7 +51,7 @@ export class Interpreter implements IInterpreter {
         return this.tryResolveAttackCommandExpression(tokens);
       }
       case '/emote': {
-        break;
+        return this.tryResolveEmoteCommandExpression(tokens);
       }
       case '/message': {
         break;
@@ -77,6 +84,26 @@ export class Interpreter implements IInterpreter {
         Number(tokens[3])
       )
     );
+  }
+
+  private tryResolveEmoteCommandExpression(
+    tokens: string[]
+  ): EmoteCommandExpression | undefined {
+    if (tokens.length < 2) {
+      return undefined;
+    }
+
+    const pureTokenValue = tokens[1].substring(1, tokens[1].length - 1);
+
+    if (!AsciiEmojiParser.getKeywords().includes(pureTokenValue)) {
+      return undefined;
+    }
+
+    this._logger.log(`INTERPRETER: parsed ${EmoteCommandExpression.name}`);
+
+    const emote = this.emojiParser.parse(tokens[1]);
+
+    return new EmoteCommandExpression(new EmoteCommandExpressionContext(emote));
   }
 
   private tryResolveAmmoType(token: string): AmmoType | undefined {

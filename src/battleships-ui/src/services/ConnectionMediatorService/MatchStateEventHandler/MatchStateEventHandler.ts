@@ -45,6 +45,7 @@ export class NewMatchStateEventHandler extends MatchStateEventHandler {
       MatchEventNames.NewMatch,
       MatchEventNames.PlayerJoined,
       MatchEventNames.SecondPlayerJoinedConfirmation,
+      MatchEventNames.Emote,
     ];
 
     return eventWhiteList.includes(event);
@@ -70,6 +71,7 @@ export class MatchSettingsStateEventHandler extends MatchStateEventHandler {
       MatchEventNames.MatchStarted,
       MatchEventNames.PlayerFirstTurnClaim,
       MatchEventNames.ResolvedFirstTurnClaim,
+      MatchEventNames.Emote,
     ];
 
     return eventWhiteList.includes(event);
@@ -86,7 +88,12 @@ export class PlayerTurnStateEventHandler extends MatchStateEventHandler {
   }
 
   isEventAllowed(event: MatchEventNames): boolean {
-    return event === MatchEventNames.AttackPerformed;
+    const eventWhiteList = [
+      MatchEventNames.AttackPerformed,
+      MatchEventNames.Emote,
+    ];
+
+    return eventWhiteList.includes(event);
   }
 
   getName(): string {
@@ -100,7 +107,9 @@ export class EnemyTurnStateEventHandler extends MatchStateEventHandler {
   }
 
   isEventAllowed(event: MatchEventNames): boolean {
-    return false;
+    const eventWhiteList = [MatchEventNames.Emote];
+
+    return eventWhiteList.includes(event);
   }
 
   getName(): string {

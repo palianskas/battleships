@@ -157,4 +157,5 @@ export enum MatchEventNames {
   MatchStarted,
   PlayerFirstTurnClaim,
   ResolvedFirstTurnClaim,
+  Emote,
 }

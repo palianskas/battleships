@@ -16,6 +16,9 @@ interface FirstTurnClaimProps {
   playerId: number;
   claimStrength: number;
 }
+export interface ResolvedFirstTurnClaimProps {
+  winnerPlayerId: number;
+}
 
 export default function Pregame() {
   const navigate = useNavigate();
@@ -172,11 +175,22 @@ export default function Pregame() {
     )!;
 
     if (data.playerId != currentPlayer.id) {
+      const props: ResolvedFirstTurnClaimProps = { winnerPlayerId: -1 };
+
       if (data.claimStrength > firstTurnClaimStrength) {
         enemyPlayer.attackTurns.push(new AttackTurn());
+
+        props.winnerPlayerId = enemyPlayer.id;
       } else {
         currentPlayer.attackTurns.push(new AttackTurn());
+
+        props.winnerPlayerId = currentPlayer.id;
       }
+
+      ConnectionMediatorService.Instance.sendEvent(
+        MatchEventNames.ResolvedFirstTurnClaim,
+        props
+      );
 
       beginMatch();
     }

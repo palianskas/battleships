@@ -69,6 +69,7 @@ export class MatchSettingsStateEventHandler extends MatchStateEventHandler {
       MatchEventNames.PlayerLockedInSettings,
       MatchEventNames.MatchStarted,
       MatchEventNames.PlayerFirstTurnClaim,
+      MatchEventNames.ResolvedFirstTurnClaim,
     ];
 
     return eventWhiteList.includes(event);

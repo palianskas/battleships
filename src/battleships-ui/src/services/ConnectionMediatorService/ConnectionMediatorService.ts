@@ -3,9 +3,13 @@ import {
   HttpTransportType,
   HubConnection,
 } from '@microsoft/signalr';
+import { ResolvedFirstTurnClaimProps } from '../../components/MatchDisplay/Pregame/Pregame';
+import { PlayerTeam } from '../../models/Player';
 import LoggerService, { PatternTypes } from '../LoggerService/LoggerService';
+import MatchProvider from '../MatchProvider/MatchProvider';
 import MatchEventsSubject from '../Observers/MatchEventsObserver/MatchEventsSubject';
 import {
+  EnemyTurnStateEventHandler,
   IStateContext,
   IStateEventHandler,
   MatchSettingsStateEventHandler,
@@ -93,11 +97,28 @@ export default class ConnectionMediatorService
         new MatchSettingsStateEventHandler(this, this.getEventSenderFunc())
       );
     });
-    this.addSingular(MatchEventNames.MatchStarted, (_) => {
-      this.setStatefulEventHandler(
-        new PlayerTurnStateEventHandler(this, this.getEventSenderFunc())
-      );
-    });
+
+    this.addSingular(
+      MatchEventNames.ResolvedFirstTurnClaim,
+      (data: ResolvedFirstTurnClaimProps) => {
+        const currentPlayer = MatchProvider.Instance.match.players.find(
+          (player) => player.team === PlayerTeam.Blue
+        )!;
+        const enemyPlayer = MatchProvider.Instance.match.players.find(
+          (player) => player.team === PlayerTeam.Red
+        )!;
+
+        if (data.winnerPlayerId === currentPlayer.id) {
+          this.setStatefulEventHandler(
+            new PlayerTurnStateEventHandler(this, this.getEventSenderFunc())
+          );
+        } else if (data.winnerPlayerId === enemyPlayer.id) {
+          this.setStatefulEventHandler(
+            new EnemyTurnStateEventHandler(this, this.getEventSenderFunc())
+          );
+        }
+      }
+    );
   }
 
   private getEventSenderFunc(): (
@@ -135,4 +156,5 @@ export enum MatchEventNames {
   AttackPerformed,
   MatchStarted,
   PlayerFirstTurnClaim,
+  ResolvedFirstTurnClaim,
 }

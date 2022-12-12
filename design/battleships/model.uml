@@ -378,8 +378,12 @@
       <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_Wh3wYEfOEe2SLYkSMgTh1A" name="MatchCreated"/>
       <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_XPj80EfOEe2SLYkSMgTh1A" name="PlayerJoined"/>
       <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_X5gRsEfOEe2SLYkSMgTh1A" name="SecondPlayerConfirmation"/>
-      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_YYO1EEfOEe2SLYkSMgTh1A" name="PlayerStartedMatch"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_YYO1EEfOEe2SLYkSMgTh1A" name="PlayerLockedInSettings"/>
       <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_ZO7zkEfOEe2SLYkSMgTh1A" name="PlayerUpdatedMatchSettings"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_EKj8kHo8Ee2Vr8k6ejkpyw" name="AttackPerformed"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_E_1-wHo8Ee2Vr8k6ejkpyw" name="MatchStarted"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_Fvn14Ho8Ee2Vr8k6ejkpyw" name="PlayerFirstTurnClaim"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_GgpqMHo8Ee2Vr8k6ejkpyw" name="ResolvedFirstTurnClaim"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_cRzusEfOEe2SLYkSMgTh1A" name="" client="_kUI6wETLEe27rv1zb77HhA" supplier="_QofiMEfOEe2SLYkSMgTh1A"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_AmYUAEfPEe2SLYkSMgTh1A" name="MatchEventsSubject" visibility="public">
@@ -1091,27 +1095,27 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_jbQRMEPqEe26Q_q4HjD8wQ" name="use case diagram"/>
   <packagedElement xmi:type="uml:Package" xmi:id="_W1cg0HV6Ee2ggqz0hPIOvA" name="state diagrams">
-    <packagedElement xmi:type="uml:StateMachine" xmi:id="_mT2IgHV6Ee2ggqz0hPIOvA" name="Match states">
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="_mT2IgHV6Ee2ggqz0hPIOvA" name="ConnectionMediatorService states">
       <region xmi:type="uml:Region" xmi:id="_mqCa8HV6Ee2ggqz0hPIOvA" name="Region1">
-        <transition xmi:type="uml:Transition" xmi:id="_4hknwHV7Ee2ggqz0hPIOvA" name="Player joins" source="_-fd_AHV6Ee2ggqz0hPIOvA" target="_3th7sHV7Ee2ggqz0hPIOvA"/>
-        <transition xmi:type="uml:Transition" xmi:id="_LxickHV8Ee2ggqz0hPIOvA" name="Second player joins" source="_3th7sHV7Ee2ggqz0hPIOvA" target="_G5GG8HV8Ee2ggqz0hPIOvA"/>
-        <transition xmi:type="uml:Transition" xmi:id="_kT-QkHV8Ee2ggqz0hPIOvA" name="Settings submitted" source="_G5GG8HV8Ee2ggqz0hPIOvA" target="_eQBKEHV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_LxickHV8Ee2ggqz0hPIOvA" name="event: SecondPlayerJoinedConfirmation" source="_3th7sHV7Ee2ggqz0hPIOvA" target="_G5GG8HV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_kT-QkHV8Ee2ggqz0hPIOvA" name="event: ResolvedFirstTurnClaim" source="_G5GG8HV8Ee2ggqz0hPIOvA" target="_eQBKEHV8Ee2ggqz0hPIOvA"/>
         <transition xmi:type="uml:Transition" xmi:id="_rUVU8HV8Ee2ggqz0hPIOvA" name="True" source="_eQBKEHV8Ee2ggqz0hPIOvA" target="_ZAuasHV8Ee2ggqz0hPIOvA"/>
         <transition xmi:type="uml:Transition" xmi:id="_0eRU8HV8Ee2ggqz0hPIOvA" name="False" source="_eQBKEHV8Ee2ggqz0hPIOvA" target="_TqvNcHV8Ee2ggqz0hPIOvA"/>
-        <transition xmi:type="uml:Transition" xmi:id="_6qwsYHV8Ee2ggqz0hPIOvA" name="Enemy turn finished" source="_ZAuasHV8Ee2ggqz0hPIOvA" target="_TqvNcHV8Ee2ggqz0hPIOvA"/>
-        <transition xmi:type="uml:Transition" xmi:id="_CLq5EHV9Ee2ggqz0hPIOvA" name="Player turn finished" source="_TqvNcHV8Ee2ggqz0hPIOvA" target="_ZAuasHV8Ee2ggqz0hPIOvA"/>
-        <transition xmi:type="uml:Transition" xmi:id="_Hm4vIHV-Ee2ggqz0hPIOvA" name="All player ships destroyed" source="_ZAuasHV8Ee2ggqz0hPIOvA" target="_EEDhkHV-Ee2ggqz0hPIOvA"/>
-        <transition xmi:type="uml:Transition" xmi:id="_IPnjEHV-Ee2ggqz0hPIOvA" name="All enemy player ships destroyed" source="_TqvNcHV8Ee2ggqz0hPIOvA" target="_EEDhkHV-Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_6qwsYHV8Ee2ggqz0hPIOvA" name="enemy.attackTurns.length &lt; 1" source="_ZAuasHV8Ee2ggqz0hPIOvA" target="_TqvNcHV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_CLq5EHV9Ee2ggqz0hPIOvA" name="player.attackTurns.length &lt; 1" source="_TqvNcHV8Ee2ggqz0hPIOvA" target="_ZAuasHV8Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_Hm4vIHV-Ee2ggqz0hPIOvA" name="enemy.ships.all(ship.isDestroyed)" source="_ZAuasHV8Ee2ggqz0hPIOvA" target="_EEDhkHV-Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_IPnjEHV-Ee2ggqz0hPIOvA" name="player.ships.all(ship.isDestroyed)" source="_TqvNcHV8Ee2ggqz0hPIOvA" target="_EEDhkHV-Ee2ggqz0hPIOvA"/>
         <transition xmi:type="uml:Transition" xmi:id="_TwFVkHV-Ee2ggqz0hPIOvA" source="_EEDhkHV-Ee2ggqz0hPIOvA" target="_OnBKAHV-Ee2ggqz0hPIOvA"/>
-        <transition xmi:type="uml:Transition" xmi:id="_ZAamwHV-Ee2ggqz0hPIOvA" name="Both players exit" source="_OnBKAHV-Ee2ggqz0hPIOvA" target="_YApL0HV-Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_ZAamwHV-Ee2ggqz0hPIOvA" name="match.players.length &lt; 1" source="_OnBKAHV-Ee2ggqz0hPIOvA" target="_YApL0HV-Ee2ggqz0hPIOvA"/>
+        <transition xmi:type="uml:Transition" xmi:id="_rKfxYHo7Ee2Vr8k6ejkpyw" source="_-fd_AHV6Ee2ggqz0hPIOvA" target="_3th7sHV7Ee2ggqz0hPIOvA"/>
         <subvertex xmi:type="uml:Pseudostate" xmi:id="_-fd_AHV6Ee2ggqz0hPIOvA" name=""/>
-        <subvertex xmi:type="uml:State" xmi:id="_3th7sHV7Ee2ggqz0hPIOvA" name="Matchmaking"/>
-        <subvertex xmi:type="uml:State" xmi:id="_G5GG8HV8Ee2ggqz0hPIOvA" name="Match settings setup"/>
-        <subvertex xmi:type="uml:State" xmi:id="_TqvNcHV8Ee2ggqz0hPIOvA" name="Player turn"/>
-        <subvertex xmi:type="uml:State" xmi:id="_ZAuasHV8Ee2ggqz0hPIOvA" name="Enemy turn"/>
-        <subvertex xmi:type="uml:Pseudostate" xmi:id="_eQBKEHV8Ee2ggqz0hPIOvA" name="First turn assigned to enemy" kind="choice"/>
+        <subvertex xmi:type="uml:State" xmi:id="_3th7sHV7Ee2ggqz0hPIOvA" name="NewMatchStateEventHandler"/>
+        <subvertex xmi:type="uml:State" xmi:id="_G5GG8HV8Ee2ggqz0hPIOvA" name="MatchSettingsStateEventHandler"/>
+        <subvertex xmi:type="uml:State" xmi:id="_TqvNcHV8Ee2ggqz0hPIOvA" name="PlayerTurnStateEventHandler"/>
+        <subvertex xmi:type="uml:State" xmi:id="_ZAuasHV8Ee2ggqz0hPIOvA" name="EnemyTurnStateEventHandler"/>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_eQBKEHV8Ee2ggqz0hPIOvA" name="ResolvedFirstTurnClaimProps.winnerId == player.id" kind="choice"/>
         <subvertex xmi:type="uml:Pseudostate" xmi:id="_EEDhkHV-Ee2ggqz0hPIOvA" name="" kind="junction"/>
-        <subvertex xmi:type="uml:State" xmi:id="_OnBKAHV-Ee2ggqz0hPIOvA" name="Match finished"/>
+        <subvertex xmi:type="uml:State" xmi:id="_OnBKAHV-Ee2ggqz0hPIOvA" name="MatchEndStateEventHandler"/>
         <subvertex xmi:type="uml:FinalState" xmi:id="_YApL0HV-Ee2ggqz0hPIOvA"/>
       </region>
     </packagedElement>

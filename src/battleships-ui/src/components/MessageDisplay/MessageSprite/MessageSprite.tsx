@@ -13,7 +13,6 @@ export function MessageSprite({ message }: MessageSpriteProps) {
     <div
       className="message-sprite"
       style={{
-        bottom: message.bottom,
         left: message.left,
         animationDuration: MESSAGE_DISPLAY_INTERVAL_SECS.toString() + 's',
       }}

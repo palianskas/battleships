@@ -8,16 +8,17 @@
   padding: 10px;
   border-radius: 5px;
 
-  animation: fade-out ease-out;
+  animation: fade-slide cubic-bezier(0.5, 0, 0.25, 1);
 }
 
 .message-sender {
   font-weight: bold;
 }
 
-@keyframes fade-out {
+@keyframes fade-slide {
   from {
     opacity: 1;
+    bottom: -10%;
   }
 
   75% {
@@ -26,5 +27,6 @@
 
   to {
     opacity: 0;
+    bottom: 33%;
   }
 }

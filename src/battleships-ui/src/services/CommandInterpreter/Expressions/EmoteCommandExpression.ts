@@ -1,4 +1,4 @@
-import { PlayerTeam } from '../../../models/Player';
+import { Player, PlayerTeam } from '../../../models/Player';
 import ConnectionMediatorService, {
   MatchEventNames,
 } from '../../ConnectionMediatorService/ConnectionMediatorService';
@@ -6,9 +6,9 @@ import LoggerService, { PatternTypes } from '../../LoggerService/LoggerService';
 import MatchProvider from '../../MatchProvider/MatchProvider';
 import { ExpressionContext, CommandExpression } from './Expressions';
 
-export interface EmoteEventProps {
-  playerId: number;
-  emote: string;
+export interface CommsEventProps {
+  player: Player;
+  message: string;
 }
 
 export class EmoteCommandExpressionContext extends ExpressionContext {
@@ -44,9 +44,9 @@ export class EmoteCommandExpression extends CommandExpression {
       return;
     }
 
-    const data: EmoteEventProps = {
-      playerId: player.id,
-      emote: this.context.emote,
+    const data: CommsEventProps = {
+      player: player,
+      message: this.context.emote,
     };
 
     this._logger.log(`INTERPRETER: Executing ${EmoteCommandExpression.name}`);

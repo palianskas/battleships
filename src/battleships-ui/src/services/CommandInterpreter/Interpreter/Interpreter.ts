@@ -1,4 +1,4 @@
-import { Ammo, AmmoType } from '../../../models/Ammo';
+import { AmmoType } from '../../../models/Ammo';
 import LoggerService, { PatternTypes } from '../../LoggerService/LoggerService';
 import {
   AttackCommandExpression,

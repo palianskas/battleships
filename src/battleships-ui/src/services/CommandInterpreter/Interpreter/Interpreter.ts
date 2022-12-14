@@ -131,7 +131,7 @@ export class Interpreter implements IInterpreter {
   private tryResolveAmmoType(token: string): AmmoType | undefined {
     const index = parseInt(token, 10);
 
-    if (!Number.isInteger(index)) {
+    if (!Number.isInteger(index) || !AmmoType[index]) {
       return undefined;
     }
 

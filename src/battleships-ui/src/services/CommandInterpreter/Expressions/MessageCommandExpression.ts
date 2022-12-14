@@ -11,22 +11,22 @@ export interface CommsEventProps {
   message: string;
 }
 
-export class EmoteCommandExpressionContext extends ExpressionContext {
-  public emote: string;
+export class MessageCommandExpressionContext extends ExpressionContext {
+  public message: string;
 
-  constructor(emote: string) {
+  constructor(message: string) {
     super();
 
-    this.emote = emote;
+    this.message = message;
   }
 }
 
-export class EmoteCommandExpression extends CommandExpression {
-  public context: EmoteCommandExpressionContext;
+export class MessageCommandExpression extends CommandExpression {
+  public context: MessageCommandExpressionContext;
 
   private _logger = LoggerService.Instance.getLogger(PatternTypes.Interpreter);
 
-  constructor(context: EmoteCommandExpressionContext) {
+  constructor(context: MessageCommandExpressionContext) {
     super();
 
     this.context = context;
@@ -39,17 +39,17 @@ export class EmoteCommandExpression extends CommandExpression {
 
     if (!player) {
       this._logger.log(
-        `INTERPRETER: ${EmoteCommandExpression.name} unable to execute. Player or Enemy is missing`
+        `INTERPRETER: ${MessageCommandExpression.name} unable to execute. Player or Enemy is missing`
       );
       return;
     }
 
     const data: CommsEventProps = {
       player: player,
-      message: this.context.emote,
+      message: this.context.message,
     };
 
-    this._logger.log(`INTERPRETER: Executing ${EmoteCommandExpression.name}`);
+    this._logger.log(`INTERPRETER: Executing ${MessageCommandExpression.name}`);
 
     ConnectionMediatorService.Instance.sendEvent(MatchEventNames.Message, data);
   }

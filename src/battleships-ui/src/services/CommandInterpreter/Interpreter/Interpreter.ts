@@ -9,6 +9,10 @@ import {
   EmoteCommandExpressionContext,
 } from '../Expressions/EmoteCommandExpression';
 import { IExpression } from '../Expressions/Expressions';
+import {
+  MessageCommandExpression,
+  MessageCommandExpressionContext,
+} from '../Expressions/MessageCommandExpression';
 const AsciiEmojiParser = require('ascii-emoji-parser');
 
 export interface IInterpreter {
@@ -53,8 +57,8 @@ export class Interpreter implements IInterpreter {
       case '/emote': {
         return this.tryResolveEmoteCommandExpression(tokens);
       }
-      case '/message': {
-        break;
+      case '/msg': {
+        return this.tryResolveMessageCommandExpression(tokens);
       }
       default: {
         return undefined;
@@ -104,6 +108,24 @@ export class Interpreter implements IInterpreter {
     const emote = this.emojiParser.parse(tokens[1]);
 
     return new EmoteCommandExpression(new EmoteCommandExpressionContext(emote));
+  }
+
+  private tryResolveMessageCommandExpression(
+    tokens: string[]
+  ): MessageCommandExpression | undefined {
+    if (tokens.length < 2) {
+      return undefined;
+    }
+
+    const messageTokens = tokens.splice(1);
+
+    const message = messageTokens.join(' ');
+
+    tokens.push(...messageTokens); // undo side-effects
+
+    return new MessageCommandExpression(
+      new MessageCommandExpressionContext(message)
+    );
   }
 
   private tryResolveAmmoType(token: string): AmmoType | undefined {

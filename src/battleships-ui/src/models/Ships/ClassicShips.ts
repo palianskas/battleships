@@ -1,6 +1,7 @@
 import ShipPartFactory, {
   ShipPartType,
 } from '../../services/Factories/ShipFactories/ShipPartFactory/ShipPartFactory';
+import { Visitor } from '../../services/Visitor/Visitor';
 import Ship, {
   Battleship,
   Carrier,
@@ -10,7 +11,9 @@ import Ship, {
 } from './Ship';
 import { ShipClass } from './ShipClass';
 
-export interface IClassicShip extends Ship {}
+export interface IClassicShip extends Ship {
+  accept(visitor: Visitor): void;
+}
 
 export class ClassicCarrier extends Carrier implements IClassicShip {
   readonly parts = new ShipPartFactory().createParts(
@@ -18,6 +21,9 @@ export class ClassicCarrier extends Carrier implements IClassicShip {
     ShipPartType.Classic,
     ShipClass.Carrier
   );
+  public accept(visitor: Visitor): void {
+    visitor.visitClassicCarrier(this);
+  }
 }
 
 export class ClassicBattleship extends Battleship implements IClassicShip {
@@ -26,6 +32,9 @@ export class ClassicBattleship extends Battleship implements IClassicShip {
     ShipPartType.Classic,
     ShipClass.Battleship
   );
+  public accept(visitor: Visitor): void {
+    visitor.visitClassicBattleship(this);
+  }
 }
 
 export class ClassicCruiser extends Cruiser implements IClassicShip {
@@ -34,6 +43,9 @@ export class ClassicCruiser extends Cruiser implements IClassicShip {
     ShipPartType.Classic,
     ShipClass.Cruiser
   );
+  public accept(visitor: Visitor): void {
+    visitor.visitClassicCruiser(this);
+  }
 }
 
 export class ClassicSubmarine extends Submarine implements IClassicShip {
@@ -42,6 +54,9 @@ export class ClassicSubmarine extends Submarine implements IClassicShip {
     ShipPartType.Classic,
     ShipClass.Submarine
   );
+  public accept(visitor: Visitor): void {
+    visitor.visitClassicSubmarine(this);
+  }
 }
 
 export class ClassicSpeedboat extends Speedboat implements IClassicShip {
@@ -50,4 +65,7 @@ export class ClassicSpeedboat extends Speedboat implements IClassicShip {
     ShipPartType.Classic,
     ShipClass.Speedboat
   );
+  public accept(visitor: Visitor): void {
+    visitor.visitClassicSpeedboat(this);
+  }
 }

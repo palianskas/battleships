@@ -1,3 +1,4 @@
+import Snapshot from '../services/Memento/Snapshot';
 export default abstract class Vehicle {
   positionX = 0;
   positionY = 0;
@@ -7,7 +8,15 @@ export default abstract class Vehicle {
     this.positionY = positionY;
     this.directionDegrees = directionDegrees;
   }
-
+  setPositionY(positionY:number) {
+    this.positionY = positionY;
+  }
+  setPositionX(positionX:number) {
+    this.positionX =positionX;
+  }
+  setDegrees(degrees:number) {
+    this.directionDegrees =degrees;
+  }
   MoveUp(this: any) {
     this.positionY += 1;
     return this.vehicle;
@@ -27,4 +36,9 @@ export default abstract class Vehicle {
     this.positionX -= 1;
     return this.vehicle;
   }
+  createSnapshot(): Snapshot{
+    return new Snapshot(this.positionY,this.positionX,this.directionDegrees,this)
+  }
 }
+
+

@@ -1,8 +1,11 @@
 ﻿import Vehicle from '../../models/Vehicle';
+import Snapshot from '../Memento/Snapshot';
 
 abstract class VehicleCommand {
   protected vehicle: Vehicle;
   protected lastPosition: { positionX: number; positionY: number };
+  private backup: Snapshot | undefined;
+
 
   protected constructor(vehicle: Vehicle) {
     this.vehicle = vehicle;
@@ -22,6 +25,14 @@ abstract class VehicleCommand {
   undo() {
     this.vehicle.positionX = this.lastPosition.positionX;
     this.vehicle.positionY = this.lastPosition.positionY;
+  }
+  makeBackUp(){
+    const backup = this.vehicle.createSnapshot();
+  }
+  undoMemento(){
+    if(this.backup != null){
+      this.backup.restore();
+    }
   }
 
   abstract execute(): Vehicle;

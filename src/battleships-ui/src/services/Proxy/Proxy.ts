@@ -11,13 +11,17 @@ export class Proxy implements IAttackStrategy  {
     constructor (tile: MapTile, map:MatchMap)
     {
         this.tile = tile;
-        this.map =map;
+        this.map = map;
     }
     attack(tile: MapTile, map: MatchMap): void {
-        if(this.realAttack == null){
+        if(this.realAttack ==null ){
             this.realAttack = new RealAttack(tile, map);
+            if(tile.isAttacked == true){
+                console.log("tile has been attacked, try another tile");
+            }
+            
         }
-        this.realAttack.attack(tile,map);
+        else this.realAttack.attack(tile,map);
 
     }
 

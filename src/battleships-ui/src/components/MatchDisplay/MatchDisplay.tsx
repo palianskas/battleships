@@ -10,13 +10,11 @@ import { ShipClass } from '../../models/Ships/ShipClass';
 import { ModularShipPart } from '../../models/Ships/ShipPart';
 import { ShipToStringAdapter } from '../../services/Adapter/ShipToStringAdapter';
 import ConnectionMediatorService, {
-  MatchEventNames,
+  MatchEventNames
 } from '../../services/ConnectionMediatorService/ConnectionMediatorService';
 import AirshipFactory from '../../services/Factories/AirshipFactories/AirshipFactory';
 import ObservingShipFactory from '../../services/Factories/ShipFactories/ObservingShipFactory';
-import LoggerService, {
-  PatternTypes,
-} from '../../services/LoggerService/LoggerService';
+import LoggerService, { PatternTypes } from '../../services/LoggerService/LoggerService';
 import MatchProvider from '../../services/MatchProvider/MatchProvider';
 import { ArmorPiercingAttackStrategy } from '../../services/Strategies/AttackStrategies/ArmorPiercingAttackStrategy';
 import { IAttackStrategy } from '../../services/Strategies/AttackStrategies/AttackStrategies';
@@ -27,6 +25,9 @@ import { StandardAttackStrategy } from '../../services/Strategies/AttackStrategi
 import { AttackTurnHandler } from '../../services/TurnHandler/TurnHandler';
 import AmmoRack from './AmmoRack/AmmoRack';
 import MapGrid from './MapGrid/MapGrid';
+import { MapTileFactory, MapTileStatus } from '../../models/Map/MapTileFactory';
+import { TileColor } from '../../models/Map/TileColors';
+import { TileIcon } from '../../models/Map/TileIcons';
 
 export default function MatchDisplay() {
   const [rerenderToggle, setRerenderToggle] = useState(0);
@@ -86,12 +87,10 @@ export default function MatchDisplay() {
         <div className="w-100 d-flex justify-content-center">
           <MapGrid
             player={bluePlayer}
-            selectedTile={selectedTile}
             onTileSelect={onOwnTileSelect}
           />
           <MapGrid
             player={redPlayer}
-            selectedTile={selectedTile}
             onTileSelect={onAttackTurnTargetTileSelect}
           />
         </div>
@@ -166,6 +165,7 @@ export default function MatchDisplay() {
 
     const turn = bluePlayer.attackTurns[0];
     setSelectedTile(tile);
+    tile.type = MapTileFactory.getType(MapTileStatus.selected)!;
 
     turn.tile = tile;
   }

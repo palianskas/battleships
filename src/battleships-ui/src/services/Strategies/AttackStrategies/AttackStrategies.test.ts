@@ -1,16 +1,13 @@
 import MatchMap from '../../../models/MatchMap';
 import { ShipClass } from '../../../models/Ships/ShipClass';
-import {
-  ClassicShipPart,
-  ModularShipPart,
-  ShipPart,
-} from '../../../models/Ships/ShipPart';
+import { ClassicShipPart, ModularShipPart } from '../../../models/Ships/ShipPart';
 import {
   AreaAttackStrategy,
   DamageAttackStrategy,
   DefaultAttackStrategy,
-  ShipSpecificAttackStrategy,
+  ShipSpecificAttackStrategy
 } from './AttackStrategies';
+import { MapTileStatus } from '../../../models/Map/MapTileFactory';
 
 let map: MatchMap;
 
@@ -34,7 +31,7 @@ describe('DefaultAttackStrategy', () => {
 
       strategy.attack(tile, map);
 
-      expect(tile.isAttacked).toBeTruthy();
+      expect(tile.type.status == MapTileStatus.attacked).toBeTruthy();
     });
   });
 });
@@ -81,7 +78,7 @@ describe('DamageAttackStrategy', () => {
 
       expect(shipPart.hp).toEqual(0);
       expect(shipPart.isDestroyed).toBeTruthy();
-      expect(tile.isShipPartDestroyed).toBeTruthy();
+      expect(tile.type.status === MapTileStatus.shipPartDestroyed).toBeTruthy();
     });
 
     test.each([{ hp: 0 }, { hp: 1 }, { hp: 5 }, { hp: 8 }, { hp: 10 }])(
@@ -146,7 +143,7 @@ describe('AreaAttackStrategy', () => {
 
             const tile = map.tiles[i][j];
 
-            expect(tile.isAttacked).toBeTruthy();
+            expect(tile.type.status === MapTileStatus.attacked).toBeTruthy();
           }
         }
       }
@@ -174,7 +171,7 @@ describe('AreaAttackStrategy', () => {
               continue;
             }
 
-            expect(tile.isAttacked).toBeFalsy();
+            expect(tile.type.status === MapTileStatus.attacked).toBeFalsy();
           }
         }
       }

@@ -1,5 +1,7 @@
 import { ShipPart } from './Ships/ShipPart';
 import { TileColor } from './Map/TileColors';
+import { MapTileFactory, MapTileStatus, MapTileType } from './Map/MapTileFactory';
+import { TileIcon } from './Map/TileIcons';
 
 export default class MatchMap {
   tiles: MapTile[][];
@@ -23,15 +25,12 @@ export class MapTile {
 
   shipPart?: ShipPart;
 
-  isAttacked = false;
-  isShipPartDestroyed = false;
+  type: MapTileType;
+
 
   constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
-  }
-
-  getColor() {
-    return TileColor.transparent;
+    this.type = MapTileFactory.getType(MapTileStatus.none)!;
   }
 }

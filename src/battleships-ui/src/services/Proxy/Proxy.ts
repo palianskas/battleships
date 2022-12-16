@@ -1,6 +1,7 @@
-import MatchMap, { MapTile } from "../../models/MatchMap";
-import { IAttackStrategy } from "../Strategies/AttackStrategies/AttackStrategies";
-import { RealAttack } from "./RealAttack";
+import MatchMap, { MapTile } from '../../models/MatchMap';
+import { IAttackStrategy } from '../Strategies/AttackStrategies/AttackStrategies';
+import { RealAttack } from './RealAttack';
+import { MapTileStatus } from '../../models/Map/MapTileFactory';
 
 
 export class Proxy implements IAttackStrategy  {
@@ -16,7 +17,7 @@ export class Proxy implements IAttackStrategy  {
     attack(tile: MapTile, map: MatchMap): void {
         if(this.realAttack ==null ){
             this.realAttack = new RealAttack(tile, map);
-            if(tile.isAttacked == true){
+            if(tile.type.status == MapTileStatus.attacked){
                 console.log("tile has been attacked, try another tile");
             }
             

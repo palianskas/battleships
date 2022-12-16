@@ -44,7 +44,15 @@ export default class ConnectionMediatorService
       .withAutomaticReconnect()
       .build();
 
-    this._connection.start();
+    console.log('reached here');
+
+    try{
+      this._connection.start().then(() => {console.log('after connect')});
+    } catch(e) {
+      console.log(e);
+    }
+
+
 
     this._connection.onclose(async () => {
       await this.start();

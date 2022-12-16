@@ -3,6 +3,9 @@ import { ShipClass } from '../../../models/Ships/ShipClass';
 import { ModularShipPart } from '../../../models/Ships/ShipPart';
 import { AttackStrategyDecorator } from '../../Decorators/AttackStrategyDecorators/AttackStrategyDecorator';
 import MatchProvider from '../../MatchProvider/MatchProvider';
+import { MapTileFactory, MapTileStatus } from '../../../models/Map/MapTileFactory';
+import { TileColor } from '../../../models/Map/TileColors';
+import { TileIcon } from '../../../models/Map/TileIcons';
 
 export interface IAttackStrategy {
   attack(tile: MapTile, map: MatchMap): void;
@@ -13,7 +16,7 @@ export class DefaultAttackStrategy extends AttackStrategyDecorator {
     const log = `DefaultAttackStrategy.attack() on (${tile.x}:${tile.y})`;
     this.decoratorLogger.log(log);
 
-    tile.isAttacked = true;
+    tile.type = MapTileFactory.getType(MapTileStatus.attacked)!;
   }
 }
 
@@ -41,7 +44,7 @@ export class DamageAttackStrategy extends AttackStrategyDecorator {
       if (shipPart.hp <= 0) {
         shipPart.hp = 0;
         shipPart.isDestroyed = true;
-        tile.isShipPartDestroyed = true;
+        tile.type = MapTileFactory.getType(MapTileStatus.shipPartDestroyed)!;
       }
     }
   }

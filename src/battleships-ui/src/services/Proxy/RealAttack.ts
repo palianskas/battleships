@@ -1,5 +1,6 @@
-import MatchMap, { MapTile } from "../../models/MatchMap";
-import { IAttackStrategy } from "../Strategies/AttackStrategies/AttackStrategies";
+import MatchMap, { MapTile } from '../../models/MatchMap';
+import { IAttackStrategy } from '../Strategies/AttackStrategies/AttackStrategies';
+import { MapTileFactory, MapTileStatus } from '../../models/Map/MapTileFactory';
 
 export class RealAttack implements IAttackStrategy  {
     
@@ -15,12 +16,13 @@ export class RealAttack implements IAttackStrategy  {
     attack(tile: MapTile, map: MatchMap): void {
         const log = `DefaultAttackStrategy.attack() on (${tile.x}:${tile.y})`;
 
-    tile.isAttacked = true;
+        tile.type = MapTileFactory.getType(MapTileStatus.attacked)!;
     }
     private loadFromDisk(tile: MapTile, map: MatchMap){
         const log = `DefaultAttackStrategy.loadfromDisk() on (${tile.x}:${tile.y})`;
 
-        tile.isAttacked = true;
+
+        tile.type = MapTileFactory.getType(MapTileStatus.attacked)!;
 
     }
     

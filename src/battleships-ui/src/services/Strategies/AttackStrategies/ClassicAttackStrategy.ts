@@ -1,6 +1,9 @@
 import MatchMap, { MapTile } from '../../../models/MatchMap';
 import { AttackStrategyDecorator } from '../../Decorators/AttackStrategyDecorators/AttackStrategyDecorator';
 import { DefaultAttackStrategy } from './AttackStrategies';
+import { MapTileFactory, MapTileStatus } from '../../../models/Map/MapTileFactory';
+import { TileIcon } from '../../../models/Map/TileIcons';
+import { TileColor } from '../../../models/Map/TileColors';
 
 export class ClassicAttackStrategy extends AttackStrategyDecorator {
   constructor() {
@@ -18,7 +21,7 @@ export class ClassicAttackStrategy extends AttackStrategyDecorator {
 
     if (!!tile.shipPart) {
       tile.shipPart.isDestroyed = true;
-      tile.isShipPartDestroyed = true;
+      tile.type = MapTileFactory.getType(MapTileStatus.shipPartDestroyed)!;
     }
   }
 }

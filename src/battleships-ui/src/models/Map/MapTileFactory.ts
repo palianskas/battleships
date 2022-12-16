@@ -36,7 +36,7 @@ export class MapTileType {
 }
 
 export class MapTileFactory {
-  private static mapTileTypes: MapTileType[];
+  private static mapTileTypes: MapTileType[] = [];
 
   static getType(status: MapTileStatus){
     const newType = new MapTileType(status)

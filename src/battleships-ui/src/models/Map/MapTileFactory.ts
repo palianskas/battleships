@@ -43,6 +43,7 @@ export class MapTileFactory {
     const type = this.mapTileTypes.find((mt) => mt === newType);
     if(!type){
       this.mapTileTypes.push(newType);
+      return newType;
     } else {
       return type;
     }
